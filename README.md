@@ -1,24 +1,43 @@
-# README
+# hitoiki
+## サイト概要
+### サイトテーマ
+一行日記のような形で、その場の気持ちを投稿できるSNS
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+### テーマを選んだ理由
+　小学生の頃、夏休みの宿題に一行日記があり、夏休み明けに友人たちと楽しく見せ合っていた覚えがあります。<br>
+　大人になったいま、誰もが手軽に一行日記を投稿でき、また他者の一行日記を覗ける場所があればいいなと考えました。<br>
 
-Things you may want to cover:
+　また、ここ数年、コロナ禍やDMM WEBCAMPでの学習中など、「咳をしてもひとり」ではありませんが、どうしても孤独を感じる瞬間がありました。<br>
+　他者の存在をそっと感じられるだけでも心が和らぎます。<br>
+　知り合いとの交流とはまた違う、見知らぬ人に見知らぬ人として交流できる場が欲しいと考えました。<br>
 
-* Ruby version
+　このふたつを両立させ、日常の中で感じたこと、ふと思ったことなど、ささやかな一行の文章を通して、他者との繋がりを感じさせる場を作りたいと考え、このテーマにしました。
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### ターゲットユーザ
+・従来のSNSよりもユーザーの秘匿性を求めたSNSを求める人<br>
+・情報量の多いSNSに息苦しさを感じている人<br>
+・独り言を形に残したい人
+​
+### 主な利用シーン
+・いつでもどこでも<br>
+・ふとした瞬間の気持ちを溢したいとき<br>
+・誰かの気持ちに触れたいと感じたとき
+​
+## 設計書
+後ほど作成予定
+​
+## 開発環境
+- OS：Linux(CentOS)
+- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- フレームワーク：Ruby on Rails
+- JSライブラリ：jQuery
+- IDE：Cloud9
+​
+<!-- ## 使用素材 -->
+<!-- - 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。 -->
+<!-- - アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。 -->
+<!-- - 使用しない場合は、使用素材の項目をREADMEから削除してください。 -->
+<!-- - 架空の団体・題材を前提にポートフォリオを制作する場合、下記のテンプレートを当項目内に記載しましょう。 -->
+<!-- 【テンプレート】 -->
+<!-- 著作権を考慮し、架空のデータを扱う予定です。 -->
+<!-- なお今後、実在するデータを利用する際には、事前に著作権保持者と契約を結んだ上で利用します。 -->
