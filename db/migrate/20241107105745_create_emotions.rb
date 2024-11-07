@@ -3,7 +3,7 @@ class CreateEmotions < ActiveRecord::Migration[6.1]
     create_table :emotions do |t|
 
       t.string :name, null: false
-      t.string :name, null: false
+      t.string :color, null: false
 
       t.timestamps
     end
