@@ -11,5 +11,6 @@ Rails.application.routes.draw do
   scope module: :public do
     root :to => "homes#top"
     get "about" => "homes#about"
+    resources :post, only: [:new, :index, :edit, :create, :update, :destroy]
   end
 end
