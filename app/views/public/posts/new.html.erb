@@ -1,0 +1,6 @@
+投稿画面
+<%= form_with model: @post do |f| %>
+  <%= f.text_field :body %>
+  <% f.hidden_field :is_public, value: true %>
+  <%= f.submit '投稿する' %>
+<% end %>
