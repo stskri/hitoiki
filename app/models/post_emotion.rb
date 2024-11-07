@@ -1,0 +1,2 @@
+class PostEmotion < ApplicationRecord
+end
