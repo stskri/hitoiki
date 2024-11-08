@@ -11,19 +11,25 @@
   </head>
 
   <body>
-    <div class="container">
-    </div>
-    
-
-
-
-    <div class="container">
-      <% flash.each do |key, message| %>
-        <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
-          <%= message %>
+    <div class="container-fluid mx-0">
+      <div class="row">
+        <% flash.each do |key, message| %>
+          <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+            <%= message %>
+          </div>
+        <% end %>
+      </div>
+      <div class="row">
+        <div class="col-2" style="background-color: #eaf4ff;">
+          <h3>レフトバー</h3>
         </div>
-      <% end %>
+
+        <div class="col-7" style="background-color: #f4ffff;"><%= yield %></div>
+
+        <div class="col-3" style="background-color: #eaf4ff;">
+          <h3>ライトバー</h3>
+        </div>
+      </div>
     </div>
-    <%= yield %>
   </body>
 </html>
