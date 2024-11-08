@@ -2,7 +2,10 @@
 <div><%= link_to "トップに戻る", root_path %></div>
 <div>
   <% @posts.each do |post| %>
-    <%= post.user.name %>
-    <%= post.body %>
+    <div>
+      <%= post.user.name %>
+      <%= post.body %>
+      <%= link_to "詳細", post_path(post.id) %>
+    </div>
   <% end %>
 </div>
