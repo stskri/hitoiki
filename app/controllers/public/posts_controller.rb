@@ -17,7 +17,8 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-
+    @posts  = Post.includes(:user).all
+    
   end
 
   def show
