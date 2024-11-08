@@ -2,6 +2,7 @@
 <%= link_to "about", about_path %>
 
 <% if user_signed_in? %>
+  <%= link_to "マイページ", my_page_path %>
   <%= link_to "投稿", new_post_path %>
   <%= link_to "投稿一覧", posts_path %>
   <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>

@@ -1,0 +1,8 @@
+<h1>マイページ</h1>
+<%= link_to "トップに戻る", root_path %>
+<% @post.each do |post| %>
+  <div>
+    <%= post.user.name %>
+    <%= post.body %>
+  </div>
+<% end %>
