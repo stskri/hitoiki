@@ -13,6 +13,6 @@ Rails.application.routes.draw do
     get "about" => "homes#about"
     get "my_page" => "users#my_page"
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
-    resources :user, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update]
   end
 end

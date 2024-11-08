@@ -7,7 +7,7 @@ class Public::UsersController < ApplicationController
     @post = Post.where(user: current_user)
   end
 
-  def edit    
+  def edit
   end
 
   def update
