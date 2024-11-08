@@ -1,7 +1,5 @@
 class Public::PostsController < ApplicationController
 
-  before_action :authenticate_user!
-
   def new
     @post = Post.new
   end
@@ -10,7 +8,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to root_path, success: '投稿しました'
+      redirect_to root_path, notice: '投稿しました'
     else
       redirect_to new_post_path, alert: '投稿に失敗しました'
     end
@@ -18,7 +16,6 @@ class Public::PostsController < ApplicationController
 
   def index
     @posts  = Post.includes(:user).all
-    
   end
 
   def show
@@ -41,6 +38,6 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:user_id, :body, :is_public)
+    params.require(:post).permit(:body)
   end
 end

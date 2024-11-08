@@ -4,7 +4,7 @@ class CreatePosts < ActiveRecord::Migration[6.1]
       
       t.integer :user_id, null: false
       t.string :body, null: false
-      t.boolean :is_public, null: false, default: true
+      t.boolean :is_public, default: true
       
       t.timestamps
     end

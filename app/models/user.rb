@@ -5,11 +5,11 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :image
-  has_many :post, dependent: :destroy
-  has_many :post_comment, dependent: :destroy
-  has_many :favorite, dependent: :destroy
-  has_many :inquiry, dependent: :destroy
-  has_many :entry, dependent: :destroy
-  has_many :room, dependent: :destroy
-  has_many :message, dependent: :destroy
+  has_many :posts, dependent: :destroy
+  has_many :post_comments, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :inquiries, dependent: :destroy
+  has_many :entries, dependent: :destroy
+  has_many :rooms, dependent: :destroy
+  has_many :messages, dependent: :destroy
 end
