@@ -1,1 +1,12 @@
 <h1>ユーザー情報編集ページ</h1>
+<%= link_to "マイページへ", my_page_path %>
+<%= form_with model: @user, method: :patch do |f| %>
+  <p>ユーザーネーム</p>
+  <%= f.text_field :name %>
+  <p>自己紹介</p>
+  <%= f.text_field :introduction %>
+  <p>メールアドレス</p>
+  <%= f.text_field :email %>
+  <%= f.submit "確定" %>
+  <p>メールアドレスとパスワードの変更は<%= link_to "こちら", edit_registration_path(@user) %>から</p>
+<% end %>
