@@ -12,22 +12,25 @@
 
   <body>
     <div class="container-fluid mx-0">
+      <%# レフトバー %>
       <div class="row">
-        <% flash.each do |key, message| %>
-          <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
-            <%= message %>
-          </div>
-        <% end %>
-      </div>
-      <div class="row">
-        <div class="col-2" style="background-color: #eaf4ff;">
-          <h3>レフトバー</h3>
+        <div class="col-2 border-right p-4 vh-100" style="position: sticky; top: 0;">
+          <%= render 'layouts/left-bar' %>
         </div>
 
-        <div class="col-7" style="background-color: #f4ffff;"><%= yield %></div>
+        <%# コンテンツ %>
+        <div class="col-7 px-5">
+          <% flash.each do |key, message| %>
+            <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+              <%= message %>
+            </div>
+          <% end %>
+          <%= yield %>
+        </div>
 
-        <div class="col-3" style="background-color: #eaf4ff;">
-          <h3>ライトバー</h3>
+        <%# ライトバー %>
+        <div class="col-3 p-4 vh-100" style="position: sticky; top: 0; background-color: #f4ffff;">
+          <%= render 'layouts/right-bar' %>
         </div>
       </div>
     </div>

@@ -1,9 +1,8 @@
 <h1>マイページ</h1>
-<%= link_to "トップに戻る", root_path %>
 <%= link_to "ユーザー情報編集", edit_user_path(@user) %>
-<p>ユーザーネーム</p>
+<span>ユーザーネーム</span>
 <%= @user.name %>
-<p>自己紹介</p>
+<span>自己紹介</span>
 <%= @user.introduction %>
 
 <% @post.each do |post| %>

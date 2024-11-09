@@ -1,0 +1,24 @@
+<div class="container mx-0">
+  <div class="row">
+    <%= link_to "（ロゴ）", root_path %>
+  </div>
+  <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+    <%= link_to posts_path do %>
+      <i class="fa-solid fa-house"><span class="font-weight-normal"> ホーム</span></i>
+    <% end %>
+  </div>
+  <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+    検索
+  </div>
+  <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+    <%= link_to posts_path do %>
+      <i class="fa-regular fa-paper-plane"><span> メッセージ</span></i>
+    <% end %>
+  </div>
+  <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+    <%= link_to "ひといき", new_post_path %>
+  </div>
+  <div class="row my-1 mx-0 p-2 " style="font-size: 1.1rem; line-height: 1.6rem;">
+    <%= link_to "ログアウト", destroy_user_session_path %>
+  </div>
+</div>
