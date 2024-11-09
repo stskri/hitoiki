@@ -1,24 +1,36 @@
-<div class="container mx-0">
-  <div class="row">
-    <%= link_to "（ロゴ）", root_path %>
+<div class="container px-0">
+  <div style="height: 85vh;">
+
+    <div  class="row my-1 mx-0 p-2" style="fline-height: 2rem;">
+      <%= link_to root_path do %>
+        <%= image_tag("hitoiki-logo.png", style: "width: 70px; height: 70px;") %>
+      <% end %>
+    </div>
+    <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to posts_path do %>
+        <i class="fa-solid fa-house"><span class="font-weight-normal"> ホーム</span></i>
+      <% end %>
+    </div>
+    <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to '#' do %>
+        <i class="fa-solid fa-magnifying-glass"><span class="font-weight-normal"> 検索</span></i>
+      <% end %>
+    </div>
+    <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to posts_path do %>
+        <i class="fa-regular fa-paper-plane"><span class="font-weight-normal"> メッセージ</span></i>
+      <% end %>
+    </div>
+
+    <div class="row my-1 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to new_post_path do %>
+        <i class="fa-solid fa-mug-saucer"><span class="font-weight-normal"> ひといき</span></i>
+      <% end %>
+    </div>
   </div>
-  <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
-    <%= link_to posts_path do %>
-      <i class="fa-solid fa-house"><span class="font-weight-normal"> ホーム</span></i>
+  <div class="row my-1 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+    <%= link_to destroy_user_session_path do %>
+      <i class="fa-solid fa-person-walking-dashed-line-arrow-right"><span class="font-weight-normal"> ログアウト</span></i>
     <% end %>
-  </div>
-  <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
-    検索
-  </div>
-  <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
-    <%= link_to posts_path do %>
-      <i class="fa-regular fa-paper-plane"><span> メッセージ</span></i>
-    <% end %>
-  </div>
-  <div class="row my-1 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
-    <%= link_to "ひといき", new_post_path %>
-  </div>
-  <div class="row my-1 mx-0 p-2 " style="font-size: 1.1rem; line-height: 1.6rem;">
-    <%= link_to "ログアウト", destroy_user_session_path %>
   </div>
 </div>
