@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hitoiki</title>
+    <title>hitoiki</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -11,19 +11,28 @@
   </head>
 
   <body>
-    <div class="container">
-    </div>
-    
-
-
-
-    <div class="container">
-      <% flash.each do |key, message| %>
-        <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
-          <%= message %>
+    <div class="container-fluid mx-0">
+      <%# レフトバー %>
+      <div class="row">
+        <div class="col-2 border-right p-4 vh-100" style="position: sticky; top: 0;">
+          <%= render 'layouts/left-bar' %>
         </div>
-      <% end %>
+
+        <%# コンテンツ %>
+        <div class="col-7 px-5">
+          <% flash.each do |key, message| %>
+            <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+              <%= message %>
+            </div>
+          <% end %>
+          <%= yield %>
+        </div>
+
+        <%# ライトバー %>
+        <div class="col-3 p-4 vh-100" style="position: sticky; top: 0; background-color: #f4ffff;">
+          <%= render 'layouts/right-bar', user: current_user  %>
+        </div>
+      </div>
     </div>
-    <%= yield %>
   </body>
 </html>

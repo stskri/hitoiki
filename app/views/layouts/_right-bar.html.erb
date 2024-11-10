@@ -1,0 +1,19 @@
+<div class="container px-0">
+  <div class="row" style="height: 10vh;">
+    <% if user_signed_in? %>
+      <div>
+        <%= link_to my_page_path do %>
+        <%= image_tag user.get_image(50,50), class: "rounded-circle" %>
+        <%= user.name %>
+      <% end %>
+      </div>
+    <% else %>
+      <%= link_to "会員登録", new_user_registration_path %>
+      <%= link_to "ログイン", user_session_path %>
+    <% end %>
+  </div>
+  <div class="row" style="height: 60vh;">通知</div>
+  <div class="row">
+    <span style="color: #bdbdbd; font-size: 0.7rem;">Copyright © hogehoge All Rights Reserved.</span>
+  </div>
+</div>

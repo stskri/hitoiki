@@ -4,7 +4,6 @@ class Public::UsersController < ApplicationController
 
   def my_page
     @user = current_user
-    @post = Post.where(user: current_user)
   end
 
   def edit
@@ -22,6 +21,6 @@ class Public::UsersController < ApplicationController
 
   private
   def user_params
-    params.require(:user).permit(:name, :introduction)
+    params.require(:user).permit(:name, :introduction, :image)
   end
 end
