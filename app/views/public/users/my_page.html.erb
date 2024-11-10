@@ -1,12 +1,5 @@
 <h1>マイページ</h1>
-<%= link_to "ユーザー情報編集", edit_user_path(@user) %>
-<p>画像</p>
-<% if @user.image.attached? %>
-  <%= image_tag @user.image, size: "50x50" %>
-<% else %>
-  <%= image_tag 'no_image', size: "50x50" %>
-<% end %>
-
+<%= image_tag @user.get_image(50,50), class: "rounded-circle" %>
 <span>ユーザーネーム</span>
 <%= @user.name %>
 <span>自己紹介</span>
