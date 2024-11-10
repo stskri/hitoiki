@@ -1,6 +1,15 @@
 <div class="container px-0">
   <div class="row" style="height: 10vh;">
-    <%= link_to "マイページ", my_page_path %>
+    <div>
+      <%= link_to my_page_path do %>
+      <% if user.image.attached? %>
+        <%= image_tag user.image, size: "50x50" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "50x50" %>
+      <% end %>
+      <%= user.name %>
+    <% end %>
+    </div>
   </div>
   <div class="row" style="height: 60vh;">通知</div>
   <div class="row">

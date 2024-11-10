@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Hitoiki</title>
+    <title>hitoiki</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
@@ -30,7 +30,7 @@
 
         <%# ライトバー %>
         <div class="col-3 p-4 vh-100" style="position: sticky; top: 0; background-color: #f4ffff;">
-          <%= render 'layouts/right-bar' %>
+          <%= render 'layouts/right-bar', user: current_user  %>
         </div>
       </div>
     </div>

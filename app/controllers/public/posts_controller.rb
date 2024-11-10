@@ -8,7 +8,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      redirect_to root_path, notice: '投稿しました'
+      redirect_to posts_path, notice: '投稿しました'
     else
       redirect_to new_post_path, alert: '投稿に失敗しました'
     end

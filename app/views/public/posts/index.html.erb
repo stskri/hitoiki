@@ -3,6 +3,11 @@
 <div>
   <% @posts.each do |post| %>
     <div>
+      <% if post.user.image.attached? %>
+        <%= image_tag post.user.image, size: "50x50" %>
+      <% else %>
+        <%= image_tag 'no_image', size: "50x50" %>
+      <% end %>
       <%= post.user.name %>
       <%= post.body %>
       <%= link_to "詳細", post_path(post.id) %>

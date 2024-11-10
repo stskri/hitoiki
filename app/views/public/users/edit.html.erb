@@ -5,8 +5,8 @@
   <%= f.text_field :name %>
   <p>自己紹介</p>
   <%= f.text_field :introduction %>
-  <p>メールアドレス</p>
-  <%= f.text_field :email %>
+  <p>画像</p>
+  <%= f.file_field :image, accept: "image/*" %>
   <%= f.submit "確定" %>
   <p>メールアドレスとパスワードの変更は<%= link_to "こちら", edit_registration_path(@user) %>から</p>
 <% end %>
