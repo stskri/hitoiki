@@ -1,0 +1,34 @@
+<div class="container px-0">
+  <div style="height: 80vh;">
+    <div  class="row mx-0 pb-4 d-flex justify-content-center">
+      <%= link_to root_path do %>
+        <%= image_tag("hitoiki-logo.png", style: "width: 70px; height: 70px;") %>
+      <% end %>
+    </div>
+    <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to posts_path do %>
+        <i class="fa-solid fa-house fa-lg"></i><span> ホーム</span>
+      <% end %>
+    </div>
+    <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to '#' do %>
+        <i class="fa-solid fa-magnifying-glass fa-lg"></i><span> 検索</span>
+      <% end %>
+    </div>
+    <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to posts_path do %>
+        <i class="fa-regular fa-paper-plane fa-lg"></i><span> メッセージ</span>
+      <% end %>
+    </div>
+    <div class="row mb-2 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to new_post_path do %>
+        <i class="fa-solid fa-mug-saucer fa-lg"></i><span> ひといき</span>
+      <% end %>
+    </div>
+  </div>
+  <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+    <%= link_to destroy_user_session_path, method: :delete do %>
+      <i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-lg"></i><span> ログアウト</span>
+    <% end %>
+  </div>
+</div>

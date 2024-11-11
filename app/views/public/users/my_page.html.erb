@@ -1,0 +1,13 @@
+<h1>マイページ</h1>
+<%= image_tag @user.get_image(50,50), class: "rounded-circle" %>
+<span>ユーザーネーム</span>
+<%= @user.name %>
+<span>自己紹介</span>
+<%= @user.introduction %>
+
+<% @user.posts.each do |post| %>
+  <div>
+    <%= post.user.name %>
+    <%= post.body %>
+  </div>
+<% end %>

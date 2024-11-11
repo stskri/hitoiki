@@ -1,0 +1,12 @@
+<h1>投稿一覧</h1>
+<div><%= link_to "トップに戻る", root_path %></div>
+<div>
+  <% @posts.each do |post| %>
+    <div>
+      <%= image_tag post.user.get_image(50,50), class: "rounded-circle" %>
+      <%= post.user.name %>
+      <%= post.body %>
+      <%= link_to "詳細", post_path(post.id) %>
+    </div>
+  <% end %>
+</div>
