@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   }
 
   scope module: :public do
-    root :to => "homes#top"
+    root :to => "posts#index"
     get "about" => "homes#about"
     get "my_page" => "users#my_page"
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
