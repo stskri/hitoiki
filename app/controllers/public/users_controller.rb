@@ -20,6 +20,11 @@ class Public::UsersController < ApplicationController
     end
   end
 
+  # 新規登録画面で登録失敗した際にURLが/usersとなり、リロードするとRouting Errorが表示されてしまうため、routesにget 'users' => 'users#dummy'を記述している
+  def dummy
+    redirect_to new_user_registration_path
+  end
+
   private
   def user_params
     params.require(:user).permit(:name, :introduction, :image)

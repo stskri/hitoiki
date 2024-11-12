@@ -23,7 +23,7 @@
         <%# コンテンツ %>
         <div class="<%= user_signed_in? ? 'col-7 px-5' : 'col-12' %>">
           <% flash.each do |key, message| %>
-            <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+            <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>  text-center">
               <%= message %>
             </div>
           <% end %>

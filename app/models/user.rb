@@ -13,6 +13,8 @@ class User < ApplicationRecord
   has_many :rooms, dependent: :destroy
   has_many :messages, dependent: :destroy
 
+  validates :name, presence: true
+
   def get_image(width, height)
     unless image.attached?
       file_path = Rails.root.join('app/assets/images/no_image.jpg')

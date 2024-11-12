@@ -1,7 +1,9 @@
-<div class="container d-flex justify-content-center align-items-center vh-100">
+<div class="container mt-5 d-flex justify-content-center align-items-center">
   <div class="card p-4" style="width: 320px; border: 1px solid #ddd;">
     <div class="mb-4 d-flex justify-content-center">
-      <%= image_tag("hitoiki-logo.png", style: "width: 100px; height: 100px;") %>
+      <%= link_to new_user_session_path do %>
+        <%= image_tag("hitoiki-logo.png", style: "width: 100px; height: 100px;") %>
+      <% end %>
     </div>
 
     <%= form_with model: @user, url: user_session_path do |f| %>
@@ -28,6 +30,6 @@
     </div>
   </div>
 </div>
-<div class="fixed-bottom text-center py-4" style="font-size: 0.8em; color: #888;">
+<div class="text-center mt-3" style="font-size: 0.8em; color: #888;">
   <span>© hogehoge All Rights Reserved</span>
 </div>
