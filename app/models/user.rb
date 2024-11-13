@@ -14,6 +14,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
 
   validates :name, presence: true
+  validates :introduction, length: { maximum: 150 }
 
   def get_image(width, height)
     unless image.attached?
