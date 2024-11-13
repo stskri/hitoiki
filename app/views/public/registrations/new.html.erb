@@ -1,34 +1,46 @@
-<h2>Sign up</h2>あああああ
+<div class="container mt-5 d-flex justify-content-center align-items-center">
+  <div class="card p-4" style="width: 320px; border: 1px solid #ddd;">
+    <div class="mb-4 d-flex justify-content-center">
+      <%= link_to root_path do %>
+        <%= image_tag("hitoiki-logo.png", style: "width: 100px; height: 100px;") %>
+      <% end %>
+    </div>
 
-<%= form_with model: @user, url: user_registration_path do |f| %>
-  <%= render "public/shared/error_messages", resource: resource %>
+    <%= form_with model: @user, url: user_registration_path do |f| %>
+      <%= render "public/shared/error_messages", resource: resource %>
 
-  <div class="field">
-  <%= f.label :name %><br>
-  <%= f.text_field :name, autofocus: true %>
+      <div class="mb-3">
+        <% f.label :name %>
+        <%= f.text_field :name, autofocus: true, placeholder: "アカウント名", class: "form-control", style: "background-color: #fafafa;" %>
+      </div>
+
+      <div class="mb-3">
+        <% f.label :email %>
+        <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス", class: "form-control", style: "background-color: #fafafa;" %>
+      </div>
+
+      <div class="mb-3">
+        <% f.label :password %>
+        <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード(#{@minimum_password_length}文字以上)", class: "form-control", style: "background-color: #fafafa;" %>
+      </div>
+
+      <div class="mb-3">
+        <% f.label :password_confirmation %>
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認用)", class: "form-control", style: "background-color: #fafafa;" %>
+      </div>
+
+      <div>
+        <%= f.submit "新規登録", class: "btn btn-primary form-control", style: "border-radius: 10px;" %>
+      </div>
+    <% end %>
+
+    <hr class="my-4">
+
+    <div class="text-center">
+      <%= render "public/shared/links", class: "btn btn-link" %>
+    </div>
   </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
-
-<%= render "public/shared/links" %>
+</div>
+<div class="text-center mt-3" style="font-size: 0.8em; color: #888;">
+  <p>© hogehoge All Rights Reserved</p>
+</div>

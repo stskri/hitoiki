@@ -1,12 +1,26 @@
-<h1>ユーザー情報編集ページ</h1>
-<%= link_to "マイページへ", my_page_path %>
-<%= form_with model: @user, method: :patch do |f| %>
-  <p>ユーザーネーム</p>
-  <%= f.text_field :name %>
-  <p>自己紹介</p>
-  <%= f.text_field :introduction %>
-  <p>画像</p>
-  <%= f.file_field :image, accept: "image/*" %>
-  <%= f.submit "確定" %>
-  <p>メールアドレスとパスワードの変更は<%= link_to "こちら", edit_registration_path(@user) %>から</p>
-<% end %>
+
+<div class="container mt-5">
+  <h4>ユーザー情報を編集</h4>
+  <p><p>メールアドレスとパスワードの変更は<%= link_to "こちら", edit_registration_path(@user) %>から</p></p>
+
+  <%= form_with model: @user, method: :patch do |f| %>
+    <div class="mb-3">
+      <span>画像</span><br>
+      <%= f.file_field :image, accept: "image/*" %>
+    </div>
+
+    <div class="mb-3">
+      <span>アカウント名</span>
+      <%= f.text_field :name, placeholder: "#{current_user.name}", class: "form-control", style: "background-color: #fafafa;" %>
+    </div>
+
+    <div class="mb-3">
+      <span>自己紹介(150字以内)</span>
+      <%= f.text_area :introduction, class: "form-control", style: "background-color: #fafafa;" %>
+    </div>
+
+    <div class="my-5 actions d-flex justify-content-center">
+      <%= f.submit "確定", class: "btn btn-success col-6 form-control ", style: "border-radius: 10px;" %>
+    </div>
+  <% end %>
+</div>
