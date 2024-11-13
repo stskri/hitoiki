@@ -14,14 +14,16 @@
     <div class="container-fluid mx-0">
       <%# レフトバー %>
       <div class="row">
-        <div class="col-2 border-right p-4 vh-100" style="position: sticky; top: 0;">
-          <%= render 'layouts/left-bar' %>
-        </div>
+        <% if user_signed_in? %>
+          <div class="col-2 border-right p-4 vh-100" style="position: sticky; top: 0;">
+            <%= render 'layouts/left-bar' %>
+          </div>
+        <% end %>
 
         <%# コンテンツ %>
-        <div class="col-7 px-5">
+        <div class="<%= user_signed_in? ? 'col-7 px-5' : 'col-12' %>">
           <% flash.each do |key, message| %>
-            <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>">
+            <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>  text-center">
               <%= message %>
             </div>
           <% end %>
@@ -29,9 +31,11 @@
         </div>
 
         <%# ライトバー %>
-        <div class="col-3 p-4 vh-100" style="position: sticky; top: 0; background-color: #f4ffff;">
-          <%= render 'layouts/right-bar', user: current_user  %>
-        </div>
+        <% if user_signed_in? %>
+          <div class="col-3 p-4 vh-100" style="position: sticky; top: 0; background-color: #f4ffff;">
+            <%= render 'layouts/right-bar', user: current_user  %>
+          </div>
+        <% end %>
       </div>
     </div>
   </body>

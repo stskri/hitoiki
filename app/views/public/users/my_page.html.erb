@@ -4,6 +4,7 @@
 <%= @user.name %>
 <span>自己紹介</span>
 <%= @user.introduction %>
+<%= link_to "編集", edit_user_path(@user) %>
 
 <% @user.posts.each do |post| %>
   <div>

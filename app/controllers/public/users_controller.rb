@@ -1,4 +1,5 @@
 class Public::UsersController < ApplicationController
+  before_action :authenticate_user!
   def show
   end
 
@@ -17,6 +18,11 @@ class Public::UsersController < ApplicationController
     else
       redirect_to request.referer, alert: '変更の保存に失敗しました'
     end
+  end
+
+  # 新規登録画面で登録失敗した際にURLが/usersとなり、リロードするとRouting Errorが表示されてしまうため、routesにget 'users' => 'users#dummy'を記述している
+  def dummy
+    redirect_to new_user_registration_path
   end
 
   private
