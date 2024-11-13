@@ -1,5 +1,4 @@
 class Public::PostsController < ApplicationController
-  before_action :authenticate_user!, except: [:index]
 
   def new
     @post = Post.new
@@ -16,9 +15,6 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    unless user_signed_in?
-      redirect_to new_user_session_path
-    end
     @posts  = Post.includes(:user).all
   end
 
