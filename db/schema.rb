@@ -57,6 +57,7 @@ ActiveRecord::Schema.define(version: 2024_11_07_110511) do
     t.string "color", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["name", "color"], name: "index_emotions_on_name_and_color", unique: true
   end
 
   create_table "entries", force: :cascade do |t|

@@ -16,4 +16,12 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy]
     resources :users, only: [:show, :edit, :update]
   end
+
+  namespace :admin do
+    root :to => "inquiries#index"
+    resources :users
+    resources :emotions
+    resources :posts
+    resources :inquiries
+  end
 end

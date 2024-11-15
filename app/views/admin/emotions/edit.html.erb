@@ -1,8 +1,8 @@
 <div class="mt-5">
-  <h4>投稿編集</h4>
+  <h4>感情タグ編集</h4>
 </div>
 
-<%= form_with model: @post, method: :patch do |f| %>
+<%= form_with model: @emotion, url: admin_emotion_path(@emotion) do |f| %>
   <div class="container">
     <div class="row">
       <div class="col-10 mx-auto">
@@ -10,7 +10,10 @@
           <tbody>
             <tr>
               <td>
-                <%= f.text_field :body, placeholder: "#{@post.body}", class: "form-control" %>
+                <%= f.text_field :name, placeholder: "#{@emotion.name}", class: "form-control"  %>
+              </td>
+              <td>
+                <%= f.color_field :color, class: "form-control" %>
               </td>
               <td>
                 <%= f.submit "確定", class: "btn btn-success form-control" %>

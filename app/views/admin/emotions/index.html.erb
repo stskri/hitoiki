@@ -1,0 +1,114 @@
+<div class="mt-5">
+  <h4>感情タグ作成</h4>
+</div>
+
+<%= form_with model: @emotion, url: admin_emotions_path, method: :post do |f| %>
+  <div class="container">
+    <div class="row">
+      <div class="col-10 mx-auto">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td>
+                <%= f.text_field :name, class: "form-control" %>
+              </td>
+              <td>
+                <%= f.color_field :color, class: "form-control" %>
+              </td>
+              <td>
+                <%= f.submit "作成", class: "btn btn-success form-control" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="mt-5">
+  <h4>感情タグ一覧</h4>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-12" style="padding: 12px 0;">
+      <table class="table table-bordered table-sm">
+        <thead class="thead-light">
+          <tr>
+            <th>感情名</th>
+            <th>カラーコード</th>
+            <th>背景色</th>
+            <th>編集と削除</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @emotions.each do |emotion| %>
+            <tr>
+              <td><%= emotion.name %></td>
+              <td><%= emotion.color %></td>
+              <td style="background-color: <%= emotion.color %>;"></td>
+              <td>
+                <div>
+                  <%= link_to "編集", edit_admin_emotion_path(emotion), class: "btn-sm btn-success" %>
+                  <%= link_to "削除", admin_emotion_path(emotion), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn-sm btn-danger" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+
+
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+以下は試し
+<div class="container">
+  <div class="row">
+      <div class="col-12 mb-4">
+        <table class="table table-bordered table-sm">
+          <thead class="thead-light">
+            <tr>
+              <th class="col-1">感情名</th>
+              <th class="col-2">カラーコード</th>
+              <th class="col-1">背景色</th>
+              <th class="col-2">編集と削除</th>
+              <th class="col-1">感情名</th>
+              <th class="col-2">カラーコード</th>
+              <th class="col-1">背景色</th>
+              <th class="col-2">編集と削除</th>
+            </tr>
+          </thead>
+          <tbody class="table-group-divider">
+            <% @emotions.each_slice(2) do |emotion_pair| %>
+              <tr>
+                <% emotion_pair.each do |emotion| %>
+                  <td><%= emotion.name %></td>
+                  <td><%= emotion.color %></td>
+                  <td style="background-color: <%= emotion.color %>;"></td>
+                  <td>
+                    <div>
+                      <%= link_to "編集", edit_admin_emotion_path(emotion), class: "btn-sm btn-success" %>
+                      <%= link_to "削除", admin_emotion_path(emotion), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn-sm btn-danger" %>
+                    </div>
+                  </td>
+                <% end %>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+  </div>
+</div>

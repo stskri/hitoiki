@@ -1,6 +1,24 @@
-<h1>投稿画面</h1>
-<div><%= link_to "一覧に戻る", posts_path %></div>
+<div class="mt-5">
+  <h4>新規投稿</h4>
+</div>
+
 <%= form_with model: @post do |f| %>
-  <%= f.text_field :body %>
-  <%= f.submit '投稿する' %>
+  <div class="container">
+    <div class="row">
+      <div class="col-10 mx-auto">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td>
+                <%= f.text_field :body, placeholder: "ひといき", class: "form-control" %>
+              </td>
+              <td>
+                <%= f.submit "投稿", class: "btn btn-success form-control" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 <% end %>
