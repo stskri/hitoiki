@@ -16,5 +16,21 @@ Admin.find_or_create_by(id: 1) do |admin|
 end
 # adminの設定ここまで
 
+# emotionの設定
+emotions = [
+  { id: 1, name: '喜び', color: '#fff9c4' },
+  { id: 2, name: '怒り', color: '#ffcdd2' },
+  { id: 3, name: '哀しい', color: '#bbdefd' },
+  { id: 4, name: '楽しい', color: '#c8e6c9' }
+]
+
+emotions.each do |emotion_data|
+  Emotion.find_or_create_by(id: emotion_data[:id]) do |emotion|
+    emotion.name = emotion_data[:name]
+    emotion.color = emotion_data[:color]
+  end
+end
+# emotionの設定ここまで
+
 
 puts "seedの作成が完了しました。"
