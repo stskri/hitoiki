@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :entries, dependent: :destroy
   has_many :rooms, dependent: :destroy
   has_many :messages, dependent: :destroy
+  # my_pageにいいねした投稿を一覧表示させるため、favoritesを通じてpostを取得する
+  has_many :favorited_posts, through: :favorites, source: :post
 
   validates :name, presence: true
   validates :introduction, length: { maximum: 150 }

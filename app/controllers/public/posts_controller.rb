@@ -3,12 +3,15 @@ class Public::PostsController < ApplicationController
 
   def new
     @post = Post.new
+    @emotions = Emotion.all
   end
 
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
+      # @post_emotion = @post.post_emotions.build(ppost_emotion_params)
+      # @post_emotion = []
       redirect_to posts_path, notice: '投稿しました'
     else
       redirect_to new_post_path, alert: '投稿に失敗しました'
@@ -53,5 +56,9 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:body)
+  end
+
+  def ppost_emotion_params
+    params.require(:post_emotion).permit(:emotion_name, :emotion_color)
   end
 end

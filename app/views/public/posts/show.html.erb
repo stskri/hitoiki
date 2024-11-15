@@ -2,5 +2,6 @@
 <div><%= link_to "一覧に戻る", posts_path %></div>
 <%= @post.user.name %>
 <%= @post.body %>
+<%= render "public/favorites/btn", post: @post %>
 <%= link_to "編集", edit_post_path(@post) %>
 <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} %>
