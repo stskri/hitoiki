@@ -7,5 +7,6 @@ class CreateEmotions < ActiveRecord::Migration[6.1]
 
       t.timestamps
     end
+    add_index :emotions, [:name, :color], unique: true
   end
 end

@@ -15,7 +15,7 @@ class Admin::EmotionsController < ApplicationController
     if @emotion.save
       redirect_to admin_emotions_path, notice: '感情タグを作成しました'
     else
-      redirect_to new_admin_emotion_path, alert: '感情タグの作成に失敗しました'
+      redirect_to admin_emotions_path, alert: '感情タグの作成に失敗しました'
     end
   end
 
@@ -42,5 +42,4 @@ class Admin::EmotionsController < ApplicationController
   def emotion_params
     params.require(:emotion).permit(:name, :color)
   end
-
 end
