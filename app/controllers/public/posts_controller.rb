@@ -23,6 +23,7 @@ class Public::PostsController < ApplicationController
       redirect_to new_user_session_path
     end
     @posts  = Post.includes(:user).all
+    @favorited_posts = current_user.favorited_posts
   end
 
   def show

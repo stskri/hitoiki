@@ -19,3 +19,7 @@
   <%= favorited_post.user.name %>
   <%= favorited_post.body %>
 <% end %>
+
+<div>
+  <%= render 'public/posts/posts', posts: @favorited_posts %>
+</div>
