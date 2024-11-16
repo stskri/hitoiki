@@ -9,7 +9,7 @@ class Public::RelationshipsController < ApplicationController
 
   def destroy
     user = User.find(params[:user_id])
-    current_user.usfollow(user)
+    current_user.unfollow(user)
     redirect_to request.referer
   end
 
