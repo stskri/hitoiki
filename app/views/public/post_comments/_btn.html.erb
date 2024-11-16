@@ -1,0 +1,6 @@
+<%= link_to post_path(post) do %>
+  <i class="fa-regular fa-comment"></i>
+<% end %>
+<% if post.post_comment.count > 0 %>
+  <%= post.post_comment.count %>
+<% end %>
