@@ -5,6 +5,7 @@ class Public::UsersController < ApplicationController
 
   def my_page
     @user = current_user
+    @favorited_posts = current_user.favorited_posts
   end
 
   def edit

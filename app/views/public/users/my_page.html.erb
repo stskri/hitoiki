@@ -14,3 +14,8 @@
     <%= link_to "削除", post_path(post), method: :delete, data: { confirm: '本当に削除しますか？'} %>
   </div>
 <% end %>
+
+<% @favorited_posts.each do |favorited_post| %>
+  <%= favorited_post.user.name %>
+  <%= favorited_post.body %>
+<% end %>

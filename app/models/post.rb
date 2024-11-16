@@ -5,4 +5,8 @@ class Post < ApplicationRecord
   has_many :post_comment, dependent: :destroy
 
   validates :body, presence: true
+
+  def favorited_by?(user)
+    favorites.exists?(user_id: user.id)
+  end
 end
