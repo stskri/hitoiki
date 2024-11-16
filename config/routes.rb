@@ -16,7 +16,10 @@ Rails.application.routes.draw do
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
     end
-    resources :users, only: [:show, :edit, :update]
+    resources :users, only: [:show, :edit, :update] do
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
   end
 
   namespace :admin do
