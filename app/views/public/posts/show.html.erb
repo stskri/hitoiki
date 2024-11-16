@@ -2,6 +2,14 @@
 <div><%= link_to "一覧に戻る", posts_path %></div>
 <%= @post.user.name %>
 <%= @post.body %>
-<%= render "public/favorites/btn", post: @post %>
+<div id="favorite_btn_<%= @post.id %>">
+  <%= render "public/favorites/btn", post: @post %>
+</div>
 <%= link_to "編集", edit_post_path(@post) %>
 <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} %>
+
+<script>
+  $(document).ready(function() {
+    console.log('jQuery is loaded!');
+  });
+</script>

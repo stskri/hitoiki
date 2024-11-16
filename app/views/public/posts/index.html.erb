@@ -6,7 +6,9 @@
       <%= image_tag post.user.get_image(50,50), class: "rounded-circle" %>
       <%= post.user.name %>
       <%= post.body %>
-      <%= render "public/favorites/btn", post: post %>
+      <div id="favorite_btn_<%= post.id %>">
+        <%= render "public/favorites/btn", post: post %>
+      </div>
       <%= link_to "詳細", post_path(post.id) %>
     </div>
   <% end %>
