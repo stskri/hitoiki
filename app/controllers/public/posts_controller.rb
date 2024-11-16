@@ -19,11 +19,12 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    unless user_signed_in?
+    if user_signed_in?
+      @posts  = Post.includes(:user).all.order(created_at: :desc)
+      @favorited_posts = current_user.favorited_posts
+    else
       redirect_to new_user_session_path
     end
-    @posts  = Post.includes(:user).all
-    @favorited_posts = current_user.favorited_posts
   end
 
   def show
