@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     get 'users' => 'users#dummy' # 新規登録画面で登録失敗した際にURLが/usersとなり、リロードするとRouting Errorが表示されてしまうため、controller側で redirect_to new_user_registration_path を用意している
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resource :favorites, only: [:create, :destroy]
+      resources :post_comments, only: [:create, :destroy]
     end
     resources :users, only: [:show, :edit, :update] do
       resource :relationships, only: [:create, :destroy]

@@ -21,6 +21,9 @@
               <div id="favorite_btn_<%= post.id %>" class="me-2">
                 <%= render "public/favorites/btn", post: post %>
               </div>
+              <div>
+                <%= render "public/post_comments/btn", post: post %>
+              </div>
               <%= link_to "詳細", post_path(post.id), class: "btn btn-sm btn-primary" %>
             </div>
           </div>

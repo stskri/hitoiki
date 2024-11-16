@@ -2,10 +2,14 @@
   <%= link_to post_favorites_path(post), method: :delete, remote: true do %>
     <i class="fa-solid fa-mug-hot" aria-hidden="true" style="color: red;"></i>
   <% end %>
-  <%= post.favorites.count %>いいね
+  <% if post.favorites.count > 0 %>
+    <%= post.favorites.count %>
+  <% end %>
 <% else %>
   <%= link_to post_favorites_path(post), method: :post, remote: true do %>
     <i class="fa-solid fa-mug-saucer" aria-hidden="true"></i>
   <% end %>
-  <%= post.favorites.count %>いいね
+  <% if post.favorites.count > 0 %>
+    <%= post.favorites.count %>
+  <% end %>
 <% end %>
