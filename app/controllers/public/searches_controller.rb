@@ -1,13 +1,16 @@
 class Public::SearchesController < ApplicationController
   before_action :authenticate_user!
 
+  def search_pages
+  end
+
   def search
     @model = params[:model]
     @content = params[:content]
     @method = params[:method]
-    if @model = 'user'
+    if @model == "user"
       @records = User.search_for(@content, @method)
-    else
+    elsif @model == "post"
       @records = Post.search_for(@content, @method)
     end
   end

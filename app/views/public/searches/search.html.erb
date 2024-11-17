@@ -1,7 +1,11 @@
+<div>
+  <%= render 'form' %>
+</div>
+
 <% if @model == 'user' %>
   <h3>ユーザー検索 "<%= @content %>"</h3>
   <%= render 'public/users/users', users: @records %>
 <% elsif @model == 'post' %>
   <h3>投稿検索 "<%= @content %>"</h3>
-  <%= render 'public/posts/posts', posrs: @records %>
+  <%= render 'public/posts/posts', posts: @records %>
 <% end %>

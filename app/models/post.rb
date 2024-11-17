@@ -12,13 +12,13 @@ class Post < ApplicationRecord
 
   def self.search_for(content, method)
     if method == 'perfect'
-      Post.where(name: content)
+      Post.where(body: content)
     elsif method == 'forward'
-      Post.where('name LIKE?', content + '%')
+      Post.where('body LIKE?', content + '%')
     elsif method == 'backword'
-      Post.where('name LIKE?', '%' + content)
+      Post.where('body LIKE?', '%' + content)
     else
-      Post.where('name LIKE?', '%' + content + '%')
+      Post.where('body LIKE?', '%' + content + '%')
     end
   end
 end
