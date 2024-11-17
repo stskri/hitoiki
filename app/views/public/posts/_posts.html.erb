@@ -4,7 +4,7 @@
       <div class="col mb-3">
         <div class="card">
           <div class="card-body">
-            <div class="d-flex align-items-start">
+            <div class="d-flex">
               <%= link_to user_path(post.user) do %>
                 <%= image_tag post.user.get_image(50, 50), class: "rounded-circle me-3" %>
               <% end %>
@@ -12,19 +12,19 @@
                 <h6 class="card-title mb-1">
                   <%= link_to post.user.name, user_path(post.user), class: "text-dark text-decoration-none" %>
                 </h6>
-                <p class="card-text text-truncate">
-                  <%= truncate(post.body, length: 31) %>
+                <p class="card-text">
+                  <%= post.body %>
                 </p>
               </div>
             </div>
             <div class="row mt-2 d-flex">
-              <div id="favorite_btn_<%= post.id %>" class="col-4 d-flex justify-content-center">
+              <div id="favorite_btn_<%= post.id %>" class="col-4">
                 <%= render "public/favorites/btn", post: post %>
               </div>
-              <div class="col-4 d-flex justify-content-center">
+              <div class="col-4">
                 <%= render "public/post_comments/btn", post: post %>
               </div>
-              <div class="col-4 d-flex justify-content-center">
+              <div class="col-4">
                 <%= link_to "詳細", post_path(post.id), class: "btn btn-sm btn-primary" %>
               </div>
             </div>

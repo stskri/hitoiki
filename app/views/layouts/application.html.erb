@@ -11,23 +11,22 @@
   </head>
 
   <body>
-    <div class="container-fluid mx-0">
-      <%# レフトバー %>
-      <div class="row">
+    <div class="container-fluid mx-0" style="height: 100vh;">
+      <div class="row d-flex" style="height: 100%;">
         <% if user_signed_in? %>
-          <div class="col-2 border-right p-4 vh-100" style="position: sticky; top: 0;">
+          <div class="col-2 border-right p-4" style="position: sticky; top: 0; height: 100vh;">
             <%= render 'layouts/user_left-bar' %>
           </div>
         <% elsif admin_signed_in? %>
-          <div class="col-2 p-4 vh-100" style="position: sticky; top: 0; border-right: 1px solid #ff5733;">
+          <div class="col-2 p-4" style="position: sticky; top: 0; border-right: 1px solid #ff5733; height: 100vh;">
             <%= render 'layouts/admin_left-bar' %>
           </div>
         <% end %>
 
         <%# コンテンツ %>
-        <div class="<%= user_signed_in? || admin_signed_in? ? 'col-7 px-5' : 'col-12' %>">
+        <div class="col" style="flex-grow: 1; height: 100%;">
           <% flash.each do |key, message| %>
-            <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %>  text-center">
+            <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %> text-center">
               <%= message %>
             </div>
           <% end %>
@@ -36,11 +35,11 @@
 
         <%# ライトバー %>
         <% if user_signed_in? %>
-          <div class="col-3 p-4 vh-100" style="position: sticky; top: 0; background-color: #f4ffff;">
-            <%= render 'layouts/user_right-bar', user: current_user  %>
+          <div class="col-3 p-4" style="position: sticky; top: 0; background-color: #f4ffff; height: 100vh;">
+            <%= render 'layouts/user_right-bar', user: current_user %>
           </div>
         <% elsif admin_signed_in? %>
-          <div class="col-3 p-4 vh-100" style="position: sticky; top: 0; background-color: #f4ffff;">
+          <div class="col-3 p-4" style="position: sticky; top: 0; background-color: #f4ffff; height: 100vh;">
             <%= render 'layouts/admin_right-bar' %>
           </div>
         <% end %>

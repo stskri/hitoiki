@@ -1,5 +1,19 @@
-<% users.each do |user| %>
-  <div>
-    <%= user.name %>
+<div class="container pt-4">
+  <div class="row row-cols-1">
+    <% users.each do |user| %>
+      <div class="col mb-3">
+        <%= link_to user_path(user), class: "card" do %>
+          <div class="card-body">
+            <div class="d-flex">
+              <%= image_tag user.get_image(50, 50), class: "rounded-circle me-3", style: "width: 50px; height: 50px;" %>
+              <div style="flex-grow: 1;">
+                <%= user.name %><br>
+                <%= user.introduction %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
   </div>
-<% end %>
+</div>
