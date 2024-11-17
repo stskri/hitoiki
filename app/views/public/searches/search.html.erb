@@ -1,11 +1,13 @@
-<div>
+<div style="position: sticky; top: 0; background-color: white; z-index: 5;">
+  <hr class="mt-0" style="border-color: #fff;">
   <%= render 'form' %>
+  <hr>
 </div>
 
 <% if @model == 'user' %>
-  <h3>ユーザー検索 "<%= @content %>"</h3>
+  <h5 class="text-center">ユーザー検索 "<%= @content %>"</h5>
   <%= render 'public/users/users', users: @records %>
 <% elsif @model == 'post' %>
-  <h3>投稿検索 "<%= @content %>"</h3>
+  <h5 class="text-center">投稿検索 "<%= @content %>"</h5>
   <%= render 'public/posts/posts', posts: @records %>
 <% end %>
