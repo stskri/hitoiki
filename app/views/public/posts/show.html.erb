@@ -1,6 +1,9 @@
 <h1>投稿詳細ページ</h1>
 <div><%= link_to "一覧に戻る", posts_path %></div>
 <%= @post.user.name %>
+<div>
+  <%= l @post.created_at %>
+</div>
 <%= @post.body %>
 <div id="favorite_btn_<%= @post.id %>">
   <%= render "public/favorites/btn", post: @post %>

@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-  before_action :ensure_correct_user, only: [:create, :update, :destroy]
+  before_action :ensure_correct_user, only: [:update, :destroy]
   def new
     @post = Post.new
     @emotions = Emotion.all
@@ -19,12 +19,11 @@ class Public::PostsController < ApplicationController
   end
 
   def index
-    if user_signed_in?
-      @posts  = Post.includes(:user).all.order(created_at: :desc)
-      @favorited_posts = current_user.favorited_posts
-    else
-      redirect_to new_user_session_path
+    # public/posts_pathをroot_pathに指定、未ログインユーザーの場合はログインページへ
+    unless user_signed_in?
+      redirect_to new_user_session_path and return
     end
+    @posts = Post.includes(:user).all
   end
 
   def show
