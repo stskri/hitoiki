@@ -1,0 +1,32 @@
+<div>
+  <%= render 'public/posts/posts', posts: favorited_posts %>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-4 d-flex justify-content-center">
+      <%= image_tag user.get_image(100,100), class: "rounded-circle" %>
+    </div>
+    <div class="col-8">
+      <div class="row">
+        <strong><%= user.name %></strong>
+        <% if user == current_user %>
+          <%= link_to "プロフィール編集", edit_user_path(current_user) %>
+        <% else %>
+          <%= render 'public/relationships/btn', user: user %>
+        <% end %>
+      </div>
+      <div class="row">
+        <span>投稿<strong><%= user.posts.count %></strong>件</span>
+        <span>フォロー中<strong><%= user.followings.count %></strong>人</span>
+        <span>フォロワー<strong><%= user.followers.count %></strong>人</span>
+      </div>
+      <div class="row">
+        <span><%= user.introduction %></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <%= render 'public/posts/posts', posts: user.posts %>
+  </div>
+</div>

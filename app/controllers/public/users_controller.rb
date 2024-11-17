@@ -1,6 +1,8 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   def show
+    @user = User.find(params[:id])
+    @favorited_posts = @user.favorited_posts
   end
 
   def my_page
