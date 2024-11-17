@@ -17,14 +17,16 @@
                 </p>
               </div>
             </div>
-            <div class="mt-2 d-flex">
-              <div id="favorite_btn_<%= post.id %>" class="me-2">
+            <div class="row mt-2 d-flex">
+              <div id="favorite_btn_<%= post.id %>" class="col-4 d-flex justify-content-center">
                 <%= render "public/favorites/btn", post: post %>
               </div>
-              <div>
+              <div class="col-4 d-flex justify-content-center">
                 <%= render "public/post_comments/btn", post: post %>
               </div>
-              <%= link_to "詳細", post_path(post.id), class: "btn btn-sm btn-primary" %>
+              <div class="col-4 d-flex justify-content-center">
+                <%= link_to "詳細", post_path(post.id), class: "btn btn-sm btn-primary" %>
+              </div>
             </div>
           </div>
         </div>

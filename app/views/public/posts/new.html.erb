@@ -4,13 +4,13 @@
 
 <%= form_with model: @post, local: true do |f| %>
   <div class="container">
-    <div class="col-10 mx-auto">
+    <div class="col-11 mx-auto">
       <%= f.collection_check_boxes :post_emotion, @emotions, :id, :name do |b| %>
         <div class="form-check d-inline-block">
           <!-- チェックボックス（非表示） -->
           <%= b.check_box class: 'btn-check', id: "emotion_#{b.object.id}", autocomplete: "off" %>
           <!-- ラベル（スタイル適用） -->
-          <%= b.label class: 'btn btn-outline-primary',
+          <%= b.label class: 'my-2 btn btn-outline-primary',
                       for: "emotion_#{b.object.id}",
                       style: "background-color: #{b.object.color};" do %>
             <%= b.object.name %>
@@ -22,8 +22,10 @@
       <table class="table table-borderless">
         <tbody>
           <tr>
-            <td><%= f.text_field :body, class: 'form-control' %></td>
-            <td><%= f.submit '投稿', class: 'btn btn-success  form-control' %></td>
+            <td><%= f.text_area :body, class: 'form-control' %></td>
+          </tr>
+          <tr>
+            <td class="d-flex justify-content-center"><%= f.submit '投稿', class: 'btn btn-success form-control col-3' %></td>
           </tr>
         </tbody>
       </table>
