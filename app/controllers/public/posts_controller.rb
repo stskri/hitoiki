@@ -1,6 +1,6 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
-
+  before_action :ensure_correct_user, only: [:create, :update, :destroy]
   def new
     @post = Post.new
     @emotions = Emotion.all
@@ -64,5 +64,12 @@ class Public::PostsController < ApplicationController
 
   def ppost_emotion_params
     params.require(:post_emotion).permit(:emotion_name, :emotion_color)
+  end
+
+  def ensure_correct_user
+    @post = Post.find(params[:id])
+    unless @post.user == current_user
+      redirect_to books_path, alert: '無効なアクセスです'
+    end
   end
 end

@@ -1,5 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:update]
+
   def show
     @user = User.find(params[:id])
     @favorited_posts = @user.favorited_posts
@@ -7,7 +9,7 @@ class Public::UsersController < ApplicationController
 
   def my_page
     @user = current_user
-    @favorited_posts = current_user.favorited_posts
+    @favorited_posts = @user.favorited_posts
   end
 
   def edit
@@ -31,5 +33,12 @@ class Public::UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:name, :introduction, :image)
+  end
+
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to books_path, alert: '無効なアクセスです'
+    end
   end
 end
