@@ -1,6 +1,7 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:update]
+  before_action :guide_to_my_page, only: [:show]
 
   def show
     @user = User.find(params[:id])
@@ -39,6 +40,13 @@ class Public::UsersController < ApplicationController
     @user = User.find(params[:id])
     unless @user == current_user
       redirect_to books_path, alert: '無効なアクセスです'
+    end
+  end
+
+  # users/:current_user.idにアクセスした場合、my_pageへ
+  def guide_to_my_page
+    if User.find(params[:id]) == current_user
+      redirect_to my_page_path
     end
   end
 end
