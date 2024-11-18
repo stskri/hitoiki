@@ -6,7 +6,7 @@
     <% end %>
   </div>
 
-  <div>
+  <div class="py-5" style="font-size: 1.1rem;">
     <%= @post.body %>
   </div>
 
@@ -22,15 +22,19 @@
     </div>
     <div class="col-1 d-flex justify-content-center">
       <div>
-        <%= render "public/post_comments/btn", post: @post %>
+        <%= render "public/post_comments/counter", post: @post %>
       </div>
     </div>
     <% if @post.user == current_user %>
       <div class="col-1 d-flex justify-content-center">
-        <%= link_to "編集", edit_post_path(@post) %>
+        <%= link_to edit_post_path(@post) do %>
+          <i class="fa-solid fa-pen"></i>
+        <% end %>
       </div>
       <div class="col-1 d-flex justify-content-center">
-        <%= link_to "削除", post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} %>
+        <%= link_to post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
       </div>
       <% end %>
   </div>
