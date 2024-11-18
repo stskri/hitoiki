@@ -14,7 +14,7 @@
       </div>
       <div class="row mx-0 mb-1">
         <span>投稿<strong><%= user.posts.count %></strong>件</span>
-        <span class="px-3">フォロー中<strong><%= user.followings.count %></strong>人</span>
+        <span class="px-3">フォロー中<strong><%= link_to "user.followings.count" %></strong>人</span>
         <span>フォロワー<strong><%= user.followers.count %></strong>人</span>
       </div>
       <div class="row mx-0 mb-1">
