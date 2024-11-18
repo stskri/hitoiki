@@ -1,0 +1,6 @@
+<div>
+  <%= form_with model: [post, post_comment], class: "d-flex" do |f| %>
+    <%= f.text_area :body, placeholder: "コメント", class: 'form-control' %>
+    <%= f.submit '投稿', class: 'btn btn-success form-control' %>
+  <% end %>
+</div>

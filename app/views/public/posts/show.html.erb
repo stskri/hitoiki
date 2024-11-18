@@ -40,6 +40,12 @@
   </div>
 </div>
 
+<div class="container">
+  <div class="row">
+    <%= render 'public/post_comments/form', post: @post, post_comment: @post.post_comment %>
+  </div>
+</div>
+
 
 <h2>コメント</h2>
 <%= form_with model: [@post, @post_comment] do |f| %>
