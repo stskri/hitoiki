@@ -61,7 +61,7 @@ class Public::PostsController < ApplicationController
     params.require(:post).permit(:body)
   end
 
-  def ppost_emotion_params
+  def post_emotion_params
     params.require(:post_emotion).permit(:emotion_name, :emotion_color)
   end
 
