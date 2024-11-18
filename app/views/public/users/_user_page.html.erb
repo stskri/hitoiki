@@ -9,13 +9,23 @@
         <% if user == current_user %>
           <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn btn-sm", style: "font-weight: bold; background-color: #e2e3e5;" %>
         <% else %>
-          <%= render 'public/relationships/btn', user: user %>
+          <div id="follow_btn_<%= @user.id %>">
+            <%= render 'public/relationships/btn', user: user %>
+          </div>
         <% end %>
       </div>
       <div class="row mx-0 mb-1">
         <span>投稿<strong><%= user.posts.count %></strong>件</span>
-        <span class="px-3">フォロー中<strong><%= link_to "user.followings.count" %></strong>人</span>
-        <span>フォロワー<strong><%= user.followers.count %></strong>人</span>
+        <%= link_to user_followings_path(user), class: "mx-3" do %>
+          <span>
+            フォロー中<strong id="followings_counter"><%= render 'public/relationships/followings_counter', user: user %></strong>人
+          </span>
+        <% end %>
+        <%= link_to user_followers_path(user) do  %>
+          <span>
+            フォロワー<strong id="followers_counter"><%= render 'public/relationships/followers_counter', user: user %></strong>人
+          </span>
+        <% end %>
       </div>
       <div class="row mx-0 mb-1">
         <span><%= user.introduction %></span>
