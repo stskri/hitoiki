@@ -40,21 +40,18 @@
   </div>
 </div>
 
-<div class="container">
+<div class="container px-5">
   <div class="row">
-    <%= render 'public/post_comments/form', post: @post, post_comment: @post.post_comment %>
+    <div class="col">
+      <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
+    </div>
   </div>
 </div>
 
-
-<h2>コメント</h2>
-<%= form_with model: [@post, @post_comment] do |f| %>
-  <%= f.text_field :comment %>
-  <%= f.submit "送信" %>
-<% end %>
-
-<h2>コメント一覧</h2>
-<% @post_comments.each do |post_comment| %>
-  <%= post_comment.user.name %>
-  <%= post_comment.comment %>
-<% end %>
+<div class="container px-5">
+  <div class="row">
+    <div class="col">
+      <%= render 'public/post_comments/post_comments', post_comments: @post_comments %>
+    </div>
+  </div>
+</div>
