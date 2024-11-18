@@ -33,7 +33,7 @@ class Public::PostCommentsController < ApplicationController
   def ensure_correct_user
     @comment = PostComment.find(params[:id])
     unless @comment.user == current_user
-      redirect_to books_path, alert: '無効なアクセスです'
+      redirect_to root_path, alert: '無効なアクセスです'
     end
   end
 end

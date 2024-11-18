@@ -1,6 +1,6 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :ensure_correct_user, only: [:update]
+  before_action :ensure_correct_user, only: [:edit, :update]
   before_action :guide_to_my_page, only: [:show]
 
   def show
@@ -14,7 +14,7 @@ class Public::UsersController < ApplicationController
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def update
@@ -39,7 +39,7 @@ class Public::UsersController < ApplicationController
   def ensure_correct_user
     @user = User.find(params[:id])
     unless @user == current_user
-      redirect_to books_path, alert: '無効なアクセスです'
+      redirect_to root_path, alert: '無効なアクセスです'
     end
   end
 
