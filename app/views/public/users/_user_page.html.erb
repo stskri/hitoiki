@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 d-flex justify-content-center p-0">
+      <%= image_tag user.get_image(100,100), class: "rounded-circle img-fluid" %>
+    </div>
+    <div class="col-8">
+      <div class="row mx-0 mb-1 align-items-center">
+        <strong class="mr-3"><%= user.name %></strong>
+        <% if user == current_user %>
+          <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn btn-sm", style: "font-weight: bold; background-color: #e2e3e5;" %>
+        <% else %>
+          <%= render 'public/relationships/btn', user: user %>
+        <% end %>
+      </div>
+      <div class="row mx-0 mb-1">
+        <span>投稿<strong><%= user.posts.count %></strong>件</span>
+        <span class="px-3">フォロー中<strong><%= link_to "user.followings.count" %></strong>人</span>
+        <span>フォロワー<strong><%= user.followers.count %></strong>人</span>
+      </div>
+      <div class="row mx-0 mb-1">
+        <span><%= user.introduction %></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <%= render 'public/posts/posts', posts: user.posts %>
+  </div>
+</div>

@@ -25,8 +25,8 @@ class User < ApplicationRecord
   # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :followings, through: :relationships, source: :followed
 
-  validates :name, presence: true
-  validates :introduction, length: { maximum: 150 }
+  validates :name, presence: true, length: { maximum: 20 }
+  validates :introduction, length: { maximum: 50 }
 
   # ユーザー画像のサイズを調整
   def get_image(width, height)
