@@ -1,0 +1,47 @@
+<div class="container py-4">
+  <div class="row row-cols-1">
+    <% posts.order(created_at: :desc).each do |post| %>
+      <div class="col mb-2">
+        <div class="card">
+          <div class="card-body p-2">
+            <div class="row mx-1 d-flex">
+              <div class="col-1">
+                <%= link_to user_path(post.user) do %>
+                  <%= image_tag post.user.get_image(50, 50), class: "rounded-circle" %>
+                <% end %>
+              </div>
+              <div class="col-11">
+                <div class="d-flex justify-content-between">
+                  <h6 class="card-title my-1">
+                    <%= link_to post.user.name, user_path(post.user) %>
+                  </h6>
+                  <span class="text-muted small"><%= l post.created_at, format: :long %></span>
+                </div>
+                <p class="card-text">
+                  <%= post.body %>
+                </p>
+              </div>
+            </div>
+            <div class="row mt-2 d-flex justify-content-around">
+              <div id="favorite_btn_<%= post.id %>" class="col-4 d-flex justify-content-center">
+                <div>
+                  <%= render "public/favorites/btn", post: post %>
+                </div>
+              </div>
+              <div class="col-4 d-flex justify-content-center">
+                <div>
+                  <%= render "public/post_comments/counter", post: post %>
+                </div>
+              </div>
+              <div class="col-4 d-flex justify-content-center">
+                <div>
+                  <%= link_to "詳細", post_path(post.id), class: "btn btn-sm btn-primary" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

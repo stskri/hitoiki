@@ -1,6 +1,24 @@
-<h1>投稿編集ページ</h1>
-<div><%= link_to "一覧に戻る", posts_path %></div>
-<%= form_with model: @post do |f| %>
-  <%= f.text_field :body %>
-  <%= f.submit "確定" %>
+<div class="mt-5">
+  <h4>投稿編集</h4>
+</div>
+
+<%= form_with model: @post, method: :patch do |f| %>
+  <div class="container">
+    <div class="row">
+      <div class="col-10 mx-auto">
+        <table class="table table-borderless">
+          <tbody>
+            <tr>
+              <td>
+                <%= f.text_field :body, placeholder: "#{@post.body}", class: "form-control" %>
+              </td>
+              <td>
+                <%= f.submit "確定", class: "btn btn-success form-control" %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
 <% end %>

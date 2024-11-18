@@ -1,0 +1,38 @@
+<div class="container">
+  <div class="row">
+    <div class="col-4 d-flex justify-content-center p-0">
+      <%= image_tag user.get_image(100,100), class: "rounded-circle img-fluid" %>
+    </div>
+    <div class="col-8">
+      <div class="row mx-0 mb-1 align-items-center">
+        <strong class="mr-3"><%= user.name %></strong>
+        <% if user == current_user %>
+          <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn btn-sm", style: "font-weight: bold; background-color: #e2e3e5;" %>
+        <% else %>
+          <div id="follow_btn_<%= @user.id %>">
+            <%= render 'public/relationships/btn', user: user %>
+          </div>
+        <% end %>
+      </div>
+      <div class="row mx-0 mb-1">
+        <span>投稿<strong><%= user.posts.count %></strong>件</span>
+        <%= link_to user_followings_path(user), class: "mx-3" do %>
+          <span>
+            フォロー中<strong id="followings_counter"><%= render 'public/relationships/followings_counter', user: user %></strong>人
+          </span>
+        <% end %>
+        <%= link_to user_followers_path(user) do  %>
+          <span>
+            フォロワー<strong id="followers_counter"><%= render 'public/relationships/followers_counter', user: user %></strong>人
+          </span>
+        <% end %>
+      </div>
+      <div class="row mx-0 mb-1">
+        <span><%= user.introduction %></span>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <%= render 'public/posts/posts', posts: user.posts %>
+  </div>
+</div>

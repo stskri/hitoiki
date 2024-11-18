@@ -1,14 +1,20 @@
 class Public::UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :ensure_correct_user, only: [:edit, :update]
+  before_action :guide_to_my_page, only: [:show]
+
   def show
+    @user = User.find(params[:id])
+    @favorited_posts = @user.favorited_posts
   end
 
   def my_page
     @user = current_user
+    @favorited_posts = @user.favorited_posts
   end
 
   def edit
-    @user = current_user
+    @user = User.find(params[:id])
   end
 
   def update
@@ -28,5 +34,19 @@ class Public::UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:name, :introduction, :image)
+  end
+
+  def ensure_correct_user
+    @user = User.find(params[:id])
+    unless @user == current_user
+      redirect_to root_path, alert: '無効なアクセスです'
+    end
+  end
+
+  # users/:current_user.idにアクセスした場合、my_pageへ
+  def guide_to_my_page
+    if User.find(params[:id]) == current_user
+      redirect_to my_page_path
+    end
   end
 end

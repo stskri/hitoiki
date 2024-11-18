@@ -1,6 +1,57 @@
-<h1>投稿詳細ページ</h1>
-<div><%= link_to "一覧に戻る", posts_path %></div>
-<%= @post.user.name %>
-<%= @post.body %>
-<%= link_to "編集", edit_post_path(@post) %>
-<%= link_to "削除", post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} %>
+<div class="container px-5 pt-5">
+  <div>
+    <%= link_to user_path(@post.user) do %>
+      <%= image_tag @post.user.get_image(70, 70), class: "round-circle" %>
+      <%= @post.user.name %>
+    <% end %>
+  </div>
+
+  <div class="py-5" style="font-size: 1.1rem;">
+    <%= @post.body %>
+  </div>
+
+  <div class="text-muted small">
+    <%= l @post.created_at %>
+  </div>
+
+  <div class="row mt-2 d-flex justify-content-around">
+    <div id="favorite_btn_<%= @post.id %>" class="col-1 d-flex justify-content-center">
+      <div>
+        <%= render "public/favorites/btn", post: @post %>
+      </div>
+    </div>
+    <div class="col-1 d-flex justify-content-center">
+      <div>
+        <%= render "public/post_comments/counter", post: @post %>
+      </div>
+    </div>
+    <% if @post.user == current_user %>
+      <div class="col-1 d-flex justify-content-center">
+        <%= link_to edit_post_path(@post) do %>
+          <i class="fa-solid fa-pen"></i>
+        <% end %>
+      </div>
+      <div class="col-1 d-flex justify-content-center">
+        <%= link_to post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
+      </div>
+      <% end %>
+  </div>
+</div>
+
+<div class="container px-5">
+  <div class="row">
+    <div class="col">
+      <%= render 'public/post_comments/post_comments', post_comments: @post_comments %>
+    </div>
+  </div>
+</div>
+
+<div style="position: sticky; bottom: 0; background-color: white; z-index: 5;">
+  <hr>
+  <div class="py-2 px-5"">
+    <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
+  </div>
+  <hr class="mb-0" style="border-color: #fff;">
+</div>

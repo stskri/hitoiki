@@ -1,14 +1,8 @@
-<h1>マイページ</h1>
-<%= image_tag @user.get_image(50,50), class: "rounded-circle" %>
-<span>ユーザーネーム</span>
-<%= @user.name %>
-<span>自己紹介</span>
-<%= @user.introduction %>
-<%= link_to "編集", edit_user_path(@user) %>
+<div class="pt-5">
+  <%= render 'user_page', user: @user, favorited_posts: @favorited_posts %>
+</div>
 
-<% @user.posts.each do |post| %>
-  <div>
-    <%= post.user.name %>
-    <%= post.body %>
-  </div>
-<% end %>
+いいねした投稿の一覧
+<div>
+  <%= render 'public/posts/posts', posts: @user.favorited_posts %>
+</div>

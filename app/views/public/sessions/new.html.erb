@@ -7,20 +7,26 @@
     </div>
 
     <%= form_with model: @user, url: user_session_path do |f| %>
-      <div class="mb-3">
-        <% f.label :email %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control", style: "background-color: #fafafa;" %>
-      </div>
+      <% if admin_signed_in? %>
+        <div class="text-center">
+          <span style="color: #ff5733;">管理者ログイン中</span>
+        </div>
+      <% elsif %>
+        <div class="mb-3">
+          <% f.label :email %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: "メールアドレス", class: "form-control", style: "background-color: #fafafa;" %>
+        </div>
 
-      <div class="mb-3">
-        <% f.label :password %>
-        <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class: "form-control", style: "background-color: #fafafa;" %>
-      </div>
+        <div class="mb-3">
+          <% f.label :password %>
+          <%= f.password_field :password, autocomplete: "current-password", placeholder: "パスワード", class: "form-control", style: "background-color: #fafafa;" %>
+        </div>
 
 
-      <div class="d-grid">
-        <%= f.submit "ログイン", class: "btn btn-primary form-control", style: "border-radius: 10px;" %>
-      </div>
+        <div class="d-grid">
+          <%= f.submit "ログイン", class: "btn btn-primary form-control", style: "border-radius: 10px;" %>
+        </div>
+      <% end %>
     <% end %>
 
     <hr class="my-4">

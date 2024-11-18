@@ -7,31 +7,37 @@
     </div>
 
     <%= form_with model: @user, url: user_registration_path do |f| %>
-      <%= render "public/shared/error_messages", resource: resource %>
+      <% if admin_signed_in? %>
+        <div class="text-center">
+          <span style="color: #ff5733;">管理者ログイン中</span>
+        </div>
+      <% else %>
+        <%= render "public/shared/error_messages", resource: resource %>
 
-      <div class="mb-3">
-        <% f.label :name %>
-        <%= f.text_field :name, autofocus: true, placeholder: "アカウント名", class: "form-control", style: "background-color: #fafafa;" %>
-      </div>
+        <div class="mb-3">
+          <% f.label :name %>
+          <%= f.text_field :name, autofocus: true, placeholder: "アカウント名(20字以内)", class: "form-control", style: "background-color: #fafafa;" %>
+        </div>
 
-      <div class="mb-3">
-        <% f.label :email %>
-        <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス", class: "form-control", style: "background-color: #fafafa;" %>
-      </div>
+        <div class="mb-3">
+          <% f.label :email %>
+          <%= f.email_field :email, autocomplete: "email", placeholder: "メールアドレス", class: "form-control", style: "background-color: #fafafa;" %>
+        </div>
 
-      <div class="mb-3">
-        <% f.label :password %>
-        <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード(#{@minimum_password_length}文字以上)", class: "form-control", style: "background-color: #fafafa;" %>
-      </div>
+        <div class="mb-3">
+          <% f.label :password %>
+          <%= f.password_field :password, autocomplete: "new-password", placeholder: "パスワード(#{@minimum_password_length}文字以上)", class: "form-control", style: "background-color: #fafafa;" %>
+        </div>
 
-      <div class="mb-3">
-        <% f.label :password_confirmation %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認用)", class: "form-control", style: "background-color: #fafafa;" %>
-      </div>
+        <div class="mb-3">
+          <% f.label :password_confirmation %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", placeholder: "パスワード(確認用)", class: "form-control", style: "background-color: #fafafa;" %>
+        </div>
 
-      <div>
-        <%= f.submit "新規登録", class: "btn btn-primary form-control", style: "border-radius: 10px;" %>
-      </div>
+        <div>
+          <%= f.submit "新規登録", class: "btn btn-primary form-control", style: "border-radius: 10px;" %>
+        </div>
+      <% end %>
     <% end %>
 
     <hr class="my-4">
