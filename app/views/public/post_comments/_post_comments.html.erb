@@ -1,5 +1,5 @@
 <% post_comments.each do |post_comment| %>
-<hr>
+  <hr>
   <div class="row">
     <div class="col-1">
       <%= link_to user_path(post_comment.user), class: "d-flex" do %>
@@ -13,8 +13,13 @@
         </div>
         <span class="text-muted small"><%= l post_comment.created_at, format: :long %></span>
       </div>
-      <span>
+      <span class="d-flex justify-content-between">
         <%= post_comment.comment %>
+        <% if post_comment.user == current_user %>
+          <%= link_to post_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
+            <i class="fa-solid fa-trash mr-2"></i>
+          <% end %>
+        <% end %>
       </span>
     </div>
   </div>

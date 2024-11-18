@@ -48,10 +48,10 @@
   </div>
 </div>
 
-<div class="container px-5 py-3">
-  <div class="row">
-    <div class="col">
-      <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
-    </div>
+<div style="position: sticky; bottom: 0; background-color: white; z-index: 5;">
+  <hr>
+  <div class="py-2 px-5"">
+    <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
   </div>
+  <hr class="mb-0" style="border-color: #fff;">
 </div>
