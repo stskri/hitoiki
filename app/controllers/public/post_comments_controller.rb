@@ -19,21 +19,21 @@ class Public::PostCommentsController < ApplicationController
   def destroy
     comment = PostComment.find(params[:id])
     if comment.destroy
-      edirect_to request.referer, notice: 'コメントを削除しました'
+      redirect_to request.referer, notice: 'コメントを削除しました'
     else
-      edirect_to request.referer, alert: 'コメントの削除に失敗しました'
+      redirect_to request.referer, alert: 'コメントの削除に失敗しました'
     end
   end
 
   private
-  def post_comment_param
+  def post_comment_params
     params.require(:post_comment).permit(:comment)
   end
 
   def ensure_correct_user
     @comment = PostComment.find(params[:id])
     unless @comment.user == current_user
-      redirect_to books_path, alert: '無効なアクセスです'
+      redirect_to root_path, alert: '無効なアクセスです'
     end
   end
 end
