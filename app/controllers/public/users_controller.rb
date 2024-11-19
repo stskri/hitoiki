@@ -6,7 +6,7 @@ class Public::UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @favorited_posts = @user.favorited_posts
-    @current_entry = Entry.where(user_id: current_user.id)
+    @room = Room.new
   end
 
   def my_page

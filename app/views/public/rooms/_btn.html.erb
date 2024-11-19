@@ -1,0 +1,5 @@
+<% if (current_user.following? user) && (user.following? current_user)  %>
+  <%= form_with model: room, class: "pl-3" do |f| %>
+    <%= f.submit "メッセージを送る", class:"btn btn-sm btn-primary"%>
+  <% end %>
+<% end %>
