@@ -2,13 +2,13 @@ class Public::MessagesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    @room = Room.find(params[:id])
+    @room = Room.find(params[:room_id])
     unless @room.users.include?(current_user)
       redirect_to rooms_path, alert: "メッセージの送信に失敗しました" and return
     end
     @message = Message.new(message_params)
     @message.user_id = current_user.id
-    @message.room.id = @room.id
+    @message.room_id = @room.id
     if @message.save
       redirect_to request.referer, notice: 'メッセージを送信しました'
     else

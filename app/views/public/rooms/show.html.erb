@@ -2,13 +2,13 @@
 
 <div>
   <% @messages.each do |message| %>
-    <p><strong><%= message.user.name %>:</strong> <%= message.content %></p>
+    <p><strong><%= message.user.name %>:</strong> <%= message.message %></p>
   <% end %>
 </div>
 
 <%= form_with model: [@room, @message], local: true do |f| %>
   <div>
-    <%= f.text_area :content, rows: 3 %>
+    <%= f.text_area :message, rows: 3 %>
   </div>
   <div>
     <%= f.submit "送信" %>
