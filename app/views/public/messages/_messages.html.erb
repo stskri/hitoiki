@@ -1,0 +1,26 @@
+<% messages.each do |message| %>
+  <hr>
+  <div class="row">
+    <div class="col-1">
+      <%= link_to user_path(message.user), class: "d-flex" do %>
+        <%= image_tag message.user.get_image(50, 50), class: "rounded-circle" %>
+      <% end %>
+    </div>
+    <div class="col-11">
+      <div class="d-flex justify-content-between">
+        <div class="my-1">
+          <%= link_to message.user.name, user_path(message.user) %>
+        </div>
+        <span class="text-muted small"><%= l message.created_at, format: :long %></span>
+      </div>
+      <span class="d-flex justify-content-between">
+        <%= message.message %>
+        <% if message.user == current_user %>
+          <%= link_to room_message_path(message), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
+            <i class="fa-solid fa-trash mr-2"></i>
+          <% end %>
+        <% end %>
+      </span>
+    </div>
+  </div>
+<% end %>

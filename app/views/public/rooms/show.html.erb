@@ -1,16 +1,24 @@
-<h1>DMルーム</h1>
-
-<div>
-  <% @messages.each do |message| %>
-    <p><strong><%= message.user.name %>:</strong> <%= message.message %></p>
+<h1>
+  <% if @room.user_1_id == current_user.id %>
+    <%= User.find(@room.user_2_id).name %>
+  <% else %>
+    <%= User.find(@room.user_1_id).name %>
   <% end %>
+さんとのメッセージルーム
+</h1>
+
+<div class="container px-5">
+  <div class="row">
+    <div class="col">
+      <%= render 'public/messages/messages', messages: @messages %>
+    </div>
+  </div>
 </div>
 
-<%= form_with model: [@room, @message], local: true do |f| %>
-  <div>
-    <%= f.text_area :message, rows: 3 %>
+<div style="position: sticky; bottom: 0; background-color: white; z-index: 5;">
+  <hr>
+  <div class="py-2 px-5"">
+    <%= render 'public/messages/form', room: @room, message: @message %>
   </div>
-  <div>
-    <%= f.submit "送信" %>
-  </div>
-<% end %>
+  <hr class="mb-0" style="border-color: #fff;">
+</div>
