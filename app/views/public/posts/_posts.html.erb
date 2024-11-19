@@ -1,41 +1,39 @@
 <div class="container py-4">
   <div class="row row-cols-1">
     <% posts.order(created_at: :desc).each do |post| %>
-      <div class="col mb-2">
+      <div class="col mb-3">
         <div class="card">
-          <div class="card-body p-2">
-            <div class="row mx-1 d-flex">
-              <div class="col-1">
-                <%= link_to user_path(post.user) do %>
-                  <%= image_tag post.user.get_image(50, 50), class: "rounded-circle" %>
-                <% end %>
-              </div>
-              <div class="col-11">
-                <div class="d-flex justify-content-between">
-                  <h6 class="card-title my-1">
-                    <%= link_to post.user.name, user_path(post.user) %>
-                  </h6>
-                  <span class="text-muted small"><%= l post.created_at, format: :long %></span>
-                </div>
-                <p class="card-text">
+          <div class="card-body px-3 pt-2 pb-1">
+            <div class="row d-flex">
+              <%= link_to user_path(post.user), class: 'card-title px-3 py-1 mb-0' do %>
+                <%= image_tag post.user.get_image(45,45), class: "rounded-circle" %>
+                <%= post.user.name %>
+              <% end %>
+              <%= link_to post_path(post.id), class: "px-3 py-1 flex-grow-1 position-relative", style: "text-decoration: none;" do %>
+                <span class="text-muted small pr-2" style="position: absolute; top: 0; right: 0;">
+                  <%= l post.created_at, format: :long %>
+                </span>
+              <% end %>
+            </div>
+            <div class="row">
+              <%= link_to post_path(post.id), class: "flex-grow-1", style: "text-decoration: none;" do %>
+                <p class="card-text px-5 py-3" style="color: #212529;">
                   <%= post.body %>
                 </p>
-              </div>
+              <% end %>
             </div>
-            <div class="row mt-2 d-flex justify-content-around">
-              <div id="favorite_btn_<%= post.id %>" class="col-4 d-flex justify-content-center">
+
+            <hr class="mt-0 mb-1 mx-4">
+
+            <div class="row d-flex justify-content-around align-items-center">
+              <div id="favorite_btn_<%= post.id %>" class="col-6 d-flex justify-content-center">
                 <div>
                   <%= render "public/favorites/btn", post: post %>
                 </div>
               </div>
-              <div class="col-4 d-flex justify-content-center">
+              <div class="col-6 d-flex justify-content-center">
                 <div>
                   <%= render "public/post_comments/counter", post: post %>
-                </div>
-              </div>
-              <div class="col-4 d-flex justify-content-center">
-                <div>
-                  <%= link_to "詳細", post_path(post.id), class: "btn btn-sm btn-primary" %>
                 </div>
               </div>
             </div>
