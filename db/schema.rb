@@ -135,6 +135,8 @@ ActiveRecord::Schema.define(version: 2024_11_07_110511) do
   end
 
   create_table "rooms", force: :cascade do |t|
+    t.integer "user_1_id", null: false
+    t.integer "user_2_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

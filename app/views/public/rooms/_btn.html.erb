@@ -1,5 +1,7 @@
 <% if (current_user.following? user) && (user.following? current_user)  %>
   <%= form_with model: room, class: "pl-3" do |f| %>
+    <%= f.hidden_field :user_1_id, value: current_user.id %>
+    <%= f.hidden_field :user_2_id, value: user.id %>
     <%= f.submit "メッセージを送る", class:"btn btn-sm btn-primary"%>
   <% end %>
 <% end %>
