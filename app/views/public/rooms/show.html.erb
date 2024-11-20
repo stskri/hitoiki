@@ -1,11 +1,9 @@
-<h1>
-  <% if @room.user_1_id == current_user.id %>
-    <%= User.find(@room.user_2_id).name %>
-  <% else %>
-    <%= User.find(@room.user_1_id).name %>
+<div>
+  <% @room.users.each do |user| %>
+    <%= user.name %>
   <% end %>
-さんとのメッセージルーム
-</h1>
+  さんとのメッセージルーム
+</div>
 
 <div class="container px-5">
   <div class="row">
