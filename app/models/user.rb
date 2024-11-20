@@ -24,6 +24,11 @@ class User < ApplicationRecord
   # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :followings, through: :relationships, source: :followed
 
+  # 相手からの通知
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  # 自分からの通知
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+
   validates :name, presence: true, length: { maximum: 20 }
   validates :introduction, length: { maximum: 50 }
 
