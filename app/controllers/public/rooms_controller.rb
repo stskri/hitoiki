@@ -2,7 +2,10 @@ class Public::RoomsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @rooms = current_user.rooms
+    # current_useの持つメッセージルームを表示するためにEntryからuser_idが自分のレコードを取得、room_idを配列で抜き出す
+    current_user_rooms_id = Entry.where(user_id: current_user.id).pluck(:room_id)
+    # 抜き出したroom_idから、メッセージルームを特定
+    @rooms = Room.where(id: current_user_rooms_id)
   end
 
   def create
