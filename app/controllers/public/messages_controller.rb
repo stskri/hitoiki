@@ -17,8 +17,6 @@ class Public::MessagesController < ApplicationController
   end
 
   def destroy
-    room = Room.find(params[:id])
-
     message = Message.find(params[:id])
     if message.user == current_user
       if message.destroy

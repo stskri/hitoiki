@@ -38,16 +38,17 @@ class Public::RoomsController < ApplicationController
     @message = Message.new
   end
 
-  def destroy
-    room = Room.find(params[:id])
-    if room.users.include(current_user)
-      if room.destroy
-        redirect_to rooms_path, notice: "削除しました"
-      else
-        redirect_to rooms_path, alert: "ルームの削除に失敗しました"
-      end
-    else
-      redirect_to rooms_path, alert: "無効なアクセスです"
-    end
-  end
+  # もしdestroyを実装する場合
+  # def destroy
+  #   room = Room.find(params[:id])
+  #   if room.users.include(current_user)
+  #     if room.destroy
+  #       redirect_to rooms_path, notice: "削除しました"
+  #     else
+  #       redirect_to rooms_path, alert: "ルームの削除に失敗しました"
+  #     end
+  #   else
+  #     redirect_to rooms_path, alert: "無効なアクセスです"
+  #   end
+  # end
 end
