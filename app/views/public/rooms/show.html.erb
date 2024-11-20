@@ -1,8 +1,17 @@
-<div>
-  <% @room.users.each do |user| %>
-    <%= user.name %>
-  <% end %>
-  さんとのメッセージルーム
+<div style="position: sticky; top: 0; background-color: white; z-index: 5;">
+  <hr class="mt-0" style="border-color: #fff;">
+  <div class="d-flex justify-content-center align-items-center">
+    <% @room.users.each do |user| %>
+      <% if user != current_user %>
+        <%= link_to user_path(user), class: "d-flex justify-content-center align-items-center" do %>
+          <%= image_tag user.get_image(50,50), class: "rounded-circle mr-2" %>
+          <%= user.name %>さん
+        <% end %>
+      <% end %>
+    <% end %>
+    とのメッセージルーム
+  </div>
+  <hr>
 </div>
 
 <div class="container px-5">
