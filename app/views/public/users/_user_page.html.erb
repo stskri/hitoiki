@@ -12,6 +12,9 @@
           <div id="follow_btn_<%= @user.id %>">
             <%= render 'public/relationships/btn', user: user %>
           </div>
+          <div>
+            <%= render 'public/rooms/btn', room: @room, user: @user %>
+          </div>
         <% end %>
       </div>
       <div class="row mx-0 mb-1">

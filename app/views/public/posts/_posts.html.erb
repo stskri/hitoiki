@@ -26,12 +26,12 @@
             <hr class="mt-0 mb-1 mx-4">
 
             <div class="row d-flex justify-content-around align-items-center">
-              <div id="favorite_btn_<%= post.id %>" class="col-6 d-flex justify-content-center">
+              <div id="favorite_btn_<%= post.id %>" class="col-1 d-flex justify-content-center">
                 <div>
                   <%= render "public/favorites/btn", post: post %>
                 </div>
               </div>
-              <div class="col-6 d-flex justify-content-center">
+              <div class="col-1 d-flex justify-content-center">
                 <div>
                   <%= render "public/post_comments/counter", post: post %>
                 </div>

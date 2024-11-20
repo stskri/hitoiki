@@ -1,0 +1,8 @@
+<h1>DMルーム一覧</h1>
+<ul>
+  <% @rooms.each do |room| %>
+    <li>
+      <%= link_to "ルーム #{room.id}", room_path(room) %>
+    </li>
+  <% end %>
+</ul>

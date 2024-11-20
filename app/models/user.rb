@@ -10,7 +10,6 @@ class User < ApplicationRecord
   has_many :favorites, dependent: :destroy
   has_many :inquiries, dependent: :destroy
   has_many :entries, dependent: :destroy
-  has_many :rooms, dependent: :destroy
   has_many :messages, dependent: :destroy
 
   # my_pageにいいねした投稿を一覧表示させるため、favoritesを通じてpostを取得する
