@@ -6,24 +6,24 @@ class Public::RoomsController < ApplicationController
   end
 
   def create
-    # existing_room = Room.find_by(user_1_id: params[:room][:user_1_id], user_2_id: params[:room][:user_2_id]) ||
-    #                 Room.find_by(user_1_id: params[:room][:user_2_id], user_2_id: params[:room][:user_1_id])
-    # if existing_room != nil
-    #   redirect_to room_path(existing_room)
-    # else
-    #   @room = Room.new(user_1_id: params[:room][:user_1_id], user_2_id: params[:room][:user_2_id])
-    #   if @room.save
-    #     Entry.create(user_id: @room.user_1_id, room_id: @room.id)
-    #     Entry.create(user_id: @room.user_2_id, room_id: @room.id)
-    #     redirect_to room_path(@room), notice: "メッセージルームが作成されました"
-    #   else
-    #     redirect_to request.referer, alert: "メッセージルームの作成に失敗しました"
-    #   end
-    # end
+    # params[:room][:user_id]はusers#showのform_withで取得している相手のuser_id
+    target_user_id = params[:room][:user_id]
+    # current_userの持つメッセージルームのidを配列で取得
+    current_user_rooms = Entry.where(user_id: current_user.id).pluck(:room_id)
+    # 相手の持つメッセージルームのidを配列で取得
+    target_user_rooms = Entry.where(user_id: target_user_id).pluck(:room_id)
+    # 重複しているメッセージルームのIDをexisting_room_idに代入
+    existing_room_id = (current_user_rooms & target_user_rooms).first
+    if existing_room_id
+      # 重複しているメッセージルームがある場合は、該当するメッセージルームにリダイレクト
+      redirect_to room_path(existing_room_id)
+    else
+      # 重複しているメッセージルームがない場合、新たにメッセージルームをcreate
       @room = Room.create
       Entry.create(user_id: current_user.id, room_id: @room.id)
       Entry.create(user_id: params[:room][:user_id], room_id: @room.id)
       redirect_to room_path(@room), notice: "メッセージルームが作成されました"
+    end
   end
 
   def show

@@ -16,7 +16,7 @@
       <span class="d-flex justify-content-between">
         <%= message.message %>
         <% if message.user == current_user %>
-          <%= link_to room_message_path(message), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
+          <%= link_to room_message_path(room, message), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
             <i class="fa-solid fa-trash mr-2"></i>
           <% end %>
         <% end %>
