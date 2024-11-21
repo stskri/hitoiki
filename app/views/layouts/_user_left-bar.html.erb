@@ -16,7 +16,7 @@
       <% end %>
     </div>
     <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
-      <%= link_to posts_path do %>
+      <%= link_to rooms_path do %>
         <i class="fa-regular fa-paper-plane fa-lg"></i><span> メッセージ</span>
       <% end %>
     </div>
@@ -31,4 +31,5 @@
       <i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-lg"></i><span> ログアウト</span>
     <% end %>
   </div>
+  <%= link_to "通知", notifications_path %>
 </div>

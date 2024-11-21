@@ -24,6 +24,11 @@ class User < ApplicationRecord
   # 与フォロー関係を通じて参照→自分がフォローしている人
   has_many :followings, through: :relationships, source: :followed
 
+  # 相手からの通知
+  has_many :passive_notifications, class_name: 'Notification', foreign_key: 'visited_id', dependent: :destroy
+  # 自分からの通知
+  has_many :active_notifications, class_name: 'Notification', foreign_key: 'visitor_id', dependent: :destroy
+
   validates :name, presence: true, length: { maximum: 20 }
   validates :introduction, length: { maximum: 50 }
 
@@ -48,6 +53,7 @@ class User < ApplicationRecord
     followings.include?(user)
   end
 
+  # ユーザー検索
   def self.search_for(content, method)
     if method == 'perfect'
       User.where(name: content)
@@ -57,6 +63,21 @@ class User < ApplicationRecord
       User.where('name LIKE?', '%' + content)
     else
       User.where('name LIKE?', '%' + content + '%')
+    end
+  end
+
+  def create_notification_follow(current_user)
+    # 既に自分をフォローしていたか
+    already_follow = Notification.where(visitor_id: current_user.id, visited_id: id, action: "follow")
+    # フォローされていない場合
+    if already_follow.blank?
+      # 通知を作成
+      notification = current_user.active_notifications.new(
+        visited_id: id,
+        action: "follow"
+      )
+      # notificationがバリデーションを満たしている場合、notificationをsave
+      notification.save if notification.valid?
     end
   end
 end
