@@ -16,6 +16,19 @@ Admin.find_or_create_by(id: 1) do |admin|
 end
 # adminの設定ここまで
 
+# userの設定
+user_ids = (1..25)
+names = ("A".."Z").to_a.reject { |letter| letter == "A" }.map { |letter| letter * 4 }
+
+user_ids.zip(names).each do |user_id, name|
+  User.find_or_create_by(id: user_id) do |user|
+    user.name = name
+    user.email = "#{name[0].downcase}@#{name[0].downcase}"
+    user.password = name[0].downcase * 6
+  end
+end
+# userの設定ここまで
+
 # emotionの設定
 emotions = [
   { id: 1, name: '喜び', color: '#fff9c4' },
@@ -23,7 +36,6 @@ emotions = [
   { id: 3, name: '哀しい', color: '#bbdefd' },
   { id: 4, name: '楽しい', color: '#c8e6c9' }
 ]
-
 emotions.each do |emotion_data|
   Emotion.find_or_create_by(id: emotion_data[:id]) do |emotion|
     emotion.name = emotion_data[:name]
