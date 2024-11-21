@@ -10,6 +10,7 @@ class Public::MessagesController < ApplicationController
     @message.user_id = current_user.id
     @message.room_id = @room.id
     if @message.save
+      @message.create_notification_message(current_user)
       redirect_to request.referer, notice: 'メッセージを送信しました'
     else
       redirect_to request.referer, alert: 'メッセージの送信に失敗しました'

@@ -31,7 +31,7 @@ end
 
 # Postの設定
 30.times do |i|
-  Post.create!(
+  Post.create(
     user_id: rand(1..25),
     body: "投稿テスト#{i + 1}"
   )

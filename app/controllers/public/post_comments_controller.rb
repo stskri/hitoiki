@@ -8,6 +8,7 @@ class Public::PostCommentsController < ApplicationController
     comment.user_id = current_user.id
     comment.post_id = post.id
     if comment.save
+      post.create_notification_post_comment(current_user, comment.id)
       redirect_to request.referer, notice: 'コメントを送信しました'
     else
       redirect_to request.referer, alert: 'コメントの送信に失敗しました'
