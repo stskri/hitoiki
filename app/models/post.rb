@@ -52,7 +52,7 @@ class Post < ApplicationRecord
       save_notification_post_comment(current_user, post_comment_id, user_id['user_id'])
     end
     # コメントがない場合、投稿者のみに通知を送る
-    save_notification_post_comment(current_user, post_comment_id, user_id['user_id'])
+    save_notification_post_comment(current_user, post_comment_id, user_id['user_id'.to_i])
   end
 
   def save_notification_post_comment(current_user, post_comment_id, visited_id)

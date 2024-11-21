@@ -1,0 +1,53 @@
+<% visitor = notification.visitor %>
+<% visited = notification.visited %>
+
+<div class="container">
+  <div class="d-flex align-items-center">
+    <span class="d-flex align-items-center">
+      <%= link_to user_path(visitor), class:"d-flex align-items-center" do %>
+        <%= image_tag visitor.get_image(35, 35), class: "icon_mini" %>
+        <strong>
+          <%= visitor.name %>
+        </strong>
+      <% end %>
+      さん
+    </span>
+    <% case notification.action %>
+    <% when 'follow' %>
+      <%= "があなたをフォローしました" %>
+    <% when 'favorite' %>
+      <span>が</span>
+      <%= link_to 'あなたの投稿', notification.post, style: "font-weight: bold;" %>
+      <%= "にいいねしました" %>
+    <% when 'post_comment' %>
+      <% if notification.post.user_id == visited.id %>
+        <span>が</span>
+        <%= link_to "あなたの投稿", notification.post, style: "font-weight: bold;" %>
+      <% else %>
+        <span>
+          <%= link_to post_path(notification.post) do %>
+            <%= image_tag avatar_url(notification.post.user).to_s, class: "icon_mini" %>
+            <%= が %>
+            <strong>
+              <%= notification.post.user.name %>さんの投稿
+            </strong>
+          <% end %>
+        </span>
+      <% end %>
+      <%= "にコメントしました" %>
+    <% when 'message' %>
+      <span>から</span>
+      <%= link_to "メッセージ", room_path(notification.message.room), style: "font-weight: bold;" %>
+      <span>があります</span>
+    <% end %>
+
+    <p class="text-muted mb-0">
+      <%= PostComment.find_by(id: notification.post_comment_id)&.post_comment %>
+    </p>
+  </div>
+
+  <div class="small text-muted text-right">
+    <%= time_ago_in_words(notification.created_at).upcase %>
+  </div>
+  <hr>
+</div>

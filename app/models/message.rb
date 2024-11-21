@@ -11,7 +11,6 @@ class Message < ApplicationRecord
     room.entries.where.not(user_id: current_user.id).each do |entry|
       # 通知を作成
       notification = current_user.active_notifications.new(
-        room_id: room_id,
         message_id: id,
         visited_id: entry.user_id,
         action: "message"
