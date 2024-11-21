@@ -29,6 +29,15 @@ user_ids.zip(names).each do |user_id, name|
 end
 # userの設定ここまで
 
+# Postの設定
+30.times do |i|
+  Post.create!(
+    user_id: rand(1..25),
+    body: "投稿テスト#{i + 1}"
+  )
+end
+# Postの設定ここまで
+
 # emotionの設定
 emotions = [
   { id: 1, name: '喜び', color: '#fff9c4' },
