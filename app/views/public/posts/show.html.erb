@@ -15,21 +15,21 @@
   </div>
 
   <div class="row mt-2 d-flex justify-content-around">
-    <div id="favorite_btn_<%= @post.id %>" class="col-1 d-flex justify-content-center">
+    <div id="favorite_btn_<%= @post.id %>" class="col-3 d-flex justify-content-center">
         <%= render "public/favorites/btn", post: @post %>
     </div>
-    <div class="col-1 d-flex justify-content-center">
+    <div class="col-3 d-flex justify-content-center">
       <div>
         <%= render "public/post_comments/counter", post: @post %>
       </div>
     </div>
     <% if @post.user == current_user %>
-      <div class="col-1 d-flex justify-content-center">
+      <div class="col-3 d-flex justify-content-center">
         <%= link_to edit_post_path(@post) do %>
           <i class="fa-solid fa-pen"></i>
         <% end %>
       </div>
-      <div class="col-1 d-flex justify-content-center">
+      <div class="col-3 d-flex justify-content-center">
         <%= link_to post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
           <i class="fa-solid fa-trash"></i>
         <% end %>

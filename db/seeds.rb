@@ -18,7 +18,7 @@ end
 
 # userの設定
 user_ids = (1..25)
-names = ("A".."Z").to_a.reject { |letter| letter == "A" }.map { |letter| letter * 4 }
+names = ("A".."Z").to_a.reject { |letter| letter == "A" }.map { |letter| letter * 2 }
 
 user_ids.zip(names).each do |user_id, name|
   User.find_or_create_by(id: user_id) do |user|

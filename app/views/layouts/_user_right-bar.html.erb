@@ -1,7 +1,7 @@
 <div class="container px-0">
   <div class="row" style="height: 10vh;">
     <% if user_signed_in? %>
-      <div>
+      <div class="d-flex align-items-center">
         <%= link_to my_page_path do %>
         <%= image_tag user.get_image(50,50), class: "rounded-circle" %>
         <%= user.name %>
@@ -12,8 +12,18 @@
       <%= link_to "ログイン", user_session_path %>
     <% end %>
   </div>
-  <div class="row" style="height: 60vh;">通知</div>
-  <div class="row">
+  <div class="row" style="height: 80vh;">
+    <div class="overflow-auto border-top border-bottom" style="height: 100%; width: 100%;">
+      <% if @notifications.any? %>
+        <% @notifications.each do |notification| %>
+          <%= render 'public/notifications/notification', notification: notification %>
+        <% end %>
+      <% else %>
+        <p class="pt-3 text-center">通知はありません</p>
+      <% end %>
+    </div>
+  </div>
+  <div class="row pt-2 justify-content-center" style="height: 10vh;">
     <span style="color: #bdbdbd; font-size: 12px;">Copyright © hogehoge All Rights Reserved.</span>
   </div>
 </div>
