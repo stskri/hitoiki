@@ -2,6 +2,11 @@ class Public::PostCommentsController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:destroy]
 
+  def post_comment_users
+    @post = Post.includes(post_comments: :user).find(params[:post_id])
+    @users = @post.post_comments.map(&:user).uniq
+  end
+
   def create
     post = Post.find(params[:post_id])
     comment = PostComment.new(post_comment_params)

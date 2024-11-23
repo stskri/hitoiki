@@ -12,18 +12,33 @@
       <%= link_to "ログイン", user_session_path %>
     <% end %>
   </div>
-  <div class="row" style="height: 80vh;">
-    <div class="overflow-auto border-top border-bottom" style="height: 100%; width: 100%;">
-      <% if @notifications.any? %>
-        <% @notifications.each do |notification| %>
-          <%= render 'public/notifications/notification', notification: notification %>
+  <div class="row " style="height: 80vh;">
+    <div class="overflow-auto pt-2" style="height: 100%; width: 100%; background-color: #f2f2f2; border-radius: 15px;">
+      <div id="infinite_scroll">
+        <% if @notifications.any? %>
+            <% @notifications.each do |notification| %>
+              <%= render 'public/notifications/notification', notification: notification %>
+            <% end %>
+        <% else %>
+          <p class="pt-3 text-center">通知はありません</p>
         <% end %>
-      <% else %>
-        <p class="pt-3 text-center">通知はありません</p>
-      <% end %>
+        <%= paginate @notifications %>
+      </div>
     </div>
   </div>
   <div class="row pt-2 justify-content-center" style="height: 10vh;">
     <span style="color: #bdbdbd; font-size: 12px;">Copyright © hogehoge All Rights Reserved.</span>
   </div>
 </div>
+
+<%# 無限スクロール実装用 %>
+<script>
+  $(document).on('turbolinks:load', function() {
+    $('#infinite_scroll').jscroll({
+      contentSelector: '#infinite_scroll',
+      nextSelector: '.next a',
+      loadingHtml: '読み込み中',
+      padding: 10
+    });
+  });
+</script>

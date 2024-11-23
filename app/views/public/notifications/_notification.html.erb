@@ -6,7 +6,7 @@
     <div>
       <span style="font-size: 14px;">
         <%= link_to user_path(visitor) do %>
-          <%= image_tag visitor.get_image(25, 25), class: "icon_mini" %>
+          <%= image_tag visitor.get_image(25, 25), class: "rounded-circle" %>
         <% end %>
         <%# 改行がスペースを生むため、spanの中身を横一列に記述 %>
         <% case notification.action %>
@@ -29,15 +29,14 @@
     </div>
   </div>
 
-  <% if PostComment.find_by(id: notification.post_comment_id) || Message.find_by(id: notification.message_id)&.message %>
+  <div class="d-flex justify-content-between">
     <span class="text-muted mb-0 pl-2" style="font-size: 12px;">
       <%= PostComment.find_by(id: notification.post_comment_id)&.comment %>
       <%= Message.find_by(id: notification.message_id)&.message %>
     </span>
-  <% end %>
-
-  <div class="text-muted text-right" style="font-size: 12px;">
-    <%= time_ago_in_words(notification.created_at).upcase %>
+    <div class="text-muted text-right" style="font-size: 12px;">
+      <%= time_ago_in_words(notification.created_at).upcase %>
+    </div>
   </div>
-  <hr>
+  <hr class="my-1">
 </div>

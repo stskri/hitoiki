@@ -3,7 +3,7 @@
     <% posts.order(created_at: :desc).each do |post| %>
       <div class="col mb-3">
         <div class="card">
-          <div class="card-body px-3 py-1">
+          <div class="card-body px-3 pb-1 pt-2">
             <div class="row d-flex">
               <%= link_to user_path(post.user), class: 'card-title px-3 mb-0' do %>
                 <%= image_tag post.user.get_image(45,45), class: "rounded-circle" %>
