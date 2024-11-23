@@ -8,32 +8,33 @@
 
 <% @rooms.each do |room| %>
   <div class="row">
-    <%= link_to room_path(room) do %>
-      <div class="col mx-4">
-        <div class="py-2 d-flex">
-          <div class="col-auto">
-            <% users_id = Entry.where(room_id: room.id).pluck(:user_id) %>
-            <% users_id.each do |user_id| %>
-              <% if user_id != current_user.id %>
-                <% user = User.find(user_id) %>
+    <div class="col mx-4">
+      <div class="py-2">
+        <div class="d-flex justify-content-between">
+          <div class="col-auto px-0">
+            <% user_ids = Entry.select(:user_id).where(room_id: room.id).where.not(user_id: current_user.id).pluck(:user_id) %>
+            <% User.where(id: user_ids).each do |user| %>
+              <%= link_to user_path(user) do %>
                 <%= image_tag user.get_image(40, 40), class: "rounded-circle", style: "width: 40px; height: 40px;" %>
                 <%= user.name %>
               <% end %>
             <% end %>
           </div>
-          <div class="d-flex justify-content-between" style="flex-grow: 1;">
-            <div class="d-flex align-items-center text-muted">
-              <%# 該当するメッセージルームから、最新のメッセージ内容を１つ取得 %>
-              <%= room.messages.order(created_at: :desc).limit(1).pluck(:message).first %>
-            </div>
-            <div class="d-flex align-items-end text-muted" style="font-size: 12px;">
+          <%= link_to room_path(room), class: "px-3 py-1 flex-grow-1 position-relative" do %>
+            <div class="d-flex text-muted" style="position: absolute; top: 0; right: 0; font-size: 12px;">
               <%# 最新のメッセージがcreateされた日時を取得 %>
-              <%= room.messages.order(created_at: :desc).limit(1).first &. created_at &. then { |date| l(date, format: :long) } %>
+              <%= room.messages.order(created_at: :desc).limit(1).first &. created_at &. then { |date| l(date, format: :long) } || "未送信" %>
             </div>
-          </div>
+          <% end %>
         </div>
-      <% end %>
+        <%= link_to room_path(room), style: "flex-grow: 1;" do %>
+          <div class="d-flex align-items-center text-muted px-5">
+            <%# 該当するメッセージルームから、最新のメッセージ内容を１つ取得 %>
+            <%= room.messages.order(created_at: :desc).limit(1).pluck(:message).first || "メッセージはありません" %>
+          </div>
+        <% end %>
+      </div>
     </div>
   </div>
-  <hr class="m-0">
+  <hr class="m-1">
 <% end %>
