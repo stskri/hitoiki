@@ -30,6 +30,10 @@ Rails.application.routes.draw do
     resources :rooms, only: [:index, :create, :show] do
       resources :messages, only: [:create, :destroy]
     end
+    resources :notifications, only: [] do
+      # 通知確認ボタンの処理
+      patch :mark_as_read, on: :collection
+    end
   end
 
   namespace :admin do

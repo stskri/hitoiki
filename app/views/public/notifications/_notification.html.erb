@@ -2,7 +2,7 @@
 <% visited = notification.visited %>
 
 <div class="container px-1">
-  <div class="m-2 p-1" style="background-color: #eaffd0; border-radius: 15px;">
+  <div class="m-2 p-1" style="border-radius: 15px; background-color: <%= notification.checked ? '#fafafa' : '#eaffd0' %>;">
     <div class="d-flex align-items-center">
       <div>
         <span style="font-size: 14px;">
