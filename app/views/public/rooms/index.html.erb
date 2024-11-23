@@ -14,9 +14,9 @@
           <div class="col-auto px-0">
             <% user_ids = Entry.select(:user_id).where(room_id: room.id).where.not(user_id: current_user.id).pluck(:user_id) %>
             <% User.where(id: user_ids).each do |user| %>
-              <%= link_to user_path(user) do %>
+              <%= link_to user_path(user), class: "d-flex align-items-center" do %>
                 <%= image_tag user.get_image(40, 40), class: "rounded-circle", style: "width: 40px; height: 40px;" %>
-                <%= user.name %>
+                <span class="pl-2"><%= user.name %></span>
               <% end %>
             <% end %>
           </div>

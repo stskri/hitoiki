@@ -1,13 +1,12 @@
 <div class="container px-0">
-  <div class="row" style="height: 80vh;">
+  <div class="row" style="height: 90vh;">
     <div class="w-100 d-flex justify-content-between">
       <div class="m-0" style="background-color: #f2f2f2; flex-grow: 1;">
         <div class="p-2" style="background-color: #fff; border-radius: 0 0 15px 0;">
           <% if user_signed_in? %>
-            <div class="d-flex align-items-center">
-              <%= link_to my_page_path do %>
-                <%= image_tag user.get_image(50,50), class: "rounded-circle mr-2" %>
-                <%= user.name %>
+            <div class="d-flex align-items-center justify-content-center">
+              <%= link_to my_page_path, class: "d-flex justify-content-center border w-100 h-100", style: "border-radius: 15px;" do %>
+                <i class="m-2 fa-solid fa-user"></i>
               <% end %>
             </div>
           <% else %>
@@ -22,7 +21,8 @@
         </div>
       </div>
     </div>
-    <div class="overflow-auto" style="height: 100%; width: 100%; background-color: #f2f2f2; border-radius: 15px 0 15px 15px;">
+    <%# calcの50pxは余白を含めたマイページへのリンクの高さ %>
+    <div class="overflow-auto" style="height: calc(100% - 50px); width: 100%; background-color: #f2f2f2; border-radius: 15px 0 15px 15px;">
       <div id="infinite_scroll">
         <% if @notifications.any? %>
           <% @notifications.each do |notification| %>
@@ -35,7 +35,7 @@
       </div>
     </div>
   </div>
-  <div class="row pt-2 justify-content-center">
+  <div class="row justify-content-center align-items-center" style="height: 10vh;">
     <span style="color: #bdbdbd; font-size: 12px;">Copyright © hogehoge All Rights Reserved.</span>
   </div>
 </div>
