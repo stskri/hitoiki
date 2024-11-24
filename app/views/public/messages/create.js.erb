@@ -1,3 +1,5 @@
 $("#messages").html("<%= j(render 'public/messages/messages', messages: @messages, room: @room) %>");
 $('input[type=text]').val("");
-$('html, body').animate({ scrollTop: $(document).height() }, 'fast');
+<% if @message.save %>
+  $('html, body').animate({ scrollTop: $(document).height() }, 'fast');
+<% end %>
