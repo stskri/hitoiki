@@ -17,17 +17,17 @@
       </div>
       <div class="d-flex align-items-end">
         <div class="pt-2 px-2 pb-1" style="background-color: #f2f2f2; border-radius: 15px 15px 0 0;">
-          <%= button_to "通知を確認", mark_as_read_notifications_path, method: :patch, class: "py-1 px-2 btn btn-sm btn-primary rounded-pill", style: "font-size: 12px;" %>
+          <%= link_to "通知を確認", mark_as_read_notifications_path, method: :patch, class: "py-1 px-2 btn btn-sm btn-primary rounded-pill", style: "font-size: 12px;", id: "mark_as_read_btn", remote: true %>
         </div>
       </div>
     </div>
     <%# calcの50pxは余白を含めたマイページへのリンクの高さ %>
     <div class="overflow-auto" style="height: calc(100% - 50px); width: 100%; background-color: #f2f2f2; border-radius: 15px 0 15px 15px;">
-      <div id="infinite_scroll">
+      <div>
         <% if @notifications.any? %>
-          <% @notifications.each do |notification| %>
-            <%= render 'public/notifications/notification', notification: notification %>
-          <% end %>
+        <div id="checked_notifications">
+          <%= render 'public/notifications/notification', notifications: @notifications %>
+        </div>
         <% else %>
           <p class="pt-3 text-center">通知はありません</p>
         <% end %>

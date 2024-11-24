@@ -1,43 +1,45 @@
-<% visitor = notification.visitor %>
-<% visited = notification.visited %>
+<% @notifications.each do |notification| %>
+  <% visitor = notification.visitor %>
+  <% visited = notification.visited %>
 
-<div class="container px-1">
-  <div class="m-2 p-1" style="border-radius: 15px; background-color: <%= notification.checked ? '#fafafa' : '#eaffd0' %>;">
-    <div class="d-flex align-items-center">
-      <div>
-        <span style="font-size: 14px;">
-          <%= link_to user_path(visitor) do %>
-            <%= image_tag visitor.get_image(25, 25), class: "rounded-circle" %>
-          <% end %>
-          <%# 改行がスペースを生むため、spanの中身を横一列に記述 %>
-          <% case notification.action %>
-          <% when 'follow' %>
-            <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "があなたをフォローしました" %>
-          <% when 'favorite' %>
-            <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "が" %><%= link_to 'あなたの投稿', notification.post, style: 'font-weight: bold;' %><%= "にいいねしました" %>
-          <% when 'post_comment' %>
-            <% if notification.post.user_id == visited.id %>
-              <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "が" %><%= link_to 'あなたの投稿', notification.post, style: 'font-weight: bold;' %><%= "にコメントしました" %>
-            <% else %>
-              <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "が" %><%= link_to notification.post.user.name, user_path(notification.post.user) %><%= "さんの投稿にコメントしました" %>
+  <div class="container px-1">
+    <div class="m-2 p-1" style="border-radius: 15px; background-color: <%= notification.checked ? '#fafafa' : '#eaffd0' %>;">
+      <div class="d-flex align-items-center">
+        <div>
+          <span style="font-size: 14px;">
+            <%= link_to user_path(visitor) do %>
+              <%= image_tag visitor.get_image(25, 25), class: "rounded-circle" %>
             <% end %>
-          <% when 'message' %>
-            <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "から" %><%= link_to 'メッセージ', room_path(notification.message.room), style: 'font-weight: bold;' %><%= "があります" %>
-          <% else %>
-            <%= "通知内容が不明です" %>
-          <% end %>
-        </span>
+            <%# 改行がスペースを生むため、spanの中身を横一列に記述 %>
+            <% case notification.action %>
+            <% when 'follow' %>
+              <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "があなたをフォローしました" %>
+            <% when 'favorite' %>
+              <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "が" %><%= link_to 'あなたの投稿', notification.post, style: 'font-weight: bold;' %><%= "にいいねしました" %>
+            <% when 'post_comment' %>
+              <% if notification.post.user_id == visited.id %>
+                <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "が" %><%= link_to 'あなたの投稿', notification.post, style: 'font-weight: bold;' %><%= "にコメントしました" %>
+              <% else %>
+                <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "が" %><%= link_to notification.post.user.name, user_path(notification.post.user) %><%= "さんの投稿にコメントしました" %>
+              <% end %>
+            <% when 'message' %>
+              <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "から" %><%= link_to 'メッセージ', room_path(notification.message.room), style: 'font-weight: bold;' %><%= "があります" %>
+            <% else %>
+              <%= "通知内容が不明です" %>
+            <% end %>
+          </span>
+        </div>
       </div>
-    </div>
 
-    <div class="d-flex justify-content-between">
-      <span class="text-muted mb-0 pl-2" style="font-size: 12px;">
-        <%= PostComment.find_by(id: notification.post_comment_id)&.comment %>
-        <%= Message.find_by(id: notification.message_id)&.message %>
-      </span>
-      <div class="text-muted text-right" style="font-size: 12px;">
-        <%= time_ago_in_words(notification.created_at).upcase %>
+      <div class="d-flex justify-content-between">
+        <span class="text-muted mb-0 pl-2" style="font-size: 12px;">
+          <%= PostComment.find_by(id: notification.post_comment_id)&.comment %>
+          <%= Message.find_by(id: notification.message_id)&.message %>
+        </span>
+        <div class="text-muted text-right" style="font-size: 12px;">
+          <%= time_ago_in_words(notification.created_at).upcase %>
+        </div>
       </div>
     </div>
   </div>
-</div>
+<% end %>
