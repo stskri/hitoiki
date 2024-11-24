@@ -10,7 +10,7 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      # @post_emotion = @post.post_emotions.build(ppost_emotion_params)
+      # @post_emotion = @post.post_emotions.build(post_emotion_params)
       # @post_emotion = []
       redirect_to posts_path, notice: '投稿しました'
     else
