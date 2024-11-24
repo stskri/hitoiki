@@ -20,7 +20,7 @@
               <% if notification.post.user_id == visited.id %>
                 <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "が" %><%= link_to 'あなたの投稿', notification.post, style: 'font-weight: bold;' %><%= "にコメントしました" %>
               <% else %>
-                <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "が" %><%= link_to notification.post.user.name, user_path(notification.post.user) %><%= "さんの投稿にコメントしました" %>
+                <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "が" %><%= link_to notification.post.user.name, user_path(notification.post.user) %><%= "さんの" %><%= link_to "投稿", notification.post %><%= "にコメントしました" %>
               <% end %>
             <% when 'message' %>
               <%= link_to "#{visitor.name}さん", user_path(visitor), style: 'font-weight: bold;' %><%= "から" %><%= link_to 'メッセージ', room_path(notification.message.room), style: 'font-weight: bold;' %><%= "があります" %>

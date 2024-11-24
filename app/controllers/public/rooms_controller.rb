@@ -4,8 +4,12 @@ class Public::RoomsController < ApplicationController
   def index
     # current_useの持つメッセージルームを表示するためにEntryからuser_idが自分のレコードを取得、room_idを配列で抜き出す
     current_user_rooms_id = Entry.where(user_id: current_user.id).pluck(:room_id)
-    # 抜き出したroom_idから、メッセージルームを特定
-    @rooms = Room.where(id: current_user_rooms_id)
+    # 抜き出したroom_idからメッセージルームを特定、新着順に並び替え
+    @rooms = Room.joins(:messages)
+            .where(id: current_user_rooms_id)
+            .select('rooms.*, MAX(messages.created_at) as latest_message_time')
+            .group('rooms.id')
+            .order('latest_message_time DESC')
   end
 
   def create
@@ -34,8 +38,10 @@ class Public::RoomsController < ApplicationController
     unless @room.users.include?(current_user)
       redirect_to rooms_path, alert: "無効なアクセスです" and return
     end
-    @messages = @room.messages.includes(:user)
     @message = Message.new
+    @messages = @room.messages.includes(:user)
+    notifications = current_user.passive_notifications.where(checked: false, room_id: @room.id)
+    notifications.update(checked: true)
   end
 
   # もしdestroyを実装する場合

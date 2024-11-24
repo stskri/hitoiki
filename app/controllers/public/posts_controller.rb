@@ -30,6 +30,8 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     @post_comment = PostComment.new
     @post_comments = PostComment.where(post_id: @post.id)
+    notifications = current_user.passive_notifications.where(checked: false, post_id: @post.id)
+    notifications.update(checked: true)
   end
 
   def edit

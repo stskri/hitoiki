@@ -11,7 +11,7 @@ class Public::MessagesController < ApplicationController
     @message.user_id = current_user.id
     @message.room_id = @room.id
     if @message.save
-      @message.create_notification_message(current_user)
+      @message.create_notification_message(current_user, @room.id)
     end
   end
 
