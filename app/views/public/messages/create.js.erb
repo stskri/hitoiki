@@ -1,0 +1,3 @@
+$("#messages").html("<%= j(render 'public/messages/messages', messages: @messages, room: @room) %>");
+$('input[type=text]').val("");
+$('html, body').animate({ scrollTop: $(document).height() }, 'fast');

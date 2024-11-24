@@ -34,7 +34,7 @@ class Public::RoomsController < ApplicationController
     unless @room.users.include?(current_user)
       redirect_to rooms_path, alert: "無効なアクセスです" and return
     end
-    @messages = @room.messages
+    @messages = @room.messages.includes(:user)
     @message = Message.new
   end
 
