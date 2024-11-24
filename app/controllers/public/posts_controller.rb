@@ -10,8 +10,17 @@ class Public::PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
-      # @post_emotion = @post.post_emotions.build(post_emotion_params)
-      # @post_emotion = []
+      # posts#newのフォームから送られたEmotionの情報を取得
+      emotion_ids = params[:post][:post_emotions].reject(&:empty?)
+      emotions = Emotion.where(id: emotion_ids)
+      emotions.each do |emotion|
+        @post.post_emotions.create(
+          post_id: @post.id,
+          emotion_id: emotion.id,
+          emotion_name: emotion.name,
+          emotion_color: emotion.color
+        )
+      end
       redirect_to posts_path, notice: '投稿しました'
     else
       redirect_to new_post_path, alert: '投稿に失敗しました'
@@ -23,7 +32,7 @@ class Public::PostsController < ApplicationController
     unless user_signed_in?
       redirect_to new_user_session_path and return
     end
-    @posts = Post.includes(:user).all
+    @posts = Post.includes(:favorites, :post_comments, :post_emotions, :user).all
   end
 
   def show
@@ -61,10 +70,6 @@ class Public::PostsController < ApplicationController
 
   def post_params
     params.require(:post).permit(:body)
-  end
-
-  def post_emotion_params
-    params.require(:post_emotion).permit(:emotion_name, :emotion_color)
   end
 
   def ensure_correct_user
