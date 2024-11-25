@@ -5,27 +5,27 @@
 <%= form_with model: @post, local: true do |f| %>
   <div class="container">
     <div class="col-11 mx-auto">
-      <div class="d-flex flex-wrap justify-content-center">
+      <div class="d-flex flex-wrap">
         <%= f.collection_check_boxes :post_emotions, @emotions, :id, :name do |b| %>
           <div class="m-2">
             <input type="checkbox"
                     id="emotion_<%= b.object.id %>"
                     class="btn-check"
                     autocomplete="off"
-                    name="<%= b.object.name %>"
+                    name="post[post_emotions][]"
                     value="<%= b.object.id %>"
             >
             <label for="emotion_<%= b.object.id %>"
-                    class="btn btn-light text-center"
+                    class="m-0 btn btn-light text-center"
                     style="background-color: <%= b.object.color %>;
                             color: #212529;
                             border-radius: 5px;
-                            padding: 10px 20px;
+                            padding: 5px 20px;
                             cursor: pointer;
                             display: inline-block;
-                            width: 100px;"
+                            width: 120px;"
             >
-            <div class="d-flex justify-content-center py-0 px-2" style="background-color: #fff; display: inline-block; border-radius: 5px; white-space:nowrap;" >
+            <div class="d-flex justify-content-center py-0 px-2 text-muted" style="font-size: 14px; background-color: #fff; display: inline-block; border-radius: 5px; white-space:nowrap;" >
               <%= b.object.name %>
             </div>
             </label>
