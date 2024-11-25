@@ -5,16 +5,33 @@
 <%= form_with model: @post, local: true do |f| %>
   <div class="container">
     <div class="col-11 mx-auto">
-      <%= f.collection_check_boxes :post_emotions, @emotions, :id, :name, allow_blank: false do |b| %>
-        <div class="form-check d-inline-block">
-          <%= b.check_box class: 'btn-check', id: "emotion_#{b.object.id}", autocomplete: "off" %>
-          <%= b.label class: 'my-2 btn btn-outline-primary',
-                      for: "emotion_#{b.object.id}",
-                      style: "background-color: #{b.object.color};" do %>
-            <%= b.object.name %>
-          <% end %>
-        </div>
-      <% end %>
+      <div class="d-flex flex-wrap justify-content-center">
+        <%= f.collection_check_boxes :post_emotions, @emotions, :id, :name do |b| %>
+          <div class="m-2">
+            <input type="checkbox"
+                    id="emotion_<%= b.object.id %>"
+                    class="btn-check"
+                    autocomplete="off"
+                    name="<%= b.object.name %>"
+                    value="<%= b.object.id %>"
+            >
+            <label for="emotion_<%= b.object.id %>"
+                    class="btn btn-light text-center"
+                    style="background-color: <%= b.object.color %>;
+                            color: #212529;
+                            border-radius: 5px;
+                            padding: 10px 20px;
+                            cursor: pointer;
+                            display: inline-block;
+                            width: 100px;"
+            >
+            <div class="d-flex justify-content-center py-0 px-2" style="background-color: #fff; display: inline-block; border-radius: 5px; white-space:nowrap;" >
+              <%= b.object.name %>
+            </div>
+            </label>
+          </div>
+        <% end %>
+      </div>
     </div>
     <div class="col-12 mx-auto">
       <table class="table table-borderless">

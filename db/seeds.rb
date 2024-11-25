@@ -40,10 +40,10 @@ end
 
 # emotionの設定
 emotions = [
-  { id: 1, name: '喜び', color: '#fff9c4' },
-  { id: 2, name: '怒り', color: '#ffcdd2' },
-  { id: 3, name: '哀しい', color: '#bbdefd' },
-  { id: 4, name: '楽しい', color: '#c8e6c9' }
+  { id: 1, name: '喜び', color: '#fff176' },  # パステルイエロー
+  { id: 2, name: '怒り', color: '#ff8a80' },  # パステルレッド
+  { id: 3, name: '哀しい', color: '#64b5f6' },  # パステルブルー
+  { id: 4, name: '楽しい', color: '#81c784' }   # パステルグリーン
 ]
 emotions.each do |emotion_data|
   Emotion.find_or_create_by(id: emotion_data[:id]) do |emotion|

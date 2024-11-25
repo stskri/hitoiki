@@ -28,7 +28,7 @@
     <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to user_path(current_user), class: "d-flex align-items-center justify-content-center" do %>
         <%= image_tag current_user.get_image(30, 30), class: "rounded-circle" %>
-        <span class="pl-2"><%= current_user.name %></span>
+        <span class="pl-2"><%= truncate(current_user.name, length: 15) %></span>
       <% end %>
     </div>
   </div>
