@@ -3,14 +3,14 @@
     <% posts.order(created_at: :desc).each do |post| %>
       <div class="col mb-3">
         <div class="card">
-          <div class="card-body px-3 pt-2 pb-1">
+          <div class="card-body px-3 pb-1 pt-2">
             <div class="row d-flex">
-              <%= link_to user_path(post.user), class: 'card-title px-3 py-1 mb-0' do %>
+              <%= link_to user_path(post.user), class: 'd-flex align-items-center card-title px-3 mb-0' do %>
                 <%= image_tag post.user.get_image(45,45), class: "rounded-circle" %>
-                <%= post.user.name %>
+                <span class="pl-2"><%= post.user.name %></span>
               <% end %>
               <%= link_to post_path(post.id), class: "px-3 py-1 flex-grow-1 position-relative", style: "text-decoration: none;" do %>
-                <span class="text-muted small pr-2" style="position: absolute; top: 0; right: 0;">
+                <span class="text-muted pr-2" style="position: absolute; top: 0; right: 0; font-size: 10px;">
                   <%= l post.created_at, format: :long %>
                 </span>
               <% end %>
@@ -23,13 +23,13 @@
               <% end %>
             </div>
 
-            <hr class="mt-0 mb-1 mx-4">
+            <div class="gradient-line mb-1" style="height: 8px; <%= gradient_style(post) %>"></div>
 
             <div class="row d-flex justify-content-around align-items-center">
-              <div id="favorite_btn_<%= post.id %>" class="col-1 d-flex justify-content-center">
+              <div id="favorite_btn_<%= post.id %>" class="d-flex justify-content-center">
                   <%= render "public/favorites/btn", post: post %>
               </div>
-              <div class="col-1 d-flex justify-content-center">
+              <div class="d-flex justify-content-center">
                 <div>
                   <%= render "public/post_comments/counter", post: post %>
                 </div>

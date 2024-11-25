@@ -3,6 +3,7 @@ class Public::MessagesController < ApplicationController
 
   def create
     @room = Room.find(params[:room_id])
+    @messages = @room.messages.includes(:user)
     unless @room.users.include?(current_user)
       redirect_to rooms_path, alert: "メッセージの送信に失敗しました" and return
     end
@@ -10,18 +11,17 @@ class Public::MessagesController < ApplicationController
     @message.user_id = current_user.id
     @message.room_id = @room.id
     if @message.save
-      @message.create_notification_message(current_user)
-      redirect_to request.referer, notice: 'メッセージを送信しました'
-    else
-      redirect_to request.referer, alert: 'メッセージの送信に失敗しました'
+      @message.create_notification_message(current_user, @room.id)
     end
   end
 
   def destroy
-    message = Message.find(params[:id])
-    if message.user == current_user
-      if message.destroy
-        redirect_to request.referer, notice: 'メッセージを削除しました'
+    @room = Room.find(params[:room_id])
+    @messages = @room.messages.includes(:user)
+    @message = Message.find(params[:id])
+    if @message.user == current_user
+      if @message.destroy
+        # flash[:notice] = 'メッセージが削除されました'
       else
         redirect_to request.referer, alert: 'メッセージの削除に失敗しました'
       end

@@ -1,8 +1,9 @@
 class Post < ApplicationRecord
   belongs_to :user
   has_many :favorites, dependent: :destroy
-  has_many :post_emotion, dependent: :destroy
-  has_many :post_comment, dependent: :destroy
+  has_many :post_emotions, dependent: :destroy
+  has_many :emotions, through: :post_emotions
+  has_many :post_comments, dependent: :destroy
   has_many :notifications, dependent: :destroy
 
   validates :body, length: { maximum: 31 }, presence: true
@@ -42,33 +43,5 @@ class Post < ApplicationRecord
       # notificationがバリデーションを満たしている場合、notificationをsave
       notification.save if notification.valid?
     end
-  end
-
-  def create_notification_post_comment(current_user, post_comment_id)
-    # 既に自分以外のコメントがついているか
-    already_post_comment_user_ids = PostComment.select(:user_id).where(post_id: id).where.not(user_id: current_user.id).distinct
-    # コメントがあるなら、投稿ユーザー全員に通知を送る
-    already_post_comment_user_ids.each do |user_id|
-      save_notification_post_comment(current_user, post_comment_id, user_id['user_id'])
-    end
-    # コメントがない場合、投稿者のみに通知を送る
-    save_notification_post_comment(current_user, post_comment_id, user_id['user_id'.to_i])
-  end
-
-  def save_notification_post_comment(current_user, post_comment_id, visited_id)
-    # コメントに対する通知を作成
-    notification = current_user.active_notifications.new(
-      post_id: id,
-      post_comment_id: post_comment_id,
-      visited_id: visited_id,
-      action: "post_comment"
-    )
-    # 通知の送り元と送信先が同一ユーザーの場合
-    if notification.visitor_id == notification.visited_id
-      # 確認済みにする
-      notification.checked = true
-    end
-    # notificationがバリデーションを満たしている場合、notificationをsave
-    notification.save if notification.valid?
   end
 end

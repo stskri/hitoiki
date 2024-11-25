@@ -5,7 +5,7 @@ class CreatePostEmotions < ActiveRecord::Migration[6.1]
       t.integer :post_id, null: false
       t.integer :emotion_id, null: false
       t.string :emotion_name, null: false
-      t.string :emotion_dolor, null: false
+      t.string :emotion_color, null: false
 
       t.timestamps
     end

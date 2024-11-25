@@ -1,3 +1,4 @@
 $("#follow_btn_<%= @user.id %>").html("<%= j(render 'public/relationships/btn', user: @user) %>");
 $("#followings_counter").html("<%= j(render 'public/relationships/followings_counter', user: @user) %>");
-$("#followers_counter").html("<%= j(render 'public/relationships/followers_counter', user: @user) %>")
+$("#followers_counter").html("<%= j(render 'public/relationships/followers_counter', user: @user) %>");
+$("#btn_to_start_dm").html("<%= j(render 'public/rooms/btn', room: @room, user: @user) %>")
