@@ -9,6 +9,6 @@ class Public::NotificationsController < ApplicationController
                                   .where.not(visitor_id: current_user.id)
                                   .includes(:visitor, :post, :post_comment, :message)
                                   .order(created_at: :desc)
-                                  .page(params[:page]).per(5)
+                                  .page(params[:page]).per(25) # 追加で25件を取得
   end
 end
