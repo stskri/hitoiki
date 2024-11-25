@@ -32,7 +32,7 @@ class Public::PostsController < ApplicationController
     unless user_signed_in?
       redirect_to new_user_session_path and return
     end
-    @posts = Post.includes(:favorites, :post_comments, :post_emotions, :user)
+    @posts = Post.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
   end
 
   def show

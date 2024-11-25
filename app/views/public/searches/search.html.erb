@@ -11,5 +11,9 @@
   <%= render 'public/users/users', users: @records %>
 <% elsif @model == 'post' %>
   <h5 class="text-center">投稿検索 "<%= @content %>"</h5>
-  <%= render 'public/posts/posts', posts: @records %>
+  <div class="container py-4">
+    <div class="row row-cols-1">
+      <%= render 'public/posts/posts', posts: @records %>
+    </div>
+  </div>
 <% end %>
