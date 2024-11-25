@@ -40,18 +40,18 @@ end
 
 # emotionの設定
 emotions = [
-  { id: 1, name: '安心', color: '#aed581' },   # ライトグリーン
-  { id: 2, name: '楽しい', color: '#81c784' }, # パステルグリーン
-  { id: 3, name: '希望', color: '#4fc3f7' },   # スカイブルー
-  { id: 4, name: '哀しい', color: '#64b5f6' }, # パステルブルー
-  { id: 5, name: '驚き', color: '#ce93d8' },   # パステルパープル
-  { id: 6, name: '体調不良', color: '#ba68c8' }, # ディープパープル
-  { id: 7, name: '喜び', color: '#fff176' },   # パステルイエロー
-  { id: 8, name: '恐れ', color: '#ffb74d' },   # パステルオレンジ
-  { id: 9, name: '怒り', color: '#ff8a80' },   # パステルレッド
-  { id: 10, name: '興奮', color: '#f06292' },  # ビビッドピンク
-  { id: 11, name: '孤独', color: '#90a4ae' },  # クールグレー
-  { id: 12, name: '絶望', color: '#424242' }   # ダークグレー
+  { id: 1, name: '喜び', color: '#fff176' },
+  { id: 2, name: '安心', color: '#aed581' },
+  { id: 3, name: '楽しい', color: '#81c784' },
+  { id: 4, name: '希望', color: '#4fc3f7' },
+  { id: 5, name: '哀しい', color: '#64b5f6' },
+  { id: 6, name: '驚き', color: '#ce93d8' },
+  { id: 7, name: '体調不良', color: '#ba68c8' },
+  { id: 8, name: '興奮', color: '#f06292' },
+  { id: 9, name: '怒り', color: '#ff5252' },
+  { id: 10, name: '恐怖', color: '#b71c1c' },
+  { id: 11, name: '孤独', color: '#90a4ae' },
+  { id: 12, name: '絶望', color: '#424242' }
 ]
 emotions.each do |emotion_data|
   Emotion.find_or_create_by(id: emotion_data[:id]) do |emotion|
