@@ -25,13 +25,15 @@
     <div class="overflow-auto" style="height: calc(100% - 50px); width: 100%; background-color: #f2f2f2; border-radius: 15px 0 15px 15px;">
       <div>
         <% if @notifications.any? %>
-        <div id="checked_notifications">
+        <div id="notifications">
           <%= render 'public/notifications/notification', notifications: @notifications %>
         </div>
         <% else %>
           <p class="pt-3 text-center">通知はありません</p>
         <% end %>
-        <%= paginate @notifications %>
+        <div class="d-flex justify-content-center my-4" id="load_more_btn">
+          <%= link_to_next_page @notifications, 'さらに読み込む', class: "btn btn-info btn-sm", remote: true, params: { controller: 'public/notifications', action: 'more_notifications' } %>
+        </div>
       </div>
     </div>
   </div>
@@ -39,15 +41,3 @@
     <span style="color: #bdbdbd; font-size: 12px;">Copyright © hogehoge All Rights Reserved.</span>
   </div>
 </div>
-
-<%# 無限スクロール実装用 %>
-<script>
-  $(document).on('turbolinks:load', function() {
-    $('#infinite_scroll').jscroll({
-      contentSelector: '#infinite_scroll',
-      nextSelector: '.next a',
-      loadingHtml: '読み込み中',
-      padding: 10
-    });
-  });
-</script>

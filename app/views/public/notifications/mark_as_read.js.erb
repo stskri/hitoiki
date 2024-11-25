@@ -1,3 +1,3 @@
-$("#checked_notifications").html("<%= j(render 'public/notifications/notification', notifications: @notifications) %>");
+$("#notifications").html("<%= j(render 'public/notifications/notification', notifications: @notifications) %>");
 <%# 非同期通信の処理完了後にボタンのフォーカスエフェクトが残ってしまうことの対策 %>
 $("#mark_as_read_btn").blur();
