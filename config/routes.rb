@@ -10,7 +10,6 @@ Rails.application.routes.draw do
 
   scope module: :public do
     root :to => "posts#index"
-    get "about" => "homes#about"
     get "my_page" => "users#my_page"
     get "search" => "searches#search"
     get "search_page" => "searches#search_page"
@@ -41,12 +40,14 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root :to => "inquiries#index"
+    get "search" => "searches#search"
+    get "search_page" => "searches#search_page"
     resources :users do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
       get "user_favorite" => "users#user_favorite"
     end
-    resources :emotions
+    resources :emotions, only: [:index, :edit, :create, :update, :destroy]
     resources :posts do
       resource :favorites, only: [] do
         get 'favorite_users' => 'favorites#favorite_users', as: 'favorite_users'
