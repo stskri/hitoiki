@@ -1,0 +1,21 @@
+<div class="container">
+  <div class="row row-cols-1">
+    <% users.each do |user| %>
+      <div class="col mb-2">
+        <div class="card d-flex mx-3 my-1">
+          <div class="d-flex justify-content-between">
+            <%= link_to admin_user_path(user), class: 'd-flex align-items-center card-body px-3 py-1' do %>
+              <div class="d-flex align-items-center">
+                <%= image_tag user.get_image(50, 50), class: "rounded-circle mr-2", style: "width: 50px; height: 50px;" %>
+                <span class="pl-2"><%= user.name %></span>
+              </div>
+            <% end %>
+            <div class="d-flex align-items-center pr-3">
+              <span>投稿数：<%= user.posts.count %> 件</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

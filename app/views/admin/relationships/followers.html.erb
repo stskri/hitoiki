@@ -1,0 +1,9 @@
+<div style="position: sticky; top: 0; background-color: white; z-index: 5;">
+  <hr class="mt-0" style="border-color: #fff;">
+    <strong>フォロワー
+    </strong>
+    <span><%= @user.name %></span>
+  <hr>
+</div>
+
+<%= render 'admin/users/users', users: @followers %>

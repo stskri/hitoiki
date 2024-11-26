@@ -1,0 +1,30 @@
+<% messages.each do |message| %>
+  <div id="message_<%= message.id %>">
+    <div class="row justify-content-start">
+      <div>
+        <div class="card rounded-pill" style="<%= message.user == current_user ? 'line-height: 35px;' : '' %>">
+          <div class="py-1 d-flex align-items-center">
+            <div class="ml-4 d-flex align-items-center">
+                <%= link_to admin_user_path(message.user), class: "d-flex align-items-center" do %>
+                  <%= image_tag message.user.get_image(35, 35), class: "rounded-circle" %>
+                  <%= message.user.name %>
+                <% end %>
+                <span>：</span>
+            </div>
+            <span class="d-flex align-items-center mr-4">
+              <%= message.message %>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex mb-2 justify-content-start">
+      <span class="text-muted" style="font-size: 10px;">
+        <%= l message.created_at, format: :long %>
+        <%= link_to admin_room_message_path(room, message), method: :delete, data: { confirm: '本当に削除しますか？'}, remote: true do %>
+          <i class="fa-solid fa-trash mx-2"></i>
+        <% end %>
+      </span>
+    </div>
+  </div>
+<% end %>
