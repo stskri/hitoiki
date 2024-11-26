@@ -40,8 +40,6 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root :to => "inquiries#index"
-    get "search" => "searches#search"
-    get "search_page" => "searches#search_page"
     resources :users do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
@@ -56,6 +54,13 @@ Rails.application.routes.draw do
       end
       resources :post_comments, only: [:destroy]
       get 'post_comment_users' => 'post_comments#post_comment_users', as: 'post_comment_users'
+    end
+    resources :searches, only: [] do
+      collection do
+        get :search
+        get :user_room_search
+        get :search_page
+      end
     end
     resources :rooms, only: [:index, :show] do
       resources :messages, only: [:destroy]

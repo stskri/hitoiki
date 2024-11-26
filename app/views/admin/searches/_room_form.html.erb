@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row">
+    <div class="col gap-2">
+      <%= form_with url: user_room_search_admin_searches_path, method: :get, class: "d-flex" do |f| %>
+        <%= f.text_field :user_ids, placeholder: "roomに属するユーザーIDをカンマ区切りで入力", class: "form-control mr-2 ", value: @content  %>
+        <%= f.submit '検索', class: 'btn btn-success' %>
+      <% end %>
+    </div>
+  </div>
+</div>
