@@ -24,6 +24,7 @@
             <span>いいねした投稿<strong><%= @user.favorited_posts.count %></strong>件</span>
           <% end %>
         </div>
+        <div><%= link_to "属するメッセージルーム", rooms_admin_user_path %></div>
         <div class="row mx-0 mb-1">
           <span><%= @user.introduction %></span>
         </div>

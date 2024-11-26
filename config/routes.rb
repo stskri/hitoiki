@@ -46,8 +46,10 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
       get "user_favorite" => "users#user_favorite"
+      member do
+        get :rooms
+      end
     end
-    resources :emotions, only: [:index, :edit, :create, :update, :destroy]
     resources :posts do
       resource :favorites, only: [] do
         get 'favorite_users' => 'favorites#favorite_users', as: 'favorite_users'
@@ -55,6 +57,10 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:destroy]
       get 'post_comment_users' => 'post_comments#post_comment_users', as: 'post_comment_users'
     end
+    resources :rooms, only: [:index, :show] do
+      resources :messages, only: [:destroy]
+    end
+    resources :emotions, only: [:index, :edit, :create, :update, :destroy]
     resources :inquiries
   end
 end
