@@ -9,4 +9,7 @@ class Admin::UsersController < ApplicationController
     @user = User.includes(posts: [:favorites, :post_comments]).find(params[:id])
   end
 
+  def user_favorite
+    @user = User.includes(posts: [:favorites, :post_comments]).find(params[:user_id])
+  end
 end

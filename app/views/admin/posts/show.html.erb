@@ -19,11 +19,15 @@
   <div class="row mt-2 d-flex justify-content-around">
     <div>
       <i class="fa-solid fa-mug-saucer" aria-hidden="true"></i>
-      <%= @post.favorites.count %>
+      <%= link_to favorite_users_admin_post_favorites_path(@post) do %>
+        <%= @post.favorites.count %>
+      <% end %>
     </div>
     <div>
       <i class="fa-regular fa-comment"></i>
-      <%= @post.post_comments.count %>
+      <%= link_to admin_post_post_comment_users_path(@post) do %>
+        <%= @post.post_comments.count %>
+      <% end %>
     </div>
     <div>
       <i class="fa-solid fa-pen"></i>

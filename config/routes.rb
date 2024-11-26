@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     get "my_page" => "users#my_page"
     get "search" => "searches#search"
     get "search_page" => "searches#search_page"
+    get "my_favorite" => "users#my_favorite"
     get 'users' => 'users#dummy' # 新規登録画面で登録失敗した際にURLが/usersとなり、リロードするとRouting Errorが表示されてしまうため、controller側で redirect_to new_user_registration_path を用意している
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resource :favorites, only: [:create, :destroy] do
@@ -43,10 +44,15 @@ Rails.application.routes.draw do
     resources :users do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
+      get "user_favorite" => "users#user_favorite"
     end
     resources :emotions
     resources :posts do
+      resource :favorites, only: [] do
+        get 'favorite_users' => 'favorites#favorite_users', as: 'favorite_users'
+      end
       resources :post_comments, only: [:destroy]
+      get 'post_comment_users' => 'post_comments#post_comment_users', as: 'post_comment_users'
     end
     resources :inquiries
   end

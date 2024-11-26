@@ -13,9 +13,9 @@ class Admin::PostsController < ApplicationController
   def destroy
     post = Post.find(params[:id])
     if post.destroy
-      redirect_to posts_path, notice: '投稿を削除しました'
+      redirect_to admin_root_path, notice: '投稿を削除しました'
     else
-      redirect_to post_path(post.id), alert: '投稿の削除に失敗しました'
+      redirect_to admin_post_path(post), alert: '投稿の削除に失敗しました'
     end
   end
 end
