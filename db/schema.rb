@@ -95,7 +95,9 @@ ActiveRecord::Schema.define(version: 2024_11_07_110511) do
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
     t.integer "post_id"
-    t.integer "comment_id"
+    t.integer "post_comment_id"
+    t.integer "room_id"
+    t.integer "message_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
     t.datetime "created_at", precision: 6, null: false
@@ -114,7 +116,7 @@ ActiveRecord::Schema.define(version: 2024_11_07_110511) do
     t.integer "post_id", null: false
     t.integer "emotion_id", null: false
     t.string "emotion_name", null: false
-    t.string "emotion_dolor", null: false
+    t.string "emotion_color", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -135,7 +137,6 @@ ActiveRecord::Schema.define(version: 2024_11_07_110511) do
   end
 
   create_table "rooms", force: :cascade do |t|
-    t.integer "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

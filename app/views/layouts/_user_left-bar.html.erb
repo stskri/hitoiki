@@ -16,7 +16,7 @@
       <% end %>
     </div>
     <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
-      <%= link_to posts_path do %>
+      <%= link_to rooms_path do %>
         <i class="fa-regular fa-paper-plane fa-lg"></i><span> メッセージ</span>
       <% end %>
     </div>
@@ -25,10 +25,18 @@
         <i class="fa-solid fa-mug-saucer fa-lg"></i><span> ひといき</span>
       <% end %>
     </div>
+    <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to user_path(current_user), class: "d-flex align-items-center justify-content-center" do %>
+        <%= image_tag current_user.get_image(30, 30), class: "rounded-circle" %>
+        <span class="pl-2"><%= truncate(current_user.name, length: 15) %></span>
+      <% end %>
+    </div>
   </div>
-  <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
-    <%= link_to destroy_user_session_path, method: :delete do %>
-      <i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-lg"></i><span> ログアウト</span>
-    <% end %>
+  <div>
+    <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to destroy_user_session_path, method: :delete do %>
+        <i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-lg"></i><span> ログアウト</span>
+      <% end %>
+    </div>
   </div>
 </div>

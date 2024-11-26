@@ -1,7 +1,7 @@
 <div class="container px-5 pt-5">
   <div>
     <%= link_to user_path(@post.user) do %>
-      <%= image_tag @post.user.get_image(70, 70), class: "round-circle" %>
+      <%= image_tag @post.user.get_image(70, 70), class: "rounded-circle" %>
       <%= @post.user.name %>
     <% end %>
   </div>
@@ -14,29 +14,29 @@
     <%= l @post.created_at %>
   </div>
 
+  <div class="gradient-line my-2" style="height: 8px; <%= gradient_style(@post) %>"></div>
+
   <div class="row mt-2 d-flex justify-content-around">
-    <div id="favorite_btn_<%= @post.id %>" class="col-1 d-flex justify-content-center">
-      <div>
+    <div id="favorite_btn_<%= @post.id %>" class="col-3 d-flex justify-content-center">
         <%= render "public/favorites/btn", post: @post %>
-      </div>
     </div>
-    <div class="col-1 d-flex justify-content-center">
+    <div class="col-3 d-flex justify-content-center">
       <div>
         <%= render "public/post_comments/counter", post: @post %>
       </div>
     </div>
     <% if @post.user == current_user %>
-      <div class="col-1 d-flex justify-content-center">
+      <div class="col-3 d-flex justify-content-center">
         <%= link_to edit_post_path(@post) do %>
           <i class="fa-solid fa-pen"></i>
         <% end %>
       </div>
-      <div class="col-1 d-flex justify-content-center">
+      <div class="col-3 d-flex justify-content-center">
         <%= link_to post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
           <i class="fa-solid fa-trash"></i>
         <% end %>
       </div>
-      <% end %>
+    <% end %>
   </div>
 </div>
 
@@ -48,7 +48,7 @@
   </div>
 </div>
 
-<div style="position: sticky; bottom: 0; background-color: white; z-index: 5;">
+<div style="position: sticky; bottom: 0; background-color: white; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
   <hr>
   <div class="py-2 px-5"">
     <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>

@@ -1,0 +1,32 @@
+<% messages.each do |message| %>
+<div id="message_<%= message.id %>">
+  <div class="row <%= message.user == current_user ? 'justify-content-end' : 'justify-content-start' %>">
+    <div>
+      <div class="card rounded-pill" style="<%= message.user == current_user ? 'line-height: 35px;' : '' %>">
+        <div class="py-1 d-flex align-items-center">
+          <div class="<%= message.user == current_user ? 'ml-4' : 'col-auto' %>">
+            <% if message.user != current_user %>
+              <%= link_to user_path(message.user) do %>
+                <%= image_tag message.user.get_image(35, 35), class: "rounded-circle" %>
+              <% end %>
+            <% end %>
+          </div>
+          <span class="d-flex align-items-center mr-4">
+            <%= message.message %>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="<%= message.user == current_user ? 'd-flex mb-2 justify-content-end' : 'd-flex mb-2 justify-content-start' %>">
+    <span class="<%= message.user == current_user ? 'text-muted' : 'text-muted' %>" style="font-size: 10px;">
+      <%= l message.created_at, format: :long %>
+        <% if message.user == current_user %>
+        <%= link_to room_message_path(room, message), method: :delete, data: { confirm: '本当に削除しますか？'}, remote: true do %>
+          <i class="fa-solid fa-trash mx-2"></i>
+        <% end %>
+      <% end %>
+    </span>
+  </div>
+</div>
+<% end %>

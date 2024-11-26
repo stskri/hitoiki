@@ -16,7 +16,7 @@
       <span class="d-flex justify-content-between">
         <%= post_comment.comment %>
         <% if post_comment.user == current_user %>
-          <%= link_to post_post_comment_path(post_comment), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
+          <%= link_to post_post_comment_path(post_id: post_comment.post_id, id: post_comment.id), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
             <i class="fa-solid fa-trash mr-2"></i>
           <% end %>
         <% end %>

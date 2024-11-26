@@ -1,0 +1,31 @@
+<div style="position: sticky; top: 0; background-color: white; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
+  <hr class="mt-0" style="border-color: #fff;">
+  <div class="d-flex justify-content-center align-items-center">
+    <% @room.users.each do |user| %>
+      <% if user != current_user %>
+        <%= link_to user_path(user), class: "d-flex justify-content-center align-items-center" do %>
+          <%= image_tag user.get_image(50,50), class: "rounded-circle mr-2" %>
+          <%= user.name %>さん
+        <% end %>
+      <% end %>
+    <% end %>
+    とのメッセージルーム
+  </div>
+  <hr style="border-color: #fff;">
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col" id="messages">
+      <%= render 'public/messages/messages', messages: @messages, room: @room %>
+    </div>
+  </div>
+</div>
+
+<div style="position: sticky; bottom: 0; background-color: white; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
+  <hr>
+  <div class="py-2 px-5"">
+    <%= render 'public/messages/form', room: @room, message: @message %>
+  </div>
+  <hr class="mb-0" style="border-color: #fff;">
+</div>

@@ -20,7 +20,17 @@
         <i class="fa-solid fa-tags"></i><span> 感情タグ一覧</span>
       <% end %>
     </div>
-    <div  class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+    <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to search_page_admin_searches_path do %>
+        <i class="fa-solid fa-magnifying-glass fa-lg"></i><span> 検索</span>
+      <% end %>
+    </div>
+    <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to admin_rooms_path do %>
+        <i class="fa-regular fa-comments"></i><span> DMルーム一覧</span>
+      <% end %>
+    </div>
+    <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to admin_inquiries_path do %>
         <i class="fa-solid fa-envelopes-bulk"></i><span> 問い合わせ一覧</span>
       <% end %>
