@@ -30,7 +30,7 @@
   <h4>感情タグ一覧</h4>
 </div>
 
-<div class="container">
+<div class="container px-5">
   <div class="row">
     <div class="col-12" style="padding: 12px 0;">
       <table class="table table-bordered table-sm">
@@ -39,7 +39,7 @@
             <th>感情名</th>
             <th>カラーコード</th>
             <th>背景色</th>
-            <th>編集と削除</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -48,10 +48,10 @@
               <td><%= emotion.name %></td>
               <td><%= emotion.color %></td>
               <td style="background-color: <%= emotion.color %>;"></td>
-              <td>
-                <div>
-                  <%= link_to "編集", edit_admin_emotion_path(emotion), class: "btn-sm btn-success" %>
-                  <%= link_to "削除", admin_emotion_path(emotion), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn-sm btn-danger" %>
+              <td class="d-flex justify-content-center">
+                <div class="d-flex">
+                  <div class="mr-5"><%= link_to "編集", edit_admin_emotion_path(emotion), class: "btn-sm btn-success" %></div>
+                  <div><%= link_to "削除", admin_emotion_path(emotion), method: :delete, data: { confirm: '本当に削除しますか？'}, class: "btn-sm btn-danger" %></div>
                 </div>
               </td>
             </tr>

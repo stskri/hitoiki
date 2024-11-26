@@ -41,7 +41,7 @@
             <%= render 'layouts/user_right-bar', user: current_user %>
           </div>
         <% elsif admin_signed_in? %>
-          <div class="col-3 p-4" style="position: sticky; top: 0; background-color: #f4ffff; height: 100vh;">
+          <div class="col-3 p-4" style="position: sticky; top: 0; height: 100vh;">
             <%= render 'layouts/admin_right-bar' %>
           </div>
         <% end %>

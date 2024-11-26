@@ -1,0 +1,39 @@
+<% posts.order(created_at: :desc).each do |post| %>
+  <div class="col mb-3">
+    <div class="card">
+      <div class="card-body px-3 pb-1 pt-2">
+        <div class="row d-flex">
+          <%= link_to admin_user_path(post.user), class: 'd-flex align-items-center card-title px-3 mb-0' do %>
+            <%= image_tag post.user.get_image(45,45), class: "rounded-circle" %>
+            <span class="pl-2"><%= post.user.name %></span>
+          <% end %>
+          <%= link_to admin_post_path(post.id), class: "px-3 py-1 flex-grow-1 position-relative", style: "text-decoration: none;" do %>
+            <span class="text-muted pr-2" style="position: absolute; top: 0; right: 0; font-size: 10px;">
+              <%= l post.created_at, format: :long %>
+            </span>
+          <% end %>
+        </div>
+        <div class="row">
+          <%= link_to admin_post_path(post.id), class: "flex-grow-1", style: "text-decoration: none;" do %>
+            <p class="card-text px-5 py-3" style="color: #212529;">
+              <%= post.body %>
+            </p>
+          <% end %>
+        </div>
+
+        <div class="gradient-line mb-1" style="height: 8px; <%= gradient_style(post) %>"></div>
+
+        <div class="row d-flex justify-content-around align-items-center">
+          <div>
+            <i class="fa-solid fa-mug-saucer" aria-hidden="true"></i>
+            <%= post.favorites.count %>
+          </div>
+          <div>
+            <i class="fa-regular fa-comment"></i>
+            <%= post.post_comments.count %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

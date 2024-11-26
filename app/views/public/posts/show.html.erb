@@ -14,6 +14,8 @@
     <%= l @post.created_at %>
   </div>
 
+  <div class="gradient-line my-2" style="height: 8px; <%= gradient_style(@post) %>"></div>
+
   <div class="row mt-2 d-flex justify-content-around">
     <div id="favorite_btn_<%= @post.id %>" class="col-3 d-flex justify-content-center">
         <%= render "public/favorites/btn", post: @post %>

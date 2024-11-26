@@ -40,9 +40,14 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root :to => "inquiries#index"
-    resources :users
+    resources :users do
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
     resources :emotions
-    resources :posts
+    resources :posts do
+      resources :post_comments, only: [:destroy]
+    end
     resources :inquiries
   end
 end
