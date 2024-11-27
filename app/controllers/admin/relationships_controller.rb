@@ -1,4 +1,6 @@
 class Admin::RelationshipsController < ApplicationController
+  before_action :authenticate_admin!
+
   def followings
     @user = User.find(params[:user_id])
     @followings = @user.followings

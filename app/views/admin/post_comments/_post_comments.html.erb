@@ -1,12 +1,12 @@
 <% post_comments.each do |post_comment| %>
   <hr>
-  <div class="row">
-    <div class="col-1">
+  <div class="row d-flex">
+    <div class="col-auto px-0">
       <%= link_to admin_user_path(post_comment.user), class: "d-flex" do %>
         <%= image_tag post_comment.user.get_image(50, 50), class: "rounded-circle" %>
       <% end %>
     </div>
-    <div class="col-11">
+    <div class="col">
       <div class="d-flex justify-content-between">
         <div class="my-1">
           <%= link_to post_comment.user.name, admin_user_path(post_comment.user) %>
