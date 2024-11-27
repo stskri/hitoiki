@@ -18,14 +18,12 @@ class Public::PostCommentsController < ApplicationController
   end
 
   def destroy
-    comment = PostComment.find(params[:id])
-    if comment.destroy
-      redirect_to request.referer, notice: 'コメントを削除しました'
+    @post_comment = PostComment.find(params[:id])
+    if @post_comment.destroy
     else
       redirect_to request.referer, alert: 'コメントの削除に失敗しました'
     end
   end
-
 
   private
 
