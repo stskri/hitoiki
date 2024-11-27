@@ -15,6 +15,11 @@ Rails.application.routes.draw do
     get "search_page" => "searches#search_page"
     get "my_favorite" => "users#my_favorite"
     get 'users' => 'users#dummy' # 新規登録画面で登録失敗した際にURLが/usersとなり、リロードするとRouting Errorが表示されてしまうため、controller側で redirect_to new_user_registration_path を用意している
+
+    devise_scope :user do
+      post "users/guest_sign_in", to: "users/sessions#guest_sign_in"
+    end
+
     resources :posts, only: [:new, :index, :show, :edit, :create, :update, :destroy] do
       resource :favorites, only: [:create, :destroy] do
         get 'favorite_users' => 'favorites#favorite_users', as: 'favorite_users'
