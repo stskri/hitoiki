@@ -2,14 +2,16 @@ class Public::RoomsController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    # current_useの持つメッセージルームを表示するためにEntryからuser_idが自分のレコードを取得、room_idを配列で抜き出す
+    # current_userの参加しているルームIDを取得
     current_user_rooms_id = Entry.where(user_id: current_user.id).pluck(:room_id)
-    # 抜き出したroom_idからメッセージルームを特定、新着順に並び替え
+    # ルーム情報を新着順で取得
     @rooms = Room.joins(:messages)
-            .where(id: current_user_rooms_id)
-            .select('rooms.*, MAX(messages.created_at) as latest_message_time')
-            .group('rooms.id')
-            .order('latest_message_time DESC')
+                .where(id: current_user_rooms_id)
+                .select('rooms.*, MAX(messages.created_at) as latest_message_time')
+                .group('rooms.id')
+                .order('latest_message_time DESC')
+    # 未読通知があるルームIDを取得
+    @unread_rooms = Notification.where(visited_id: current_user.id, checked: false, room_id: current_user_rooms_id).pluck(:room_id)
   end
 
   def create
