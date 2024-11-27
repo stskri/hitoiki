@@ -1,0 +1,5 @@
+$("#post_comments").html("<%= j(render 'public/post_comments/post_comments', post_comments: @post_comments) %>");
+$('input[type=text]').val("");
+<% if @post_comment.save %>
+  $('html, body').animate({ scrollTop: $(document).height() }, 'fast');
+<% end %>

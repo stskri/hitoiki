@@ -28,9 +28,12 @@
           <% end %>
         </div>
         <%= link_to room_path(room), style: "flex-grow: 1;" do %>
-          <div class="d-flex align-items-center text-muted px-5">
+          <div class="d-flex justify-content-between align-items-center text-muted px-5">
             <%# 該当するメッセージルームから、最新のメッセージ内容を１つ取得 %>
             <%= room.messages.order(created_at: :desc).limit(1).pluck(:message).first || "メッセージはありません" %>
+            <% if @unread_rooms.include?(room.id) %>
+              <div class="rounded-circle" style="background-color: #b3e59f; height: 15px; width: 15px;"></div>
+            <% end %>
           </div>
         <% end %>
       </div>

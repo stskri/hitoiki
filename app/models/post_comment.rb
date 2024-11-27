@@ -7,30 +7,36 @@ class PostComment < ApplicationRecord
 
 
   def create_notification_post_comment(current_user, post_comment_id)
-    # 既に自分以外のコメントがついているかを確認
-    already_post_comment_user_ids = PostComment.select(:user_id).where(post_id: self.post_id).where.not(user_id: current_user.id).distinct
+    # 通知先ユーザーのIDをユニークに管理するためのセット
+    notified_user_ids = Set.new
 
-    # コメントがある場合、コメントしたユーザー全員に通知を送る
-    already_post_comment_user_ids.each do |user|
-      save_notification_post_comment(current_user, post_comment_id, user.user_id)
+    # 既存のコメントユーザーに通知（重複を除く、自分以外）
+    already_post_comment_user_ids = PostComment.where(post_id: self.post_id)
+                                              .where.not(user_id: current_user.id)
+                                              .pluck(:user_id)
+                                              .uniq
+    already_post_comment_user_ids.each do |user_id|
+      notified_user_ids.add(user_id)
+      save_notification_post_comment(current_user, post_comment_id, user_id)
     end
-    # 投稿者への通知を追加
-    save_notification_post_comment(current_user, post_comment_id, self.post.user_id)
+
+    # 投稿主に通知（既存コメントユーザーとして通知済みでなければ）
+    post_owner_id = self.post.user_id
+    unless post_owner_id == current_user.id || notified_user_ids.include?(post_owner_id)
+      save_notification_post_comment(current_user, post_comment_id, post_owner_id)
+    end
   end
 
+  private
+
   def save_notification_post_comment(current_user, post_comment_id, visited_id)
-    # コメントに対する通知を作成
     notification = current_user.active_notifications.new(
       post_id: self.post_id,
       post_comment_id: post_comment_id,
       visited_id: visited_id,
       action: "post_comment"
     )
-
-    # 通知の送り元と送信先が同一ユーザーの場合、確認済みにする
     notification.checked = true if notification.visitor_id == notification.visited_id
-
-    # 通知が有効な場合に保存
     notification.save if notification.valid?
   end
 end

@@ -8,7 +8,9 @@
         <div class="row mx-0 mb-1 align-items-center">
           <strong class="mr-3"><%= user.name %></strong>
           <% if user == current_user %>
-            <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn btn-sm", style: "font-weight: bold; background-color: #e2e3e5;" %>
+            <% unless user.guest_user? %>
+              <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn btn-sm", style: "font-weight: bold; background-color: #e2e3e5;" %>
+            <% end %>
           <% else %>
             <div id="follow_btn_<%= @user.id %>">
               <%= render 'public/relationships/btn', user: user %>

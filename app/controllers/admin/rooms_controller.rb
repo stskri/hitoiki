@@ -9,13 +9,4 @@ class Admin::RoomsController < ApplicationController
     @room = Room.find(params[:id])
     @messages = @room.messages.includes(:user)
   end
-
-  def destroy
-    room = Room.find(params[:id])
-    if room.destroy
-      redirect_to rooms_path, notice: "削除しました"
-    else
-      redirect_to rooms_path, alert: "ルームの削除に失敗しました"
-    end
-  end
 end
