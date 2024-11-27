@@ -32,6 +32,20 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 20 }
   validates :introduction, length: { maximum: 50 }
 
+  # ゲストログインのためのメソッド
+  GUEST_USER_EMAIL = "guest@example.com"
+  def self.guest
+    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲストユーザー"
+    end
+  end
+
+  # ゲストユーザーか確認するためのメソッド
+  def guest_user?
+    email == GUEST_USER_EMAIL
+  end
+
   # ユーザー画像のサイズを調整
   def get_image(width, height)
     unless image.attached?
