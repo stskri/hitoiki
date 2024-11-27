@@ -8,10 +8,11 @@ class Public::PostCommentsController < ApplicationController
   end
 
   def create
-    comment = current_user.post_comments.new(post_comment_params.merge(post_id: params[:post_id]))
-    if comment.save
-      comment.create_notification_post_comment(current_user, comment.id)
-      redirect_to request.referer, notice: 'コメントを送信しました'
+    post = Post.find(params[:post_id])
+    @post_comments = PostComment.where(post_id: post.id)
+    @post_comment = current_user.post_comments.new(post_comment_params.merge(post_id: params[:post_id]))
+    if @post_comment.save
+      @post_comment.create_notification_post_comment(current_user, @post_comment.id)
     else
       redirect_to request.referer, alert: 'コメントの送信に失敗しました'
     end
