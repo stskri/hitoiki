@@ -28,7 +28,7 @@
         <%# コンテンツ %>
         <div class="col" style="flex-grow: 1; height: 100%;">
           <% flash.each do |key, message| %>
-            <div class="alert alert-<%= key == 'notice' ? 'success' : 'danger' %> text-center">
+            <div class="mb-0 alert alert-<%= key == 'notice' ? 'success' : 'danger' %> text-center">
               <%= message %>
             </div>
           <% end %>
