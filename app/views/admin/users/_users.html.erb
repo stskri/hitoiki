@@ -2,7 +2,7 @@
   <div class="row row-cols-1">
     <% users.each do |user| %>
       <div class="col mb-2">
-        <div class="card d-flex mx-3 my-1">
+        <div class="card d-flex mx-3 my-1" style="<%= 'background-color: #dcdcdc;' if user.is_active == false %>">
           <div class="d-flex justify-content-between">
             <%= link_to admin_user_path(user), class: 'd-flex align-items-center card-body px-3 py-1' do %>
               <div class="d-flex align-items-center">
