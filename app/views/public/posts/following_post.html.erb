@@ -1,0 +1,26 @@
+<div style="position: sticky; top: 0; background-color: white; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
+  <hr class="mt-0" style="border-color: #fff;">
+  <div class="d-flex justify-content-between align-items-center">
+    <h5 class="m-0 pl-3">フォローしているユーザーの投稿</h5>
+    <%= link_to "全ての投稿", root_path, class: "btn btn-sm btn-light" %>
+  </div>
+  <hr class="mb-0">
+</div>
+
+<% if @following_users.exists? %>
+  <div class="container py-4">
+    <div class="row row-cols-1" id="posts">
+      <%= render 'posts_ajax', posts: @posts %>
+    </div>
+    <div class="d-flex justify-content-center my-4" id="posts_more_btn">
+      <%= link_to_next_page @posts, 'さらに読み込む', class: "btn btn-info btn-sm", remote: true, params: { controller: 'public/posts', action: 'index' } %>
+    </div>
+  </div>
+<% else %>
+  <div class="mt-4 d-flex justify-content-center">
+    <h6>まだ誰もフォローしていません。</h6>
+  </div>
+  <div class="d-flex justify-content-center">
+    <h6>フォローしてみましょう！</h6>
+  </div>
+<% end %>

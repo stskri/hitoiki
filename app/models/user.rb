@@ -32,6 +32,11 @@ class User < ApplicationRecord
   validates :name, presence: true, length: { maximum: 20 }
   validates :introduction, length: { maximum: 50 }
 
+  # 指定したカラムのメソッドがtrueの場合、trueを返す
+  def active_for_authentication?
+    super && self.is_active == true
+  end
+
   # ゲストログインのためのメソッド
   GUEST_USER_EMAIL = "guest@example.com"
   def self.guest
