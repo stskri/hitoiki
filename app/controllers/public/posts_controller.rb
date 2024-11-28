@@ -1,6 +1,14 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+
+  def following_post
+    @following_users = current_user.followings
+    @posts = Post.includes(:favorites, :post_comments, :post_emotions, :user)
+            .where(user_id: @following_users.pluck(:id))
+            .page(params[:page]).per(25)
+  end
+
   def new
     @post = Post.new
     @emotions = Emotion.all
