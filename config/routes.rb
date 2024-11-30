@@ -44,7 +44,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    root :to => "inquiries#index"
+    root :to => "searches#search_page"
     resources :users do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
