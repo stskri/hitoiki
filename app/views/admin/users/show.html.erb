@@ -1,7 +1,7 @@
 <div class="container pt-4">
   <div class="row">
     <div class="col-4 d-flex justify-content-center p-0">
-      <%= image_tag @user.get_image(100,100), class: "rounded-circle img-fluid" %>
+      <%= image_tag @user.get_image(100,100), class: "rounded-circle img-fluid", style: "width: 100px; height: 100px;" %>
     </div>
     <div class="col-8 d-flex align-items-center">
       <div>
@@ -27,6 +27,16 @@
         <div><%= link_to "属するメッセージルーム", rooms_admin_user_path %></div>
         <div class="row mx-0 mb-1">
           <span><%= @user.introduction %></span>
+        </div>
+        <div class="py-3">
+          <%= form_with model: @user, url: admin_user_path(@user.id), method: :patch do |f| %>
+            <%= f.label :ユーザーステータス, class: "pr-3" %>
+            <%= f.radio_button :is_active, true %>
+            <%= f.label :is_active, "有効" %>
+            <%= f.radio_button :is_active, false %>
+            <%= f.label :is_active, "停止" %>
+            <%= f.submit "変更", class: "ml-3 btn btn-sm btn-success" %>
+          <% end %>
         </div>
       </div>
     </div>
