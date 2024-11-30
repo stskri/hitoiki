@@ -18,7 +18,7 @@ end
 
 # userの設定
 user_ids = (1..25)
-names = ("A".."Z").to_a.reject { |letter| letter == "A" }.map { |letter| letter * 2 }
+names = ("A".."Z").to_a.reject { |letter| letter == "A" }.map { |letter| "#{letter * 2}name" }
 
 user_ids.zip(names).each do |user_id, name|
   User.find_or_create_by(id: user_id) do |user|
@@ -30,7 +30,7 @@ end
 # userの設定ここまで
 
 # Postの設定
-30.times do |i|
+80.times do |i|
   Post.create(
     user_id: rand(1..25),
     body: "投稿テスト#{i + 1}"

@@ -11,7 +11,7 @@ class Public::SearchesController < ApplicationController
     if @model == "user"
       @records = User.search_for(@content, @method)
     elsif @model == "post"
-      @records = Post.search_for(@content, @method)
+      @records = Post.search_for(@content, @method).page(params[:page]).per(25)
     end
   end
 end
