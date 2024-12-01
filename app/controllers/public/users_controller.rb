@@ -14,7 +14,10 @@ class Public::UsersController < ApplicationController
 
   def my_page
     @user = current_user
-    @favorited_posts = @user.favorited_posts
+  end
+
+  def my_favorite
+    @favorited_posts = current_user.favorited_posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
   end
 
   def edit

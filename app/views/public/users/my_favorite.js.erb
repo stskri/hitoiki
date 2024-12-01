@@ -1,0 +1,8 @@
+$("#favorited_posts").append('<%= j render 'public/posts/posts_ajax', posts: @favorited_posts %>');
+
+<% if @favorited_posts.next_page %>
+  $("#more_favorited_posts_btn").html('<%= j link_to_next_page @favorited_posts, "さらに読み込む", class: "btn btn-info btn-sm", remote: true %>');
+<% else %>
+  $("#more_favorited_posts_btn").remove();
+  $("#favorited_posts").append('<div class="my-4 d-flex justify-content-center text-muted" style="font-size: 12px;">最下部です</div>')
+<% end %>
