@@ -6,7 +6,7 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user_posts = @user.posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(2)
+    @user_posts = @user.posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
     @favorited_posts = @user.favorited_posts
     @room = Room.new
     notifications = current_user.passive_notifications.where(checked: false, action: "follow", visitor_id: @user.id)
