@@ -10,6 +10,7 @@ class Public::RoomsController < ApplicationController
                 .select('rooms.*, MAX(messages.created_at) as latest_message_time')
                 .group('rooms.id')
                 .order('latest_message_time DESC')
+                .page(params[:page]).per(15)
     # 未読通知があるルームIDを取得
     @unread_rooms = Notification.where(visited_id: current_user.id, checked: false, room_id: current_user_rooms_id).pluck(:room_id)
   end
