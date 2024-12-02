@@ -1,0 +1,8 @@
+$("#my_posts").append('<%= j render "public/posts/posts_ajax", posts: @my_posts %>');
+
+<% if @my_posts.next_page %>
+  $("#my_posts_more_btn").html('<%= j link_to_next_page @my_posts, "さらに読み込む", class: "btn btn-info btn-sm", remote: true %>');
+<% else %>
+  $("#my_posts_more_btn").remove();
+  $("#my_posts").append('<div class="my-4 d-flex justify-content-center text-muted" style="font-size: 12px;">最下部です</div>')
+<% end %>
