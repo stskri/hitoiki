@@ -1,5 +1,5 @@
 <div class="container px-0">
-  <div style="height: 80vh;">
+  <div style="height: 70vh;">
     <div  class="row mx-0 pb-4 d-flex justify-content-center">
       <%= link_to root_path do %>
         <%= image_tag("hitoiki-logo.png", style: "width: 70px; height: 70px;") %>
@@ -33,6 +33,11 @@
     </div>
   </div>
   <div>
+    <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to new_inquiry_path do %>
+        <i class="fa-regular fa-envelope fa-lg"></i><span> お問い合わせ</span>
+      <% end %>
+    </div>
     <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to destroy_user_session_path, method: :delete do %>
         <i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-lg"></i><span> ログアウト</span>
