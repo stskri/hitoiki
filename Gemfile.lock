@@ -91,6 +91,8 @@ GEM
     dotenv-rails (3.1.4)
       dotenv (= 3.1.4)
       railties (>= 6.1)
+    enum_help (0.0.19)
+      activesupport (>= 3.0.0)
     erubi (1.13.0)
     ffi (1.17.0)
     globalid (1.2.1)
@@ -266,6 +268,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   dotenv-rails
+  enum_help
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   kaminari

@@ -184,3 +184,10 @@ ja:
       long: "%Y/%m/%d %H:%M"
       short: "%m/%d %H:%M"
     pm: 午後
+  enums:
+    inquiry:
+      genre:
+        account: "アカウント関連"
+        feature_request: "機能のリクエスト"
+        bug_report: "バグ報告"
+        other: "その他"
