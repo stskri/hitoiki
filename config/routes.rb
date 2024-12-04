@@ -46,7 +46,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :inquiries
+    resources :inquiries, only: [:new, :index, :show, :create, :destroy]
   end
 
   namespace :admin do
