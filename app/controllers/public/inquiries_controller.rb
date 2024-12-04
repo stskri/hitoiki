@@ -8,7 +8,7 @@ class Public::InquiriesController < ApplicationController
   end
 
   def index
-    @inquiries = current_user.inquiries
+    @inquiries = current_user.inquiries.order(created_at: :desc).page(params[:page]).per(25)
   end
 
   def show
