@@ -36,6 +36,12 @@ class Public::InquiriesController < ApplicationController
   end
 
   def destroy
+    inquiry = Inquiry.find(params[:id])
+    if inquiry.destroy
+      redirect_to inquiries_path, notice: "お問い合わせを削除しました"
+    else
+      redirect_to request.referer, alert: "お問い合わせの削除に失敗しました"
+    end
   end
 
 
