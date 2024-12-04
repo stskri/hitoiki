@@ -23,7 +23,15 @@ class Public::InquiriesController < ApplicationController
     if inquiry.save
       redirect_to inquiries_path, notice: "お問い合わせを送信しました"
     else
-      redirect_to request.referer, alert: "お問い合わせの送信に失敗しました"
+      if inquiry.body.blank? and inquiry.genre.blank?
+        redirect_to request.referer, alert: "ジャンルを選択し、本文を入力してください"
+      elsif inquiry.body.blank?
+        redirect_to request.referer, alert: "本文を入力して下さい"
+      elsif inquiry.genre.blank?
+        redirect_to request.referer, alert: "ジャンルを選択して下さい"
+      else
+        redirect_to request.referer, alert: "お問い合わせの送信に失敗しました"
+      end
     end
   end
 
