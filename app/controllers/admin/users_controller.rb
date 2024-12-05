@@ -24,7 +24,7 @@ class Admin::UsersController < ApplicationController
       redirect_to admin_user_path(@user)
       flash[:notice] = "ユーザー情報を更新しました"
     else
-      redirect_to admin_user_path
+      redirect_to admin_user_path(@user)
       flash[:alert] = "ユーザー情報の更新に失敗しました"
     end
   end
