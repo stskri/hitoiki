@@ -51,6 +51,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root :to => "searches#search_page"
+    get 'unanswered_inquiries' => 'inquiries#unanswered_inquiries'
     resources :users do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
@@ -77,6 +78,10 @@ Rails.application.routes.draw do
       resources :messages, only: [:destroy]
     end
     resources :emotions, only: [:index, :edit, :create, :update, :destroy]
-    resources :inquiries
+    resources :inquiries, only: [:index, :show, :update, :destroy] do
+      member do
+        patch :mark_as_resolved # お問い合わせの確認処理
+      end
+    end
   end
 end

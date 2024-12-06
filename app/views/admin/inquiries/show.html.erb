@@ -1,0 +1,51 @@
+<div style="position: sticky; top: 0; background-color: white; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
+  <hr class="mt-0" style="border-color: #fff;">
+  <div class="d-flex justify-content-center align-items-center">
+    <h5 class="m-0"><%= l @inquiry.created_at, format: :default %> のお問い合わせ</h5>
+  </div>
+  <hr class="mb-0">
+</div>
+
+<div class="container px-5">
+  <div class="row">
+    <div class="py-4 w-100">
+      <div class="pr-3 d-flex justify-content-end">
+        <%= form_with model: @inquiry, url: admin_inquiry_path(@inquiry.id), method: :patch do |f| %>
+          <%= f.label :お問い合わせの確認, class: "pr-3", style: "font-weight: bold;" %>
+          <%= f.radio_button :is_active, true %>
+          <%= f.label :is_active, "未確認" %>
+          <%= f.radio_button :is_active, false %>
+          <%= f.label :is_active, "確認済" %>
+          <%= f.submit "変更", class: "ml-3 btn btn-sm btn-success" %>
+        <% end %>
+      </div>
+    </div>
+    <div class="card w-100">
+      <div class="p-3 card-body">
+        <div class="d-flex justify-content-between align-items-center">
+          <%= link_to admin_user_path(@inquiry.user), style: "flex-grow: 1;" do %>
+            <div>
+              <%= image_tag @inquiry.user.get_image(35,35), class: "rounded-circle", style: "width: 35px; height: 35px;" %>
+              <span class="pr-2"><%= @inquiry.user.name %></span>
+            </div>
+          <% end %>
+          <%= link_to admin_inquiry_path(@inquiry), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
+            <i class="pr-2 fa-solid fa-trash"></i>
+          <% end %>
+        </div>
+
+        <hr>
+
+        <div class="d-flex justify-content-center">
+          <div style="line-height: 35px;">
+            <%= I18n.t("enums.inquiry.genre.#{@inquiry.genre}") %>
+          </div>
+        </div>
+
+        <hr>
+
+        <%= @inquiry.body %>
+      </div>
+    </div>
+  </div>
+</div>
