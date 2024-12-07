@@ -1,43 +1,14 @@
 <div style="position: sticky; top: 0; background-color: white; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
   <hr class="mt-0" style="border-color: #fff;">
   <div class="d-flex justify-content-center align-items-center">
-    <h4 class="m-0">メッセージルーム</h4>
+    <h5 class="m-0">メッセージルーム</h5>
   </div>
   <hr class="mb-0">
 </div>
 
-<% @rooms.each do |room| %>
-  <div class="row">
-    <div class="col mx-4">
-      <div class="py-2">
-        <div class="d-flex justify-content-between">
-          <div class="col-auto px-0">
-            <% user_ids = Entry.select(:user_id).where(room_id: room.id).where.not(user_id: current_user.id).pluck(:user_id) %>
-            <% User.where(id: user_ids).each do |user| %>
-              <%= link_to user_path(user), class: "d-flex align-items-center" do %>
-                <%= image_tag user.get_image(40, 40), class: "rounded-circle", style: "width: 40px; height: 40px;" %>
-                <span class="pl-2"><%= user.name %></span>
-              <% end %>
-            <% end %>
-          </div>
-          <%= link_to room_path(room), class: "px-3 py-1 flex-grow-1 position-relative" do %>
-            <div class="d-flex text-muted" style="position: absolute; top: 0; right: 0; font-size: 12px;">
-              <%# 最新のメッセージがcreateされた日時を取得 %>
-              <%= room.messages.order(created_at: :desc).limit(1).first &. created_at &. then { |date| l(date, format: :long) } || "未送信" %>
-            </div>
-          <% end %>
-        </div>
-        <%= link_to room_path(room), style: "flex-grow: 1;" do %>
-          <div class="d-flex justify-content-between align-items-center text-muted px-5">
-            <%# 該当するメッセージルームから、最新のメッセージ内容を１つ取得 %>
-            <%= room.messages.order(created_at: :desc).limit(1).pluck(:message).first || "メッセージはありません" %>
-            <% if @unread_rooms.include?(room.id) %>
-              <div class="rounded-circle" style="background-color: #b3e59f; height: 15px; width: 15px;"></div>
-            <% end %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-  </div>
-  <hr class="m-1">
-<% end %>
+<div id="rooms">
+  <%= render 'rooms', rooms: @rooms %>
+</div>
+<div class="d-flex justify-content-center my-4" id="more_rooms_btn">
+  <%= link_to_next_page @rooms, 'さらに読み込む', class: "btn btn-info btn-sm", remote: true, params: { controller: 'public/rooms', action: 'index' } %>
+</div>

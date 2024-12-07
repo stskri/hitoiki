@@ -28,24 +28,30 @@ Rails.application.routes.draw do
       resources :post_comments, only: [:create, :destroy]
       get 'post_comment_users' => 'post_comments#post_comment_users', as: 'post_comment_users'
     end
+
     resources :users, only: [:show, :edit, :update] do
       resource :relationships, only: [:create, :destroy]
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
+
     resources :rooms, only: [:index, :create, :show] do
       resources :messages, only: [:create, :destroy]
     end
+
     resources :notifications, only: [] do
       collection do
         patch :mark_as_read # 通知確認ボタンの処理
         get 'more', to: 'notifications#more_notifications' # 通知欄にある"さらに読み込む"ボタンの非同期通信のため
       end
     end
+
+    resources :inquiries, only: [:new, :index, :show, :create, :destroy]
   end
 
   namespace :admin do
-    root :to => "inquiries#index"
+    root :to => "searches#search_page"
+    get 'unanswered_inquiries' => 'inquiries#unanswered_inquiries'
     resources :users do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
@@ -72,6 +78,10 @@ Rails.application.routes.draw do
       resources :messages, only: [:destroy]
     end
     resources :emotions, only: [:index, :edit, :create, :update, :destroy]
-    resources :inquiries
+    resources :inquiries, only: [:index, :show, :update, :destroy] do
+      member do
+        patch :mark_as_resolved # お問い合わせの確認処理
+      end
+    end
   end
 end

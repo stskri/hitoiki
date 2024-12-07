@@ -1,0 +1,5 @@
+<% if inquiry.is_active == true %>
+  <%= link_to "確認", mark_as_resolved_admin_inquiry_path(inquiry), method: :patch, class: "mt-1 btn btn-sm btn-primary", style: "padding: 0 12px;", remote: true, params: { controller: 'admin/inquiries', action: 'mark_as_resolved' } %>
+<% else %>
+  <%= link_to "確認済", mark_as_resolved_admin_inquiry_path(inquiry), method: :patch, class: "mt-1 btn btn-sm btn-light", style: "padding: 0 12px;", remote: true, params: { controller: 'admin/inquiries', action: 'mark_as_resolved' }  %>
+<% end %>

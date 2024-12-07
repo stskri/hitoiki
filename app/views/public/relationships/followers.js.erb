@@ -1,0 +1,8 @@
+$("#followers").append('<%= j render 'public/users/users_ajax', users: @followers %>');
+
+<% if @followers.next_page %>
+  $("#more_followers_btn").html('<%= j link_to_next_page @followers, "さらに読み込む", class: "btn btn-info btn-sm", remote: true %>');
+<% else %>
+  $("#more_followers_btn").remove();
+  $("#followers").append('<div class="my-4 d-flex justify-content-center text-muted" style="font-size: 12px;">最下部です</div>')
+<% end %>
