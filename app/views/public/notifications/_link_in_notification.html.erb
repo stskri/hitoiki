@@ -7,7 +7,9 @@
       <div>
         <span style="font-size: 13px;">
           <%= link_to user_path(visitor) do %>
-            <%= image_tag visitor.get_image(25, 25), class: "rounded-circle", style: "height: 25px; width: 25px;" %>
+            <div class="rounded-circle" style="display: inline-block; height: 25px; width: 25px;">
+              <%= image_tag visitor.get_image(25, 25), class: "rounded-circle", style: "height: 25px; width: 25px;" %>
+            </div>
           <% end %>
           <%# 改行がスペースを生むため、spanの中身を横一列に記述 %>
           <% case notification.action %>
