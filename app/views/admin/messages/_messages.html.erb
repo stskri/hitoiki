@@ -6,7 +6,7 @@
           <div class="py-1 d-flex align-items-center">
             <div class="ml-4 d-flex align-items-center">
                 <%= link_to admin_user_path(message.user), class: "d-flex align-items-center" do %>
-                  <%= image_tag message.user.get_image(35, 35), class: "rounded-circle" %>
+                  <%= image_tag message.user.get_image(35, 35), class: "rounded-circle", style: "width: 35px; height: 35px;" %>
                   <%= message.user.name %>
                 <% end %>
                 <span>：</span>

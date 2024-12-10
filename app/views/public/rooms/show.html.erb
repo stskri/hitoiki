@@ -4,7 +4,7 @@
     <% @room.users.each do |user| %>
       <% if user != current_user %>
         <%= link_to user_path(user), class: "d-flex justify-content-center align-items-center" do %>
-          <%= image_tag user.get_image(50,50), class: "rounded-circle mr-2" %>
+          <%= image_tag user.get_image(50,50), class: "rounded-circle mr-2", style: "height: 50px; width: 50px;" %>
           <%= user.name %>さん
         <% end %>
       <% end %>

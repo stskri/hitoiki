@@ -7,11 +7,11 @@
 </div>
 
 <% if @model == 'user' %>
-  <h5 class="text-center">ユーザー検索 "<%= @content %>"</h5>
+  <h5 class="mb-3 text-center">ユーザー検索 "<%= @content %>"</h5>
   <%= render 'admin/users/users', users: @records %>
 <% elsif @model == 'post' %>
-  <h5 class="text-center">投稿検索 "<%= @content %>"</h5>
-  <div class="container py-4">
+  <h5 class="m-0 text-center">投稿検索 "<%= @content %>"</h5>
+  <div class="container py-3">
     <div class="row row-cols-1">
       <%= render 'admin/posts/posts', posts: @records %>
     </div>

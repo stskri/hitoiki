@@ -1,7 +1,9 @@
 <div class="container px-5 pt-5">
   <div>
     <%= link_to user_path(@post.user) do %>
-      <%= image_tag @post.user.get_image(70, 70), class: "rounded-circle" %>
+      <div class="rounded-circle" style="display: inline-block; height: 70px; width: 70px;">
+        <%= image_tag @post.user.get_image(70, 70), class: "rounded-circle", style: "height: 70px; width: 70px;" %>
+      </div>
       <%= @post.user.name %>
     <% end %>
   </div>

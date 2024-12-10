@@ -4,7 +4,7 @@
     <div class="row d-flex">
       <div class="col-auto px-0">
         <%= link_to user_path(post_comment.user), class: "d-flex" do %>
-          <%= image_tag post_comment.user.get_image(50, 50), class: "rounded-circle" %>
+          <%= image_tag post_comment.user.get_image(50, 50), class: "rounded-circle", style: "height: 50px; width: 50px;" %>
         <% end %>
       </div>
       <div class="col">
