@@ -1,3 +1,4 @@
 <% @notifications.each do |notification| %>
+  <%# 条件分岐が非常に猥雑なため、少しでも可読性を上げるために分けて記述している %>
   <%= render 'public/notifications/link_in_notification', notification: notification %>
 <% end %>

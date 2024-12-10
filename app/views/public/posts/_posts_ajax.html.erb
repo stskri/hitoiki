@@ -5,7 +5,7 @@
       <div class="card-body px-3 pb-1 pt-2">
         <div class="row d-flex">
           <%= link_to user_path(post.user), class: 'd-flex align-items-center card-title px-3 mb-0' do %>
-            <%= image_tag post.user.get_image(45,45), class: "rounded-circle" %>
+            <%= image_tag post.user.get_image(45,45), class: "rounded-circle", style: "height: 45px; width: 45px;" %>
             <span class="pl-2"><%= post.user.name %></span>
           <% end %>
           <%= link_to post_path(post.id), class: "px-3 py-1 flex-grow-1 position-relative", style: "text-decoration: none;" do %>
