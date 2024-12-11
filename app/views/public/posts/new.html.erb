@@ -16,6 +16,16 @@
         </tbody>
       </table>
     </div>
+
+
+    <div class="col-12 btn" data-toggle="button">
+      <label class="btn btn-outline-secondary" style="width:50%">
+        <%= f.radio_button :is_public, false, style: "display: none;"  %>
+        <span>非公開にする</span>
+      </label>
+    </div>
+
+
     <div class="col-12 pt-5">
       <h6 class="pb-3 d-flex justify-content-center">タグを選択できます</h6>
       <div class="d-flex flex-wrap justify-content-center">
