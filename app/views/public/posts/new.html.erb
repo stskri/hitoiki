@@ -1,12 +1,21 @@
-<div class="pt-5 pl-5">
-  <h4>新規投稿</h4>
-</div>
-
 <%= form_with model: @post, local: true do |f| %>
   <div class="container">
     <div class="col-12 mx-auto">
       <table class="table table-borderless">
         <tbody>
+
+          <tr>
+            <div class="pt-5 px-5 d-flex justify-content-between align-items-center" style="padding-bottom: 12px;">
+              <h4 class="m-0">新規投稿</h4>
+              <div class="p-0 btn-sm" data-toggle="button">
+                <label class="m-0 btn btn-outline-secondary" style="padding: 4px 8px;">
+                  <%= f.radio_button :is_public, false, style: "display: none;"  %>
+                  <span class="small">非公開にする</span>
+                </label>
+              </div>
+            </div>
+          </tr>
+
           <tr>
             <td><%= f.text_field :body, class: 'form-control' %></td>
           </tr>
@@ -16,15 +25,6 @@
         </tbody>
       </table>
     </div>
-
-
-    <div class="col-12 btn" data-toggle="button">
-      <label class="btn btn-outline-secondary" style="width:50%">
-        <%= f.radio_button :is_public, false, style: "display: none;"  %>
-        <span>非公開にする</span>
-      </label>
-    </div>
-
 
     <div class="col-12 pt-5">
       <h6 class="pb-3 d-flex justify-content-center">タグを選択できます</h6>
