@@ -19,7 +19,10 @@ class Public::UsersController < ApplicationController
   end
 
   def my_favorite
-    @favorited_posts = current_user.favorited_posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
+    @favorited_posts = current_user.favorited_posts.includes(:favorites, :post_comments, :post_emotions, :user)
+                                    .where(is_public: true) # 公開されている投稿を取得
+                                    .or(Post.where(is_public: false, user_id: current_user.id, id: current_user.favorited_posts.select(:id))) # 自分の投稿で非公開だが、いいね済みの投稿を追加
+                                    .page(params[:page]).per(25)
   end
 
   def edit

@@ -5,8 +5,9 @@ class Public::PostsController < ApplicationController
   def following_post
     @following_users = current_user.followings
     @posts = Post.includes(:favorites, :post_comments, :post_emotions, :user)
-            .where(user_id: @following_users.pluck(:id))
-            .page(params[:page]).per(25)
+                  .where(is_public: true, user_id: @following_users.pluck(:id))
+                  .or(Post.where(user_id: current_user.id))
+                  .page(params[:page]).per(25)
   end
 
   def new
@@ -37,6 +38,7 @@ class Public::PostsController < ApplicationController
 
   def index
     # public/posts_pathをroot_pathに指定、未ログインユーザーの場合はログインページへ
+    # 「ログインして下さい」のエラーメッセージを表示しないため、 before_action :authenticate_user! ではなく明示的にsign_inページへリダイレクトさせている
     unless user_signed_in?
       redirect_to new_user_session_path and return
     end
