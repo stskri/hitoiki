@@ -1,6 +1,7 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :not_public_post, only: [:show]
 
   def following_post
     @following_users = current_user.followings
@@ -89,6 +90,14 @@ class Public::PostsController < ApplicationController
     @post = Post.find(params[:id])
     unless @post.user == current_user
       redirect_to root_path, alert: '無効なアクセスです'
+    end
+  end
+
+
+  def not_public_post
+    post = Post.find(params[:id])
+    if post.user != current_user && post.is_public == false
+      redirect_to root_path, alert: "非公開の投稿です"
     end
   end
 end
