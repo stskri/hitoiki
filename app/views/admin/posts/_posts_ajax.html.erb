@@ -1,6 +1,6 @@
 <% posts.order(created_at: :desc).each do |post| %>
   <div class="col mb-3">
-    <div class="card"  style="<%= 'background-color: #dcdcdc;' if post.is_public == false %>">
+    <div class="card" style="<%= 'background-color: #dcdcdc;' if post.is_public == false %>">
       <div class="card-body px-3 pb-1 pt-2">
         <div class="row d-flex">
           <%= link_to admin_user_path(post.user), class: 'd-flex align-items-center card-title px-3 mb-0' do %>
