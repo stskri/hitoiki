@@ -11,7 +11,8 @@ class Admin::UsersController < ApplicationController
   end
 
   def user_favorite
-    @user = User.includes(posts: [:favorites, :post_comments]).find(params[:user_id])
+    @user = User.find(params[:user_id])
+    @favorited_posts = @user.favorited_posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
   end
 
   def rooms
