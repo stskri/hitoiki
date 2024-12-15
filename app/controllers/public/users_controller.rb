@@ -6,8 +6,9 @@ class Public::UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @user_posts = @user.posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
-    @favorited_posts = @user.favorited_posts
+    @user_posts = @user.posts.includes(:favorites, :post_comments, :post_emotions, :user)
+                              .where(is_public: true)
+                              .page(params[:page]).per(25)
     @room = Room.new
     notifications = current_user.passive_notifications.where(checked: false, action: "follow", visitor_id: @user.id)
     notifications.update(checked: true)
@@ -15,11 +16,14 @@ class Public::UsersController < ApplicationController
 
   def my_page
     @user = current_user
-    @my_posts = current_user.posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
+    @my_posts = @user.posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
   end
 
   def my_favorite
-    @favorited_posts = current_user.favorited_posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
+    @favorited_posts = current_user.favorited_posts.includes(:favorites, :post_comments, :post_emotions, :user)
+                                    .where(is_public: true) # 公開されている投稿を取得
+                                    .or(Post.where(is_public: false, user_id: current_user.id, id: current_user.favorited_posts.select(:id))) # 自分の投稿で非公開だが、いいね済みの投稿を追加
+                                    .page(params[:page]).per(25)
   end
 
   def edit

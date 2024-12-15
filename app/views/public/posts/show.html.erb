@@ -1,59 +1,61 @@
-<div class="container px-5 pt-5">
-  <div>
-    <%= link_to user_path(@post.user) do %>
-      <div class="rounded-circle" style="display: inline-block; height: 70px; width: 70px;">
-        <%= image_tag @post.user.get_image(70, 70), class: "rounded-circle", style: "height: 70px; width: 70px;" %>
-      </div>
-      <%= @post.user.name %>
-    <% end %>
-  </div>
-
-  <div class="py-5" style="font-size: 1.1rem;">
-    <%= @post.body %>
-  </div>
-
-  <div class="text-muted small">
-    <%= l @post.created_at %>
-  </div>
-
-  <div class="gradient-line my-2" style="height: 8px; <%= gradient_style(@post) %>"></div>
-
-  <div class="row mt-2 d-flex justify-content-around">
-    <div id="favorite_btn_<%= @post.id %>" class="col-3 d-flex justify-content-center">
-        <%= render "public/favorites/btn", post: @post %>
+<div style="<%= 'background-color: #dcdcdc;' if @post.is_public == false %>">
+  <div class="container px-5 pt-5">
+    <div>
+      <%= link_to user_path(@post.user) do %>
+        <div class="rounded-circle" style="display: inline-block; height: 70px; width: 70px;">
+          <%= image_tag @post.user.get_image(70, 70), class: "rounded-circle", style: "height: 70px; width: 70px;" %>
+        </div>
+        <%= @post.user.name %>
+      <% end %>
     </div>
-    <div class="col-3 d-flex justify-content-center">
-      <div>
-        <%= render "public/post_comments/counter", post: @post %>
-      </div>
+
+    <div class="py-5" style="font-size: 1.1rem;">
+      <%= @post.body %>
     </div>
-    <% if @post.user == current_user %>
-      <div class="col-3 d-flex justify-content-center">
-        <%= link_to edit_post_path(@post) do %>
-          <i class="fa-solid fa-pen"></i>
-        <% end %>
+
+    <div class="text-muted small">
+      <%= l @post.created_at %>
+    </div>
+
+    <div class="gradient-line my-2" style="height: 8px; <%= gradient_style(@post) %>"></div>
+
+    <div class="row mt-2 d-flex justify-content-around">
+      <div id="favorite_btn_<%= @post.id %>" class="col-3 d-flex justify-content-center">
+          <%= render "public/favorites/btn", post: @post %>
       </div>
       <div class="col-3 d-flex justify-content-center">
-        <%= link_to post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
-          <i class="fa-solid fa-trash"></i>
-        <% end %>
+        <div>
+          <%= render "public/post_comments/counter", post: @post %>
+        </div>
       </div>
-    <% end %>
-  </div>
-</div>
-
-<div class="container px-5">
-  <div class="row">
-    <div class="col" id="post_comments">
-      <%= render 'public/post_comments/post_comments', post_comments: @post_comments %>
+      <% if @post.user == current_user %>
+        <div class="col-3 d-flex justify-content-center">
+          <%= link_to edit_post_path(@post) do %>
+            <i class="fa-solid fa-pen"></i>
+          <% end %>
+        </div>
+        <div class="col-3 d-flex justify-content-center">
+          <%= link_to post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} do %>
+            <i class="fa-solid fa-trash"></i>
+          <% end %>
+        </div>
+      <% end %>
     </div>
   </div>
-</div>
 
-<div style="position: sticky; bottom: 0; background-color: white; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
-  <hr>
-  <div class="py-2 px-5"">
-    <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
+  <div class="container px-5">
+    <div class="row">
+      <div class="col" id="post_comments">
+        <%= render 'public/post_comments/post_comments', post_comments: @post_comments %>
+      </div>
+    </div>
   </div>
-  <hr class="mb-0" style="border-color: #fff;">
+
+  <div style="position: sticky; bottom: 0; background-color: white; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
+    <hr>
+    <div class="py-2 px-5"">
+      <%= render 'public/post_comments/form', post: @post, post_comment: @post_comment %>
+    </div>
+    <hr class="mb-0" style="border-color: #fff;">
+  </div>
 </div>

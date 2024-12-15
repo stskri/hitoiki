@@ -6,11 +6,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    @user = User.includes(posts: [:favorites, :post_comments]).find(params[:id])
+    @user = User.find(params[:id])
+    @user_posts = @user.posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
   end
 
   def user_favorite
-    @user = User.includes(posts: [:favorites, :post_comments]).find(params[:user_id])
+    @user = User.find(params[:user_id])
+    @favorited_posts = @user.favorited_posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
   end
 
   def rooms
