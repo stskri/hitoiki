@@ -7,9 +7,13 @@
 <div class="container py-0">
   <div class="row">
     <div class="container py-4">
-      <div class="row row-cols-1">
-        <%= render 'admin/posts/posts', posts: @user.favorited_posts %>
+      <div id ="admin_user_favorited_posts" class="row row-cols-1">
+        <%= render 'admin/posts/posts_ajax', posts: @favorited_posts %>
       </div>
     </div>
   </div>
+</div>
+
+<div class="d-flex justify-content-center my-4" id="admin_more_user_favorited_posts_btn">
+  <%= link_to_next_page @favorited_posts, 'さらに読み込む', class: "btn btn-info btn-sm", remote: true, params: { controller: 'admin/users', action: 'user_favorite' } %>
 </div>

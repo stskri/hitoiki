@@ -1,16 +1,18 @@
-<%= link_to post_path(post) do %>
-  <% if post.post_comments.count > 0 %>
-    <i class="fa-solid fa-comment"></i>
-  <% else %>
-    <i class="fa-regular fa-comment"></i>
+<div>
+  <%= link_to post_path(post) do %>
+    <% if post.post_comments.count > 0 %>
+      <i class="fa-solid fa-comment"></i>
+    <% else %>
+      <i class="fa-regular fa-comment"></i>
+    <% end %>
   <% end %>
-<% end %>
-<% if post.post_comments.count > 0 %>
-  <% if post.user == current_user %>
-    <%= link_to post_post_comment_users_path(post) do %>
+  <% if post.post_comments.count > 0 %>
+    <% if post.user == current_user %>
+      <%= link_to post_post_comment_users_path(post) do %>
+        <%= post.post_comments.count %>
+      <% end %>
+    <% else %>
       <%= post.post_comments.count %>
     <% end %>
-  <% else %>
-    <%= post.post_comments.count %>
   <% end %>
-<% end %>
+</div>

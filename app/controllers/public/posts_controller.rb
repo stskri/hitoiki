@@ -1,12 +1,14 @@
 class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
+  before_action :not_public_post, only: [:show]
 
   def following_post
     @following_users = current_user.followings
     @posts = Post.includes(:favorites, :post_comments, :post_emotions, :user)
-            .where(user_id: @following_users.pluck(:id))
-            .page(params[:page]).per(25)
+                  .where(is_public: true, user_id: @following_users.pluck(:id))
+                  .or(Post.where(user_id: current_user.id))
+                  .page(params[:page]).per(25)
   end
 
   def new
@@ -37,10 +39,14 @@ class Public::PostsController < ApplicationController
 
   def index
     # public/posts_pathをroot_pathに指定、未ログインユーザーの場合はログインページへ
+    # 「ログインして下さい」のエラーメッセージを表示しないため、 before_action :authenticate_user! ではなく明示的にsign_inページへリダイレクトさせている
     unless user_signed_in?
       redirect_to new_user_session_path and return
     end
-    @posts = Post.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
+    @posts = Post.includes(:favorites, :post_comments, :post_emotions, :user)
+                  .where(is_public: true)
+                  .or(Post.where(user_id: current_user.id))
+                  .page(params[:page]).per(25)
   end
 
   def show
@@ -58,6 +64,11 @@ class Public::PostsController < ApplicationController
   def update
     post = Post.find(params[:id])
     if post.update(post_params)
+      if params[:post][:is_public] == "false"
+        post.update_notification_is_active(false, current_user)
+      elsif params[:post][:is_public] == "true"
+        post.update_notification_is_active(true, current_user)
+      end
       redirect_to post_path(post.id), notice: '投稿を編集しました'
     else
       redirect_to edit_post_path(post.id), alert: '投稿の編集に失敗しました'
@@ -77,13 +88,21 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:body)
+    params.require(:post).permit(:body, :is_public)
   end
 
   def ensure_correct_user
     @post = Post.find(params[:id])
     unless @post.user == current_user
       redirect_to root_path, alert: '無効なアクセスです'
+    end
+  end
+
+
+  def not_public_post
+    post = Post.find(params[:id])
+    if post.user != current_user && post.is_public == false
+      redirect_to root_path, alert: "非公開の投稿です"
     end
   end
 end

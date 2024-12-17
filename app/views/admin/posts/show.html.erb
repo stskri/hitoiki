@@ -1,7 +1,7 @@
-<div class="container px-5 pt-5">
+<div class="container px-5 py-5" style="<%= 'background-color: #dcdcdc;' if @post.is_public == false %>">
   <div>
     <%= link_to admin_user_path(@post.user) do %>
-      <%= image_tag @post.user.get_image(70, 70), class: "rounded-circle" %>
+      <%= image_tag @post.user.get_image(70, 70), class: "rounded-circle", style: "width: 70px; height: 70px;" %>
       <%= @post.user.name %>
     <% end %>
   </div>
@@ -28,9 +28,6 @@
       <%= link_to admin_post_post_comment_users_path(@post) do %>
         <%= @post.post_comments.count %>
       <% end %>
-    </div>
-    <div>
-      <i class="fa-solid fa-pen"></i>
     </div>
     <div>
       <%= link_to admin_post_path(@post), method: :delete, data: { confirm: '本当に削除しますか？'} do %>

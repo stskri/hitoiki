@@ -7,13 +7,21 @@
 </div>
 
 <% if @model == 'user' %>
-  <h5 class="text-center">ユーザー検索 "<%= @content %>"</h5>
-  <%= render 'admin/users/users', users: @records %>
-<% elsif @model == 'post' %>
-  <h5 class="text-center">投稿検索 "<%= @content %>"</h5>
   <div class="container py-4">
-    <div class="row row-cols-1">
-      <%= render 'admin/posts/posts', posts: @records %>
+    <div id="admin_search_users" class="row row-cols-1">
+      <%= render 'admin/users/users_ajax', users: @records %>
     </div>
+    <div class="d-flex justify-content-center my-4" id="admin_search_more_users_btn">
+      <%= link_to_next_page @records, 'さらに読み込む', class: "btn btn-info btn-sm", remote: true, params: { controller: 'admin/searches', action: 'search' } %>
+    </div>
+  </div>
+<% elsif @model == 'post' %>
+  <div class="container py-3">
+    <div id="admin_search_posts" class="row row-cols-1">
+      <%= render 'admin/posts/posts_ajax', posts: @records %>
+    </div>
+  </div>
+  <div class="d-flex justify-content-center my-4" id="admin_search_more_posts_btn">
+    <%= link_to_next_page @records, 'さらに読み込む', class: "btn btn-info btn-sm", remote: true, params: { controller: 'admin/searches', action: 'search' } %>
   </div>
 <% end %>

@@ -12,7 +12,9 @@ class Public::PostCommentsController < ApplicationController
     @post_comments = PostComment.where(post_id: post.id)
     @post_comment = current_user.post_comments.new(post_comment_params.merge(post_id: params[:post_id]))
     if @post_comment.save
-      @post_comment.create_notification_post_comment(current_user, @post_comment.id)
+      if post.is_public == true
+        @post_comment.create_notification_post_comment(current_user, @post_comment.id)
+      end
     else
       redirect_to request.referer, alert: 'コメントの送信に失敗しました'
     end

@@ -7,7 +7,7 @@
           <div class="<%= message.user == current_user ? 'ml-4' : 'col-auto' %>">
             <% if message.user != current_user %>
               <%= link_to user_path(message.user) do %>
-                <%= image_tag message.user.get_image(35, 35), class: "rounded-circle" %>
+                <%= image_tag message.user.get_image(35, 35), class: "rounded-circle", style: "height: 35px; width: 35px;" %>
               <% end %>
             <% end %>
           </div>
