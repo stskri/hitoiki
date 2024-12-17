@@ -44,4 +44,15 @@ class Post < ApplicationRecord
       notification.save if notification.valid?
     end
   end
+
+  def update_notification_is_active(new_value, current_user)
+    if new_value == false
+      # 自分以外の関連する通知のis_activeをfalseにする
+      notifications.where(post_id: id).where.not(visited_id: current_user.id).update_all(is_active: false)
+    else
+      # 再び公開された場合、自分以外の関連する通知のis_activeをtrueにする
+      notifications.where(post_id: id).where.not(visited_id: current_user.id).update_all(is_active: true)
+    end
+    update(is_public: new_value)
+  end
 end
