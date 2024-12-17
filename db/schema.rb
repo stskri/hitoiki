@@ -100,6 +100,7 @@ ActiveRecord::Schema.define(version: 2024_11_07_110511) do
     t.integer "message_id"
     t.string "action", default: "", null: false
     t.boolean "checked", default: false, null: false
+    t.boolean "is_active", default: true
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -64,6 +64,11 @@ class Public::PostsController < ApplicationController
   def update
     post = Post.find(params[:id])
     if post.update(post_params)
+      if params[:post][:is_public] == "false"
+        post.update_notification_is_active(false, current_user)
+      elsif params[:post][:is_public] == "true"
+        post.update_notification_is_active(true, current_user)
+      end
       redirect_to post_path(post.id), notice: '投稿を編集しました'
     else
       redirect_to edit_post_path(post.id), alert: '投稿の編集に失敗しました'
