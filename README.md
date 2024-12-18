@@ -11,7 +11,6 @@
 ### ターゲットユーザ
 ・一行日記に懐かしさを感じた人<br>
 ・他者の存在をそっと感じたい人<br>
-・従来のSNSよりもいいねなどの反応側に秘匿性を求める人<br>
 ・情報量の多いSNSに息苦しさを感じている人<br>
 ・独り言を形に残したい人<br>
 ​
@@ -24,14 +23,13 @@
 後ほど作成予定
 ​
 ## 開発環境
-- OS：Linux(CentOS)
-- 言語：HTML,CSS,JavaScript,Ruby,SQL
+- OS：Linux(AmazonLinux2)
+- 言語：HTML, CSS, JavaScript, Ruby, SQL
 - フレームワーク：Ruby on Rails
 - JSライブラリ：jQuery
-- IDE：Cloud9
+- IDE：Visual Studio Code
 ​
 
-<!-- VScode test -->
 <!-- ## 使用素材 -->
 <!-- - 外部サービスの画像素材・音声素材を使用した場合は、必ずサービス名とURLを明記してください。 -->
 <!-- - アプリケーションの実装に使用したgem/bootstrapのリファレンスなどの記載は不要です。 -->
