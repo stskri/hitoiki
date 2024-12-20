@@ -100,9 +100,13 @@ class Public::PostsController < ApplicationController
 
 
   def not_public_post
-    post = Post.find(params[:id])
-    if post.user != current_user && post.is_public == false
-      redirect_to root_path, alert: "非公開の投稿です"
+    if Post.exists?(params[:id])
+      post = Post.find(params[:id])
+      if post.user != current_user && post.is_public == false
+        redirect_to root_path, alert: "非公開の投稿です"
+      end
+    else
+      redirect_to posts_path, alert: "無効なアクセスです"
     end
   end
 end
