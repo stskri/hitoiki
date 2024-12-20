@@ -20,7 +20,10 @@
 ・誰かの気持ちに触れたいと感じたとき
 ​
 ## 設計書
-後ほど作成予定
+・ER図
+![hitoiki_ER](https://github.com/user-attachments/assets/4ef16f3d-0701-4003-b583-f88c1ba6aa02)
+
+・UIflow(後ほど作成予定)
 ​
 ## 開発環境
 - OS：Linux(AmazonLinux2)
