@@ -33,7 +33,11 @@ class Public::PostsController < ApplicationController
       end
       redirect_to posts_path, notice: '投稿しました'
     else
-      redirect_to new_post_path, alert: '投稿に失敗しました'
+      if params[:post][:body].blank?
+        redirect_to new_post_path, alert: '本文を入力して下さい'
+      else
+        redirect_to new_post_path, alert: '投稿に失敗しました'
+      end
     end
   end
 
