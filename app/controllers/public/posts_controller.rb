@@ -96,15 +96,19 @@ class Public::PostsController < ApplicationController
   end
 
   def ensure_correct_user
-    @post = Post.find(params[:id])
-    unless @post.user == current_user
-      redirect_to root_path, alert: '無効なアクセスです'
+    if Post.exists?(params[:id]) # 存在するかどうかをまず確認
+      @post = Post.find(params[:id])
+      unless @post.user == current_user
+        redirect_to root_path, alert: '無効なアクセスです'
+      end
+    else
+      redirect_to root_path, alert: "無効なアクセスです"
     end
   end
 
 
   def not_public_post
-    if Post.exists?(params[:id])
+    if Post.exists?(params[:id]) # 存在するかどうかをまず確認
       post = Post.find(params[:id])
       if post.user != current_user && post.is_public == false
         redirect_to root_path, alert: "非公開の投稿です"

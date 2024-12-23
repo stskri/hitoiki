@@ -37,14 +37,18 @@ class Public::RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
-    unless @room.users.include?(current_user)
-      redirect_to rooms_path, alert: "無効なアクセスです" and return
+    if Room.exists?(params[:id]) # 存在するかどうかをまず確認
+      @room = Room.find(params[:id])
+      unless @room.users.include?(current_user)
+        redirect_to rooms_path, alert: "無効なアクセスです" and return
+      end
+      @message = Message.new
+      @messages = @room.messages.includes(:user)
+      notifications = current_user.passive_notifications.where(checked: false, room_id: @room.id)
+      notifications.update(checked: true)
+    else
+      redirect_to rooms_path, alert: "無効なアクセスです"
     end
-    @message = Message.new
-    @messages = @room.messages.includes(:user)
-    notifications = current_user.passive_notifications.where(checked: false, room_id: @room.id)
-    notifications.update(checked: true)
   end
 
   # もしdestroyを実装する場合
