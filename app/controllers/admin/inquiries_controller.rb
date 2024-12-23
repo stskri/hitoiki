@@ -27,7 +27,11 @@ class Admin::InquiriesController < ApplicationController
   end
 
   def show
-    @inquiry = Inquiry.find(params[:id])
+    if Inquiry.exists?(params[:id]) # 存在するかどうかをまず確認
+      @inquiry = Inquiry.find(params[:id])
+    else
+      redirect_to admin_inquiries_path, alert: "お問い合わせが存在しません"
+    end
   end
 
   def destroy

@@ -37,7 +37,7 @@ class Public::RoomsController < ApplicationController
   end
 
   def show
-    if Room.exists?(params[:id])
+    if Room.exists?(params[:id]) # 存在するかどうかをまず確認
       @room = Room.find(params[:id])
       unless @room.users.include?(current_user)
         redirect_to rooms_path, alert: "無効なアクセスです" and return

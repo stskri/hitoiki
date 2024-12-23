@@ -6,8 +6,12 @@ class Admin::UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @user_posts = @user.posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
+    if User.exists?(params[:id]) # 存在するかどうかをまず確認
+      @user = User.find(params[:id])
+      @user_posts = @user.posts.includes(:favorites, :post_comments, :post_emotions, :user).page(params[:page]).per(25)
+    else
+      redirect_to admin_users_path, alert: "ユーザーが存在しません"
+    end
   end
 
   def user_favorite

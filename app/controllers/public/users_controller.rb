@@ -50,16 +50,24 @@ class Public::UsersController < ApplicationController
   end
 
   def ensure_correct_user
-    @user = User.find(params[:id])
-    unless @user == current_user
-      redirect_to root_path, alert: '無効なアクセスです'
+    if User.exists?(params[:id]) # 存在するかどうかをまず確認
+      @user = User.find(params[:id])
+      unless @user == current_user
+        redirect_to root_path, alert: '無効なアクセスです'
+      end
+    else
+      redirect_to root_path, alert: "無効なアクセスです"
     end
   end
 
   # users/:current_user.idにアクセスした場合、my_pageへ
   def guide_to_my_page
-    if User.find(params[:id]) == current_user
-      redirect_to my_page_path
+    if User.exists?(params[:id]) # 存在するかどうかをまず確認
+      if User.find(params[:id]) == current_user
+        redirect_to my_page_path
+      end
+    else
+      redirect_to root_path, alert: "無効なアクセスです"
     end
   end
 

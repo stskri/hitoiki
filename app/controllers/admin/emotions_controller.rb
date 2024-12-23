@@ -7,7 +7,11 @@ class Admin::EmotionsController < ApplicationController
   end
 
   def edit
-    @emotion = Emotion.find(params[:id])
+    if Emotion.exists?(params[:id]) # 存在するかどうかをまず確認
+      @emotion = Emotion.find(params[:id])
+    else
+      redirect_to admin_emotions_path, alert: "感情タグが存在しません"
+    end
   end
 
   def create

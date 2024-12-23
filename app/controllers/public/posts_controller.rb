@@ -33,7 +33,11 @@ class Public::PostsController < ApplicationController
       end
       redirect_to posts_path, notice: '投稿しました'
     else
-      redirect_to new_post_path, alert: '投稿に失敗しました'
+      if params[:post][:body].blank?
+        redirect_to new_post_path, alert: '本文を入力して下さい'
+      else
+        redirect_to new_post_path, alert: '投稿に失敗しました'
+      end
     end
   end
 
@@ -92,17 +96,25 @@ class Public::PostsController < ApplicationController
   end
 
   def ensure_correct_user
-    @post = Post.find(params[:id])
-    unless @post.user == current_user
-      redirect_to root_path, alert: '無効なアクセスです'
+    if Post.exists?(params[:id]) # 存在するかどうかをまず確認
+      @post = Post.find(params[:id])
+      unless @post.user == current_user
+        redirect_to root_path, alert: '無効なアクセスです'
+      end
+    else
+      redirect_to root_path, alert: "無効なアクセスです"
     end
   end
 
 
   def not_public_post
-    post = Post.find(params[:id])
-    if post.user != current_user && post.is_public == false
-      redirect_to root_path, alert: "非公開の投稿です"
+    if Post.exists?(params[:id]) # 存在するかどうかをまず確認
+      post = Post.find(params[:id])
+      if post.user != current_user && post.is_public == false
+        redirect_to root_path, alert: "非公開の投稿です"
+      end
+    else
+      redirect_to posts_path, alert: "無効なアクセスです"
     end
   end
 end
