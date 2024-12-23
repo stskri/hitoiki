@@ -20,10 +20,11 @@
 ・誰かの気持ちに触れたいと感じたとき
 ​
 ## 設計書
-・ER図
+
+### ER図
 ![hitoiki_ER](https://github.com/user-attachments/assets/4ef16f3d-0701-4003-b583-f88c1ba6aa02)
 
-・UIflow
+### UIflow
 ![hitoiki_UIflow(1_4) drawio](https://github.com/user-attachments/assets/9e0f8049-f8dd-467e-afc8-ccd0a9e00280)
 ![hitoiki_UIflow(2_4) drawio](https://github.com/user-attachments/assets/4f877969-33f5-48ff-a010-5a18720d1ede)
 ![hitoiki_UIflow(3_4) drawio](https://github.com/user-attachments/assets/3dde47c8-f24c-46c4-9492-22fd60b65d75)
