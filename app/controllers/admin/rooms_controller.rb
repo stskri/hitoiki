@@ -6,7 +6,11 @@ class Admin::RoomsController < ApplicationController
   end
 
   def show
-    @room = Room.find(params[:id])
-    @messages = @room.messages.includes(:user)
+    if Room.exists?(params[:id]) # 存在するかどうかをまず確認
+      @room = Room.find(params[:id])
+      @messages = @room.messages.includes(:user)
+    else
+      redirect_to admin_rooms_path, alert: "メッセージルームが存在しません"
+    end
   end
 end

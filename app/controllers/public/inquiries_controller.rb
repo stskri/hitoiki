@@ -52,9 +52,13 @@ class Public::InquiriesController < ApplicationController
   end
 
   def ensure_correct_user
-    @inquiry = Inquiry.find(params[:id])
-    unless @inquiry.user == current_user
-      redirect_to root_path, alert: '無効なアクセスです'
+    if Inquiry.exists?(params[:id]) # 存在するかどうかをまず確認
+      inquiry = Inquiry.find(params[:id])
+      unless inquiry.user == current_user
+        redirect_to inquiries_path, alert: '無効なアクセスです'
+      end
+    else
+      redirect_to inquiries_path, alert: "無効なアクセスです"
     end
   end
 end

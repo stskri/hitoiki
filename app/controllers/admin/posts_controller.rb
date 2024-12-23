@@ -6,8 +6,12 @@ class Admin::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
-    @post_comments = PostComment.where(post_id: @post.id)
+    if Post.exists?(params[:id]) # 存在するかどうかをまず確認
+      @post = Post.find(params[:id])
+      @post_comments = PostComment.where(post_id: @post.id)
+    else
+      redirect_to admin_posts_path, alert: "投稿が存在しません"
+    end
   end
 
   def destroy
