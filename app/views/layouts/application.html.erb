@@ -16,7 +16,7 @@
       <div class="row d-flex" style="height: 100%;">
         <%# レフトバー %>
         <% if user_signed_in? %>
-          <div class="col-2 border-right pt-4" style="position: sticky; top: 0; height: 100vh;">
+          <div class="user-left-bar col-2 border-right pt-4" style="position: sticky; top: 0; height: 100vh;">
             <%= render 'layouts/user_left-bar' %>
           </div>
         <% elsif admin_signed_in? %>
