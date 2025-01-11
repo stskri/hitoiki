@@ -1,7 +1,8 @@
 
 <div class="container mt-5">
   <h4>ユーザー情報を編集</h4>
-  <p><p>メールアドレスとパスワードの変更、アカウント削除は<%= link_to "こちら", edit_registration_path(@user) %>から</p></p>
+  <p>メールアドレスとパスワードの変更、アカウント削除は<%= link_to "こちら", edit_registration_path(@user) %>から</p>
+  <p>お問い合わせは<%= link_to "こちら", new_inquiry_path %>から</p>
 
   <%= form_with model: @user, method: :patch do |f| %>
     <div class="mb-3">

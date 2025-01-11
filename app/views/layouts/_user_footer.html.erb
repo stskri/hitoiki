@@ -23,13 +23,6 @@
       <% end %>
     </div>
     <div>
-      <%= link_to new_post_path, class: "d-flex justify-content-center align-items-center" do %>
-        <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
-          <i class="fa-solid fa-mug-saucer fa-lg"></i>
-        </div>
-      <% end %>
-    </div>
-    <div>
       <%= link_to notifications_path, class: "d-flex justify-content-center align-items-center" do %>
         <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
           <i class="fa-solid fa-bell fa-lg"></i>
@@ -40,13 +33,6 @@
       <%= link_to user_path(current_user), class: "d-flex align-items-center justify-content-center" do %>
         <div class="rounded-circle" style="display: inline-block; height: 30px; width: 30px;">
           <%= image_tag current_user.get_image(30, 30), class: "rounded-circle", style: "height: 30px; width: 30px;" %>
-        </div>
-      <% end %>
-    </div>
-    <div>
-      <%= link_to new_inquiry_path, class: "d-flex justify-content-center align-items-center" do %>
-        <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
-          <i class="fa-regular fa-envelope fa-lg"></i>
         </div>
       <% end %>
     </div>
