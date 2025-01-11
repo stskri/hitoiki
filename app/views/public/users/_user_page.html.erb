@@ -21,8 +21,8 @@
           <% end %>
         </div>
         <div class="row mx-0 mb-1">
-          <span>投稿<strong><%= user.posts.count %></strong>件</span>
-          <%= link_to user_followings_path(user), class: "mx-2" do %>
+          <span class="mr-2">投稿<strong><%= user.posts.count %></strong>件</span>
+          <%= link_to user_followings_path(user), class: "mr-2" do %>
             <span>
               フォロー中<strong id="followings_counter"><%= render 'public/relationships/followings_counter', user: user %></strong>人
             </span>

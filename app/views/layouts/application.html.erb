@@ -48,7 +48,9 @@
       </div>
     </div>
   </body>
-  <footer style="position: sticky; bottom: 0; background-color: white; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
-    <%= render 'layouts/user_footer' %>
-  </footer>
+  <% if user_signed_in? %>
+    <footer style="position: sticky; bottom: 0; background-color: white; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
+      <%= render 'layouts/user_footer' %>
+    </footer>
+  <% end %>
 </html>
