@@ -1,1 +1,9 @@
 @use '~bootstrap/scss/bootstrap';
+
+
+/* スマホ対応 */
+@media (max-width: 480px) {
+  body {
+    background-color: red;
+  }
+}

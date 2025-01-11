@@ -1,30 +1,35 @@
 <div class="container px-0">
   <div style="height: 70vh;">
-    <div  class="row mx-0 pb-4 d-flex justify-content-center">
+    <div class="row mx-0 pb-4 d-flex justify-content-center">
       <%= link_to root_path do %>
         <%= image_tag("hitoiki-logo.png", style: "width: 70px; height: 70px;") %>
       <% end %>
     </div>
+
     <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to posts_path do %>
         <i class="fa-solid fa-house fa-lg"></i><span> ホーム</span>
       <% end %>
     </div>
+
     <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to search_page_path do %>
         <i class="fa-solid fa-magnifying-glass fa-lg"></i><span> 検索</span>
       <% end %>
     </div>
+
     <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to rooms_path do %>
         <i class="fa-regular fa-paper-plane fa-lg"></i><span> メッセージ</span>
       <% end %>
     </div>
+
     <div class="row mb-2 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to new_post_path do %>
         <i class="fa-solid fa-mug-saucer fa-lg"></i><span> ひといき</span>
       <% end %>
     </div>
+
     <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to user_path(current_user), class: "d-flex align-items-center justify-content-center" do %>
         <div class="rounded-circle" style="display: inline-block; height: 30px; width: 30px;">
@@ -40,6 +45,7 @@
         <i class="fa-regular fa-envelope fa-lg"></i><span> お問い合わせ</span>
       <% end %>
     </div>
+
     <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to destroy_user_session_path, method: :delete do %>
         <i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-lg"></i><span> ログアウト</span>
