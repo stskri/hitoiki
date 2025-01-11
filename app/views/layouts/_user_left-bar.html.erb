@@ -7,32 +7,47 @@
     </div>
 
     <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
-      <%= link_to posts_path do %>
-        <i class="fa-solid fa-house fa-lg"></i><span> ホーム</span>
+      <%= link_to posts_path, class: "d-flex justify-content-center align-items-center" do %>
+        <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
+          <i class="fa-solid fa-house fa-lg"></i>
+        </div>
+        <span>ホーム</span>
       <% end %>
     </div>
 
     <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
-      <%= link_to search_page_path do %>
-        <i class="fa-solid fa-magnifying-glass fa-lg"></i><span> 検索</span>
+      <%= link_to search_page_path, class: "d-flex justify-content-center align-items-center" do %>
+        <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
+          <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+        </div>
+        <span>検索</span>
       <% end %>
     </div>
 
     <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
-      <%= link_to rooms_path do %>
-        <i class="fa-regular fa-paper-plane fa-lg"></i><span> メッセージ</span>
+      <%= link_to rooms_path, class: "d-flex justify-content-center align-items-center" do %>
+        <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
+          <i class="fa-regular fa-paper-plane fa-lg"></i>
+        </div>
+        <span>メッセージ</span>
       <% end %>
     </div>
 
     <div class="row mb-2 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
-      <%= link_to new_post_path do %>
-        <i class="fa-solid fa-mug-saucer fa-lg"></i><span> ひといき</span>
+      <%= link_to new_post_path, class: "d-flex justify-content-center align-items-center" do %>
+        <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
+          <i class="fa-solid fa-mug-saucer fa-lg"></i>
+        </div>
+        <span>ひといき</span>
       <% end %>
     </div>
 
     <div class="row mb-2 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
-      <%= link_to notifications_path do %>
-        <i class="fa-solid fa-bell fa-lg"></i><span> 通知</span>
+      <%= link_to notifications_path, class: "d-flex justify-content-center align-items-center" do %>
+        <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
+          <i class="fa-solid fa-bell fa-lg"></i>
+        </div>
+        <span>通知</span>
       <% end %>
     </div>
 
@@ -47,14 +62,20 @@
   </div>
   <div>
     <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
-      <%= link_to new_inquiry_path do %>
-        <i class="fa-regular fa-envelope fa-lg"></i><span> お問い合わせ</span>
+      <%= link_to new_inquiry_path, class: "d-flex justify-content-center align-items-center" do %>
+        <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
+          <i class="fa-regular fa-envelope fa-lg"></i>
+        </div>
+        <span>問い合わせ</span>
       <% end %>
     </div>
 
     <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
-      <%= link_to destroy_user_session_path, method: :delete do %>
-        <i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-lg"></i><span> ログアウト</span>
+      <%= link_to destroy_user_session_path, method: :delete, class: "d-flex justify-content-center align-items-center" do %>
+        <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
+          <i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-lg"></i>
+        </div>
+        <span>ログアウト</span>
       <% end %>
     </div>
   </div>
