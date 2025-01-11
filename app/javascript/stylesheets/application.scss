@@ -1,12 +1,6 @@
 @use '~bootstrap/scss/bootstrap';
 
-
-
-
-
-@media screen and (max-width:1024px) {
-}
-
+// レスポンシブ対応
 @media screen and (max-width:768px) {
   .logo, .user-right-bar, .user-left-bar-content-name {
     display: none;

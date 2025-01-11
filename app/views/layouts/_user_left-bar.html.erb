@@ -43,9 +43,12 @@
     </div>
 
     <div class="user-left-bar-content user-left-bar-notification row mb-2 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
-      <%= link_to notifications_path, class: "d-flex justify-content-center align-items-center" do %>
+      <%= link_to notifications_path, class: "d-flex justify-content-center align-items-center position-relative" do %>
         <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
           <i class="fa-solid fa-bell fa-lg"></i>
+          <% if Notification.where(visited_id: current_user.id, checked: false).exists? %>
+            <div class="rounded-circle" style="background-color: #b3e59f; height: 10px; width: 10px; position: absolute; top: 0; right: 0;"></div>
+          <% end %>
         </div>
         <span class="user-left-bar-content-name">通知</span>
       <% end %>
