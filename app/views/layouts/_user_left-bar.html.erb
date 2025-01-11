@@ -30,12 +30,18 @@
       <% end %>
     </div>
 
+    <div class="row mb-2 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+      <%= link_to notifications_path do %>
+        <i class="fa-solid fa-bell fa-lg"></i><span> 通知</span>
+      <% end %>
+    </div>
+
     <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to user_path(current_user), class: "d-flex align-items-center justify-content-center" do %>
         <div class="rounded-circle" style="display: inline-block; height: 30px; width: 30px;">
           <%= image_tag current_user.get_image(30, 30), class: "rounded-circle", style: "height: 30px; width: 30px;" %>
         </div>
-        <span class="pl-2"><%= truncate(current_user.name, length: 15) %></span>
+        <span class="pl-2"><%= truncate(current_user.name, length: 20) %></span>
       <% end %>
     </div>
   </div>
