@@ -2,80 +2,80 @@
   <div style="height: 70vh;">
     <div class="row mx-0 pb-4 d-flex justify-content-center">
       <%= link_to root_path do %>
-        <%= image_tag("hitoiki-logo.png", style: "width: 70px; height: 70px;") %>
+        <%= image_tag("hitoiki-logo.png", class: "logo", style: "width: 70px; height: 70px;") %>
       <% end %>
     </div>
 
-    <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+    <div class="user-left-bar-content row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to posts_path, class: "d-flex justify-content-center align-items-center" do %>
         <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
           <i class="fa-solid fa-house fa-lg"></i>
         </div>
-        <span>ホーム</span>
+        <span class="user-left-bar-content-name">ホーム</span>
       <% end %>
     </div>
 
-    <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+    <div class="user-left-bar-content row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to search_page_path, class: "d-flex justify-content-center align-items-center" do %>
         <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
           <i class="fa-solid fa-magnifying-glass fa-lg"></i>
         </div>
-        <span>検索</span>
+        <span class="user-left-bar-content-name">検索</span>
       <% end %>
     </div>
 
-    <div class="row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
+    <div class="user-left-bar-content row mb-2 mx-0 p-2" style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to rooms_path, class: "d-flex justify-content-center align-items-center" do %>
         <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
           <i class="fa-regular fa-paper-plane fa-lg"></i>
         </div>
-        <span>メッセージ</span>
+        <span class="user-left-bar-content-name">メッセージ</span>
       <% end %>
     </div>
 
-    <div class="row mb-2 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+    <div class="user-left-bar-content row mb-2 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to new_post_path, class: "d-flex justify-content-center align-items-center" do %>
         <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
           <i class="fa-solid fa-mug-saucer fa-lg"></i>
         </div>
-        <span>ひといき</span>
+        <span class="user-left-bar-content-name">ひといき</span>
       <% end %>
     </div>
 
-    <div class="row mb-2 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+    <div class="user-left-bar-content user-left-bar-notification row mb-2 mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to notifications_path, class: "d-flex justify-content-center align-items-center" do %>
         <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
           <i class="fa-solid fa-bell fa-lg"></i>
         </div>
-        <span>通知</span>
+        <span class="user-left-bar-content-name">通知</span>
       <% end %>
     </div>
 
-    <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+    <div class="user-left-bar-content row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to user_path(current_user), class: "d-flex align-items-center justify-content-center" do %>
         <div class="rounded-circle" style="display: inline-block; height: 30px; width: 30px;">
           <%= image_tag current_user.get_image(30, 30), class: "rounded-circle", style: "height: 30px; width: 30px;" %>
         </div>
-        <span class="pl-2"><%= truncate(current_user.name, length: 20) %></span>
+        <span class="pl-2 user-left-bar-content-name"><%= truncate(current_user.name, length: 20) %></span>
       <% end %>
     </div>
   </div>
   <div>
-    <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+    <div class="user-left-bar-content row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to new_inquiry_path, class: "d-flex justify-content-center align-items-center" do %>
         <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
           <i class="fa-regular fa-envelope fa-lg"></i>
         </div>
-        <span>問い合わせ</span>
+        <span class="user-left-bar-content-name">問い合わせ</span>
       <% end %>
     </div>
 
-    <div class="row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
+    <div class="user-left-bar-content row mx-0 p-2"  style="font-size: 1.1rem; line-height: 1.6rem;">
       <%= link_to destroy_user_session_path, method: :delete, class: "d-flex justify-content-center align-items-center" do %>
         <div class="d-flex justify-content-center align-items-center" style="height: 30px; width: 30px;">
           <i class="fa-solid fa-person-walking-dashed-line-arrow-right fa-lg"></i>
         </div>
-        <span>ログアウト</span>
+        <span class="user-left-bar-content-name">ログアウト</span>
       <% end %>
     </div>
   </div>

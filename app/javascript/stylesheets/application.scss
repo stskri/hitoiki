@@ -13,12 +13,22 @@
 
 
 @media screen and (max-width:768px) {
-  .user-right-bar {
+  .logo, .user-right-bar, .user-left-bar-content-name {
     display: none;
+  }
+
+  .user-left-bar-content {
+    display: flex;
+    justify-content: center;
   }
 }
 
 
+@media screen and (min-width:769px) {
+  .user-left-bar-notification {
+    display: none;
+  }
+}
 
 @media screen and (max-width:425px) {
   body {
