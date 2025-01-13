@@ -1,6 +1,19 @@
 @use '~bootstrap/scss/bootstrap';
 
 // レスポンシブ対応
+// 画面幅1023px以下
+@media screen and (max-width:1023px) {
+
+}
+
+// 画面幅1024px以上
+@media screen and (min-width:1024px) {
+  .users-list {
+    display: flex;
+    justify-content: between;
+  }
+}
+
 // 画面幅768px以下
 @media screen and (max-width:768px) {
   .logo, .user-right-bar, .user-left-bar-content-name {
@@ -53,10 +66,7 @@
   }
 
   .message-form {
-    position: sticky;
     bottom: 62px;
-    z-index: 5;
-    background-color: rgba(255, 255, 255, 0.9);
   }
 }
 
@@ -77,9 +87,6 @@
   }
 
   .message-form {
-    position: sticky;
     bottom: 0;
-    z-index: 5;
-    background-color: rgba(255, 255, 255, 0.9);
   }
 }

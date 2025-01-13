@@ -5,11 +5,10 @@
       <% if user != current_user %>
         <%= link_to user_path(user), class: "d-flex justify-content-center align-items-center" do %>
           <%= image_tag user.get_image(50,50), class: "rounded-circle mr-2", style: "height: 50px; width: 50px;" %>
-          <span class="small"><%= truncate(user.name, length: 10) %>さん</span>
+          <span class="small"><%= user.name %></span>
         <% end %>
       <% end %>
     <% end %>
-    <span class="small">とのメッセージルーム</span>
   </div>
   <hr style="border-color: #fff;">
 </div>
@@ -22,7 +21,7 @@
   </div>
 </div>
 
-<div class="message-form">
+<div class="message-form" style="position: sticky; z-index: 5; background-color: rgba(255, 255, 255, 0.9);">
   <hr>
   <div class="py-2 px-3">
     <%= render 'public/messages/form', room: @room, message: @message %>
