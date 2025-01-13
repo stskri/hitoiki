@@ -5,18 +5,22 @@
     </div>
     <div class="col-8 d-flex align-items-center">
       <div>
-        <div class="row mx-0 mb-1 align-items-center">
+        <div class="mx-0 mb-1 align-items-center">
           <strong class="mr-3"><%= user.name %></strong>
           <% if user == current_user %>
             <% unless user.guest_user? %>
-              <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn btn-sm", style: "font-weight: bold; background-color: #e2e3e5;" %>
+              <div>
+                <%= link_to "プロフィール編集", edit_user_path(current_user), class: "btn btn-sm", style: "font-weight: bold; background-color: #e2e3e5;" %>
+              </div>
             <% end %>
           <% else %>
-            <div id="follow_btn_<%= @user.id %>">
-              <%= render 'public/relationships/btn', user: user %>
-            </div>
-            <div id= "btn_to_start_dm">
-              <%= render 'public/rooms/btn', room: room, user: user %>
+            <div class="relationship-dm-btn">
+              <div class="relationship-btn" id="follow_btn_<%= @user.id %>">
+                <%= render 'public/relationships/btn', user: user %>
+              </div>
+              <div class="dm-btn" id= "btn_to_start_dm">
+                <%= render 'public/rooms/btn', room: room, user: user %>
+              </div>
             </div>
           <% end %>
         </div>

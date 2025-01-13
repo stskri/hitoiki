@@ -51,7 +51,7 @@
         <div class="rounded-circle" style="display: inline-block; height: 30px; width: 30px;">
           <%= image_tag current_user.get_image(30, 30), class: "rounded-circle", style: "height: 30px; width: 30px;" %>
         </div>
-        <span class="pl-2 user-left-bar-content-name"><%= truncate(current_user.name, length: 20) %></span>
+        <span class="user-left-bar-content-name"><%= current_user.name %></span>
       <% end %>
     </div>
   </div>
