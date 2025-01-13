@@ -3,7 +3,10 @@
 // レスポンシブ対応
 // 画面幅1023px以下
 @media screen and (max-width:1023px) {
-
+  .users-list-relationship-btn {
+    justify-content: center;
+    margin-bottom: 4px;
+  }
 }
 
 // 画面幅1024px以上
@@ -11,6 +14,10 @@
   .users-list {
     display: flex;
     justify-content: between;
+  }
+
+  .users-list-relationship-btn {
+    margin-right: 16px;
   }
 }
 
