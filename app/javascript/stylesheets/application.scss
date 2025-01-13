@@ -3,6 +3,16 @@
 // レスポンシブ対応
 // 画面幅1023px以下
 @media screen and (max-width:1023px) {
+
+  .logo, .user-right-bar, .user-left-bar-content-name {
+    display: none;
+  }
+
+  .user-left-bar-content {
+    display: flex;
+    justify-content: center;
+  }
+
   .users-list-relationship-btn {
     justify-content: center;
     margin-bottom: 4px;
@@ -13,8 +23,14 @@
   }
 }
 
+
 // 画面幅1024px以上
 @media screen and (min-width:1024px) {
+
+  .user-left-bar-notification {
+    display: none;
+  }
+
   .users-list {
     display: flex;
     justify-content: between;
@@ -30,16 +46,11 @@
   }
 }
 
+
+
+
 // 画面幅768px以下
 @media screen and (max-width:768px) {
-  .logo, .user-right-bar, .user-left-bar-content-name {
-    display: none;
-  }
-
-  .user-left-bar-content {
-    display: flex;
-    justify-content: center;
-  }
 
   .relationship-btn {
     margin: 4px 0;
@@ -53,14 +64,17 @@
 
 // 画面幅769px以上
 @media screen and (min-width:769px) {
-  .user-left-bar-notification {
-    display: none;
-  }
 
   .relationship-dm-btn {
     display: flex;
   }
+
+  .relationship-btn {
+    margin-right: 8px;
+  }
 }
+
+
 
 
 // 画面幅425px以下
