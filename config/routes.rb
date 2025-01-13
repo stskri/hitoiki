@@ -39,7 +39,7 @@ Rails.application.routes.draw do
       resources :messages, only: [:create, :destroy]
     end
 
-    resources :notifications, only: [] do
+    resources :notifications, only: [:index] do
       collection do
         patch :mark_as_read # 通知確認ボタンの処理
         get 'more', to: 'notifications#more_notifications' # 通知欄にある"さらに読み込む"ボタンの非同期通信のため
