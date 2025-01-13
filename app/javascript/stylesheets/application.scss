@@ -24,6 +24,10 @@
 
 // 画面幅425px以下
 @media screen and (max-width:425px) {
+  body {
+    padding-bottom: 62px;
+  }
+
   .user-left-bar {
     display: none;
   }
