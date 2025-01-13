@@ -1,6 +1,7 @@
 @use '~bootstrap/scss/bootstrap';
 
 // レスポンシブ対応
+// 画面幅768px以下
 @media screen and (max-width:768px) {
   .logo, .user-right-bar, .user-left-bar-content-name {
     display: none;
@@ -12,20 +13,57 @@
   }
 }
 
+
+// 画面幅769px以上
 @media screen and (min-width:769px) {
   .user-left-bar-notification {
     display: none;
   }
 }
 
+
+// 画面幅425px以下
 @media screen and (max-width:425px) {
   .user-left-bar {
     display: none;
   }
+
+  .notifications-index {
+    height: calc(100vh - 70px);
+  }
+
+  .search-form-contents {
+    padding-top: 8px;
+  }
+
+  .message-form {
+    position: sticky;
+    bottom: 62px;
+    z-index: 5;
+    background-color: rgba(255, 255, 255, 0.9);
+  }
 }
 
+
+// 画面幅426px以上
 @media screen and (min-width:426px) {
   footer, .new-post-path-icon {
     display: none;
+  }
+
+  .notifications-index {
+    height: 98vh;
+  }
+
+  .search-form {
+    display: flex;
+    justify-content: center;
+  }
+
+  .message-form {
+    position: sticky;
+    bottom: 0;
+    z-index: 5;
+    background-color: rgba(255, 255, 255, 0.9);
   }
 }
