@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>hitoiki</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%# fontawesomeのため %>
@@ -16,7 +16,7 @@
       <div class="row d-flex" style="height: 100%;">
         <%# レフトバー %>
         <% if user_signed_in? %>
-          <div class="col-2 border-right pt-4" style="position: sticky; top: 0; height: 100vh;">
+          <div class="user-left-bar col-2 border-right pt-4" style="position: sticky; top: 0; height: 100vh;">
             <%= render 'layouts/user_left-bar' %>
           </div>
         <% elsif admin_signed_in? %>
@@ -37,7 +37,7 @@
 
         <%# ライトバー %>
         <% if user_signed_in? %>
-          <div class="col-3 px-4 pb-4" style="position: sticky; top: 0; height: 100vh;">
+          <div class="user-right-bar col-3 px-4 pb-4" style="position: sticky; top: 0; height: 100vh;">
             <%= render 'layouts/user_right-bar', user: current_user %>
           </div>
         <% elsif admin_signed_in? %>
@@ -48,4 +48,9 @@
       </div>
     </div>
   </body>
+  <% if user_signed_in? %>
+  <footer style="position: fixed; bottom: 0; width: 100%; background-color: rgba(255, 255, 255, 0.9); z-index: 5;">
+    <%= render 'layouts/user_footer' %>
+  </footer>
+<% end %>
 </html>

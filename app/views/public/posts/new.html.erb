@@ -5,7 +5,7 @@
         <tbody>
 
           <tr>
-            <div class="pt-5 px-5 d-flex justify-content-between align-items-center" style="padding-bottom: 12px;">
+            <div class="pt-5 d-flex justify-content-between align-items-center" style="padding-bottom: 12px;">
               <h4 class="m-0">新規投稿</h4>
               <div class="p-0 btn-sm" data-toggle="button">
                 <label class="m-0 btn btn-outline-secondary" style="padding: 4px 8px;">
@@ -15,9 +15,8 @@
               </div>
             </div>
           </tr>
-
           <tr>
-            <td><%= f.text_field :body, class: 'form-control' %></td>
+            <td class="px-0"><%= f.text_field :body, class: 'form-control' %></td>
           </tr>
           <tr>
             <td class="d-flex justify-content-center"><%= f.submit '投稿', class: 'btn btn-success form-control col-3' %></td>

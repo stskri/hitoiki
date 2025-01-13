@@ -1,10 +1,6 @@
-<div class="pt-5 pl-5">
+<div class="pt-5 pl-4">
   <h4>お問い合わせ</h4>
-  <span class="d-flex justify-content-end pr-5 small text-muted">
-    過去のお問い合わせ一覧は
-    <%= link_to "こちら", inquiries_path %>
-    から
-  </span>
+  <p class="small text-muted">過去のお問い合わせ一覧は<%= link_to "こちら", inquiries_path %>から</p>
 </div>
 
 <%= form_with model: @inquiry do |f| %>
