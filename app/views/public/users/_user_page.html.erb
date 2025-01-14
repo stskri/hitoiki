@@ -41,7 +41,9 @@
           <% end %>
           <% if user == current_user %>
             <%= link_to my_favorite_path do %>
-              <span>いいねした投稿<strong><%= current_user.favorited_posts.count %></strong>件</span>
+              <span>
+                いいねした投稿<strong id="favorite_posts_counter_on_my_page"><%= render "public/favorites/favorite_posts_counter" %></strong>件
+              </span>
             <% end %>
           <% end %>
         </div>
