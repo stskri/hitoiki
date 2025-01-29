@@ -16,7 +16,7 @@
             </div>
           </tr>
           <tr>
-            <td class="px-0"><%= f.text_field :body, class: 'form-control' %></td>
+            <td class="px-0"><%= f.text_field :body, placeholder: '31文字まで投稿できます', class: 'form-control' %></td>
           </tr>
           <tr>
             <td class="d-flex justify-content-center"><%= f.submit '投稿', class: 'btn btn-success form-control col-3' %></td>
@@ -47,7 +47,7 @@
                             display: inline-block;
                             width: 120px;"
             >
-            <div class="d-flex justify-content-center py-0 px-2 text-muted" style="font-size: 14px; background-color: #fff; display: inline-block; border-radius: 5px; white-space:nowrap;" >
+            <div class="d-flex justify-content-center py-0 px-2 text-muted" style="font-size: 14px; background-color: #fff; display: inline-block; border-radius: 5px; white-space: nowrap;" >
               <%= b.object.name %>
             </div>
             </label>
