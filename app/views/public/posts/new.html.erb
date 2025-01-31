@@ -1,4 +1,4 @@
-<%= form_with model: @post, local: true do |f| %>
+<%= form_with model: @post do |f| %>
   <div class="container">
     <div class="col-12 mx-auto">
       <table class="table table-borderless">
@@ -9,7 +9,7 @@
               <h4 class="m-0">新規投稿</h4>
               <div class="p-0 btn-sm" data-toggle="button">
                 <label class="m-0 btn btn-outline-secondary" style="padding: 4px 8px;">
-                  <%= f.radio_button :is_public, false, style: "display: none;"  %>
+                  <%= f.radio_button :is_public, false, style: "display: none;" %>
                   <span class="small">非公開にする</span>
                 </label>
               </div>
@@ -36,6 +36,7 @@
                     autocomplete="off"
                     name="post[post_emotions][]"
                     value="<%= b.object.id %>"
+                    <%= 'checked' if @selected_emotions.include?(b.object.id.to_s) %>
             >
             <label for="emotion_<%= b.object.id %>"
                     class="m-0 btn btn-light text-center"

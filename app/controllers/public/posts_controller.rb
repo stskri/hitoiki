@@ -12,33 +12,36 @@ class Public::PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = Post.new(session[:post_params] || {})
     @emotions = Emotion.all
+    @selected_emotions = session[:emotion_ids] || []
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
-    @emotions = Emotion.all
-    if @post.save
+    post = Post.new(post_params)
+    post.user_id = current_user.id
+    emotion_ids = params[:post][:post_emotions].reject(&:empty?)
+    emotions = Emotion.where(id: emotion_ids)
+    if post.save
       # posts#newのフォームから送られたEmotionの情報を取得
-      emotion_ids = params[:post][:post_emotions].reject(&:empty?)
-      emotions = Emotion.where(id: emotion_ids)
       emotions.each do |emotion|
-        @post.post_emotions.create(
-          post_id: @post.id,
+        post.post_emotions.create(
+          post_id: post.id,
           emotion_id: emotion.id,
           emotion_name: emotion.name,
           emotion_color: emotion.color
         )
       end
+      session[:post_params] = nil
+      session[:emotion_ids] = nil
       redirect_to posts_path, notice: '投稿しました'
     else
+      session[:post_params] = post_params
+      session[:emotion_ids] = emotion_ids
       if params[:post][:body].blank?
         redirect_to new_post_path, alert: '本文を入力して下さい'
       else
-        flash.now[:alert] = '投稿に失敗しました'
-        render :new
+        redirect_to new_post_path, alert: '投稿に失敗しました'
       end
     end
   end
@@ -107,7 +110,6 @@ class Public::PostsController < ApplicationController
       redirect_to root_path, alert: "無効なアクセスです"
     end
   end
-
 
   def not_public_post
     if Post.exists?(params[:id]) # 存在するかどうかをまず確認
