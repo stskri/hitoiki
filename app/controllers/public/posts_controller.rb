@@ -19,6 +19,7 @@ class Public::PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.user_id = current_user.id
+    @emotions = Emotion.all
     if @post.save
       # posts#newのフォームから送られたEmotionの情報を取得
       emotion_ids = params[:post][:post_emotions].reject(&:empty?)
@@ -36,7 +37,8 @@ class Public::PostsController < ApplicationController
       if params[:post][:body].blank?
         redirect_to new_post_path, alert: '本文を入力して下さい'
       else
-        redirect_to new_post_path, alert: '投稿に失敗しました'
+        flash.now[:alert] = '投稿に失敗しました'
+        render :new
       end
     end
   end
