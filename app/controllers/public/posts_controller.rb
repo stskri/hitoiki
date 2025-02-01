@@ -36,7 +36,7 @@ class Public::PostsController < ApplicationController
       session[:emotion_ids] = nil
       redirect_to posts_path, notice: '投稿しました'
     else
-      session[:post_params] = post_params
+      session[:post_params] = post_params.except(:is_public)
       session[:emotion_ids] = emotion_ids
       if params[:post][:body].blank?
         redirect_to new_post_path, alert: '本文を入力して下さい'

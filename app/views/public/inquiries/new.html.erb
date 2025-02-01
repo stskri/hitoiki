@@ -10,7 +10,7 @@
         <table class="table table-borderless">
           <tbody>
             <tr>
-              <td><%= f.select :genre, Inquiry.genres.keys.map { |key| [I18n.t("enums.inquiry.genre.#{key}"), key] }, include_blank: "ジャンルを選択してください" %></td>
+              <td><%= f.select :genre, Inquiry.genres.keys.map { |key| [I18n.t("enums.inquiry.genre.#{key}"), key] },{ include_blank: "ジャンルを選択してください" },{ selected: @inquiry.genre } %></td>
             </tr>
             <tr>
               <td><%= f.text_area :body, placeholder: "1000文字まで投稿できます", class: "form-control", style: "height: 300px;" %></td>

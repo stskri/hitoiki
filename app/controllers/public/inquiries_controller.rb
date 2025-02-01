@@ -3,7 +3,7 @@ class Public::InquiriesController < ApplicationController
   before_action :ensure_correct_user, only: [:show, :destroy]
 
   def new
-    @inquiry = Inquiry.new
+    @inquiry = Inquiry.new(session[:inquiry_params] || {})
     @genres = Inquiry.genres
   end
 
@@ -21,8 +21,10 @@ class Public::InquiriesController < ApplicationController
     inquiry.user_id = current_user.id
     inquiry.is_active = true
     if inquiry.save
+      session[:inquiry_params] = nil
       redirect_to inquiries_path, notice: "お問い合わせを送信しました"
     else
+      session[:inquiry_params] = inquiry_params.merge(genre: params[:inquiry][:genre])
       if inquiry.body.blank? and inquiry.genre.blank?
         redirect_to request.referer, alert: "ジャンルを選択し、本文を入力してください"
       elsif inquiry.body.blank?
