@@ -44,6 +44,8 @@ class User < ApplicationRecord
   GUEST_USER_EMAIL_2 = "guest2@example.com"
   def self.guest1
     find_or_create_by!(email: GUEST_USER_EMAIL_1) do |user|
+      file_path = Rails.root.join('app/assets/images/blue.png')
+      user.image.attach(io: File.open(file_path), filename: 'blue.png', content_type: 'image/png')
       user.password = SecureRandom.urlsafe_base64
       user.name = "ゲストユーザー１"
     end
@@ -51,6 +53,8 @@ class User < ApplicationRecord
 
   def self.guest2
     find_or_create_by!(email: GUEST_USER_EMAIL_2) do |user|
+      file_path = Rails.root.join('app/assets/images/green.png')
+      user.image.attach(io: File.open(file_path), filename: 'green.png', content_type: 'image/png')
       user.password = SecureRandom.urlsafe_base64
       user.name = "ゲストユーザー２"
     end
