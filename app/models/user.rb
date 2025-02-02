@@ -40,17 +40,25 @@ class User < ApplicationRecord
   end
 
   # ゲストログインのためのメソッド
-  GUEST_USER_EMAIL = "guest@example.com"
-  def self.guest
-    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+  GUEST_USER_EMAIL_1 = "guest1@example.com"
+  GUEST_USER_EMAIL_2 = "guest2@example.com"
+  def self.guest1
+    find_or_create_by!(email: GUEST_USER_EMAIL_1) do |user|
       user.password = SecureRandom.urlsafe_base64
-      user.name = "ゲストユーザー"
+      user.name = "ゲストユーザー１"
+    end
+  end
+
+  def self.guest2
+    find_or_create_by!(email: GUEST_USER_EMAIL_2) do |user|
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲストユーザー２"
     end
   end
 
   # ゲストユーザーか確認するためのメソッド
   def guest_user?
-    email == GUEST_USER_EMAIL
+    email == GUEST_USER_EMAIL_1 || email == GUEST_USER_EMAIL_2
   end
 
   # ユーザー画像のサイズを調整

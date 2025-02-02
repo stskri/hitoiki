@@ -33,8 +33,12 @@
 
           <hr class="my-3">
 
+          <div class="mb-3">
+            <%= link_to "ゲストログイン１",users_guest1_sign_in_path, class: "btn btn-secondary form-control sign_in", style: "border-radius: 10px;", method: :post %>
+          </div>
+
           <div>
-            <%= link_to "ゲストログイン（閲覧用）",users_guest_sign_in_path, class: "btn btn-secondary form-control sign_in", style: "border-radius: 10px;", method: :post %>
+            <%= link_to "ゲストログイン２",users_guest2_sign_in_path, class: "btn btn-secondary form-control sign_in", style: "border-radius: 10px;", method: :post %>
           </div>
         <% end %>
       <% end %>

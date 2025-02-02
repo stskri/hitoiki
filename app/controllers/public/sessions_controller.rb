@@ -4,7 +4,6 @@ class Public::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   before_action :user_suspension?, only: [:create]
 
-
   def after_sign_in_path_for(resource)
     posts_path
   end
@@ -12,7 +11,6 @@ class Public::SessionsController < Devise::SessionsController
   def after_sign_out_path_for(resource)
     new_user_session_path
   end
-
 
   # GET /resource/sign_in
   # def new
