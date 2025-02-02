@@ -1,9 +1,10 @@
 class Public::InquiriesController < ApplicationController
   before_action :authenticate_user!
   before_action :ensure_correct_user, only: [:show, :destroy]
+  before_action :load_draft_inquiry, only: [:new, :create]
 
   def new
-    @inquiry = Inquiry.new(session[:inquiry_params] || {})
+    @inquiry = @draft_inquiry || Inquiry.new
     @genres = Inquiry.genres
   end
 
@@ -17,14 +18,13 @@ class Public::InquiriesController < ApplicationController
 
   def create
     inquiry = Inquiry.new(inquiry_params)
-    inquiry.genre = params[:inquiry][:genre]
     inquiry.user_id = current_user.id
     inquiry.is_active = true
     if inquiry.save
-      session[:inquiry_params] = nil
+      @draft_inquiry&.destroy
       redirect_to inquiries_path, notice: "お問い合わせを送信しました"
     else
-      session[:inquiry_params] = inquiry_params.merge(genre: params[:inquiry][:genre])
+      save_draft_inquiry(inquiry)
       if inquiry.body.blank? and inquiry.genre.blank?
         redirect_to request.referer, alert: "ジャンルを選択し、本文を入力してください"
       elsif inquiry.body.blank?
@@ -46,11 +46,10 @@ class Public::InquiriesController < ApplicationController
     end
   end
 
-
   private
 
   def inquiry_params
-    params.require(:inquiry).permit(:body)
+    params.require(:inquiry).permit(:body, :genre)
   end
 
   def ensure_correct_user
@@ -62,5 +61,17 @@ class Public::InquiriesController < ApplicationController
     else
       redirect_to inquiries_path, alert: "無効なアクセスです"
     end
+  end
+
+  def load_draft_inquiry
+    @draft_inquiry = current_user.draft_inquiry
+  end
+
+  def save_draft_inquiry(inquiry)
+    draft = current_user.draft_inquiry || current_user.build_draft_inquiry
+    draft.body = inquiry.body
+    draft.genre = inquiry.genre
+    draft.is_active = true
+    draft.save
   end
 end

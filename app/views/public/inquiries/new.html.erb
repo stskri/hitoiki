@@ -3,14 +3,14 @@
   <p class="small text-muted">過去のお問い合わせ一覧は<%= link_to "こちら", inquiries_path %>から</p>
 </div>
 
-<%= form_with model: @inquiry do |f| %>
+<%= form_with model: @inquiry, url: inquiries_path, method: :post, scope: :inquiry do |f| %>
   <div class="container">
     <div class="row">
       <div class="col-12 mx-auto">
         <table class="table table-borderless">
           <tbody>
             <tr>
-              <td><%= f.select :genre, Inquiry.genres.keys.map { |key| [I18n.t("enums.inquiry.genre.#{key}"), key] },{ include_blank: "ジャンルを選択してください" },{ selected: @inquiry.genre } %></td>
+              <td><%= f.select :genre, Inquiry.genres.keys.map { |key| [I18n.t("enums.inquiry.genre.#{key}"), key] },{ include_blank: "ジャンルを選択してください" },{ selected: @draft_inquiry&.genre } %></td>
             </tr>
             <tr>
               <td><%= f.text_area :body, placeholder: "1000文字まで投稿できます", class: "form-control", style: "height: 300px;" %></td>
