@@ -2,6 +2,7 @@ class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   before_action :not_public_post, only: [:show]
+  before_action :load_draft_post, only: [:new, :create]
 
   def following_post
     @following_users = current_user.followings
@@ -12,7 +13,7 @@ class Public::PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new(session[:post_params] || {})
+    @post = @draft_post || Post.new
     @emotions = Emotion.all
     @selected_emotions = session[:emotion_ids] || []
   end
@@ -32,11 +33,11 @@ class Public::PostsController < ApplicationController
           emotion_color: emotion.color
         )
       end
-      session[:post_params] = nil
+      @draft_post&.destroy
       session[:emotion_ids] = nil
       redirect_to posts_path, notice: '投稿しました'
     else
-      session[:post_params] = post_params.except(:is_public)
+      save_draft_post(post)
       session[:emotion_ids] = emotion_ids
       if params[:post][:body].blank?
         redirect_to new_post_path, alert: '本文を入力して下さい'
@@ -120,5 +121,16 @@ class Public::PostsController < ApplicationController
     else
       redirect_to posts_path, alert: "無効なアクセスです"
     end
+  end
+
+  def load_draft_post
+    @draft_post = current_user.draft_post
+  end
+
+  def save_draft_post(post)
+    draft = current_user.draft_post || current_user.build_draft_post
+    draft.body = post.body
+    draft.is_public = true
+    draft.save
   end
 end
