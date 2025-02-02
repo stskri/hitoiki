@@ -2,6 +2,7 @@
 
 class Public::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
+  before_action :ensure_guest_user, only: [:edit]
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
@@ -15,9 +16,9 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    super
+  end
 
   # PUT /resource
   # def update
@@ -39,6 +40,14 @@ class Public::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
+
+
+  def ensure_guest_user
+    @user = current_user
+    if @user.guest_user?
+      redirect_to user_path(current_user) , alert: "ゲストユーザーはプロフィール編集画面へ遷移できません。"
+    end
+  end
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params

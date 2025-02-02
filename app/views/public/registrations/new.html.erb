@@ -1,9 +1,13 @@
 <div class="container mt-5 d-flex justify-content-center align-items-center">
   <div class="card p-4" style="width: 320px; border: 1px solid #ddd;">
-    <div class="mb-4 d-flex justify-content-center">
+    <div class="d-flex justify-content-center">
       <%= link_to root_path do %>
         <%= image_tag("hitoiki-logo.png", style: "width: 100px; height: 100px;") %>
       <% end %>
+    </div>
+
+    <div class="text-center my-3" style="font-size: 0.9em; color: #007bff;">
+      <span>57577を目安に、<br>31文字以内で繋がるSNS。</span>
     </div>
 
     <%= form_with model: @user, url: user_registration_path do |f| %>

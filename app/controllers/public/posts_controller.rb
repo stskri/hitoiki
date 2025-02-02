@@ -2,6 +2,7 @@ class Public::PostsController < ApplicationController
   before_action :authenticate_user!, except: [:index]
   before_action :ensure_correct_user, only: [:edit, :update, :destroy]
   before_action :not_public_post, only: [:show]
+  before_action :load_draft_post, only: [:new, :create]
 
   def following_post
     @following_users = current_user.followings
@@ -12,27 +13,32 @@ class Public::PostsController < ApplicationController
   end
 
   def new
-    @post = Post.new
+    @post = @draft_post || Post.new
     @emotions = Emotion.all
+    @selected_emotions = session[:emotion_ids] || []
   end
 
   def create
-    @post = Post.new(post_params)
-    @post.user_id = current_user.id
-    if @post.save
+    post = Post.new(post_params)
+    post.user_id = current_user.id
+    emotion_ids = params[:post][:post_emotions].reject(&:empty?)
+    emotions = Emotion.where(id: emotion_ids)
+    if post.save
       # posts#newのフォームから送られたEmotionの情報を取得
-      emotion_ids = params[:post][:post_emotions].reject(&:empty?)
-      emotions = Emotion.where(id: emotion_ids)
       emotions.each do |emotion|
-        @post.post_emotions.create(
-          post_id: @post.id,
+        post.post_emotions.create(
+          post_id: post.id,
           emotion_id: emotion.id,
           emotion_name: emotion.name,
           emotion_color: emotion.color
         )
       end
+      @draft_post&.destroy
+      session[:emotion_ids] = nil
       redirect_to posts_path, notice: '投稿しました'
     else
+      save_draft_post(post)
+      session[:emotion_ids] = emotion_ids
       if params[:post][:body].blank?
         redirect_to new_post_path, alert: '本文を入力して下さい'
       else
@@ -106,7 +112,6 @@ class Public::PostsController < ApplicationController
     end
   end
 
-
   def not_public_post
     if Post.exists?(params[:id]) # 存在するかどうかをまず確認
       post = Post.find(params[:id])
@@ -116,5 +121,16 @@ class Public::PostsController < ApplicationController
     else
       redirect_to posts_path, alert: "無効なアクセスです"
     end
+  end
+
+  def load_draft_post
+    @draft_post = current_user.draft_post
+  end
+
+  def save_draft_post(post)
+    draft = current_user.draft_post || current_user.build_draft_post
+    draft.body = post.body
+    draft.is_public = true
+    draft.save
   end
 end

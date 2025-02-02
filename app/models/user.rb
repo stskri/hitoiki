@@ -11,6 +11,8 @@ class User < ApplicationRecord
   has_many :inquiries, dependent: :destroy
   has_many :entries, dependent: :destroy
   has_many :messages, dependent: :destroy
+  has_one :draft_inquiry, dependent: :destroy
+  has_one :draft_post, dependent: :destroy
 
   # my_pageにいいねした投稿を一覧表示させるため、favoritesを通じてpostを取得する
   has_many :favorited_posts, through: :favorites, source: :post
@@ -38,17 +40,29 @@ class User < ApplicationRecord
   end
 
   # ゲストログインのためのメソッド
-  GUEST_USER_EMAIL = "guest@example.com"
-  def self.guest
-    find_or_create_by!(email: GUEST_USER_EMAIL) do |user|
+  GUEST_USER_EMAIL_1 = "guest1@example.com"
+  GUEST_USER_EMAIL_2 = "guest2@example.com"
+  def self.guest1
+    find_or_create_by!(email: GUEST_USER_EMAIL_1) do |user|
+      file_path = Rails.root.join('app/assets/images/blue.png')
+      user.image.attach(io: File.open(file_path), filename: 'blue.png', content_type: 'image/png')
       user.password = SecureRandom.urlsafe_base64
-      user.name = "ゲストユーザー"
+      user.name = "ゲストユーザー１"
+    end
+  end
+
+  def self.guest2
+    find_or_create_by!(email: GUEST_USER_EMAIL_2) do |user|
+      file_path = Rails.root.join('app/assets/images/green.png')
+      user.image.attach(io: File.open(file_path), filename: 'green.png', content_type: 'image/png')
+      user.password = SecureRandom.urlsafe_base64
+      user.name = "ゲストユーザー２"
     end
   end
 
   # ゲストユーザーか確認するためのメソッド
   def guest_user?
-    email == GUEST_USER_EMAIL
+    email == GUEST_USER_EMAIL_1 || email == GUEST_USER_EMAIL_2
   end
 
   # ユーザー画像のサイズを調整
